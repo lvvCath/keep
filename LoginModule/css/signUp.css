@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Josefin Sans', sans-serif;
+    justify-content: center;
+    
+}
+
+body {
+    background-color: #f1dfd1;
+    background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%);
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+	/* background: url("https://image.freepik.com/free-vector/cyber-technology-background_23-2148390330.jpg?w=900") center center no-repeat; */
+    background-size: cover;
+    position: relative;
+}
+
+body:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+	background: rgba(0,0,0, .5);
+}
+
+.container {
+    width: 50%;
+    display: relative;
+    justify-content: center;
+    padding: 0;
+}
+
+form {
+	background-color: #FFFFFF;
+    margin:0;
+    padding: 10px 50px 20px 50px;
+    border-bottom: 10px solid #485461;
+    border-top: 10px solid #0099ff;
+    border-radius:10px;
+}
+
+#createBtn, #clearBtn {
+    background-color: #045de9;
+    background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+    outline: none;
+    padding: 8px 30px 8px 30px;
+    margin: 0 15px 0 15px;
+    border-radius: 20px;
+    border:none;
+    width: 20rem;
+}
+#clearBtn {
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+}
+
+#createBtn:hover, #clearBtn:hover {
+    transform: scale(1.1);
+}
