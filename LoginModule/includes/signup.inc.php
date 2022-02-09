@@ -26,14 +26,6 @@ if(isset($_POST["submit"])){
         header("location: ../SignUp.php?error=invalidEmail");
         exit();
     }
-    if(pwdMatch($password, $con_password) !== false){
-        header("location: ../SignUp.php?error=passwordNotMatch");
-        exit();
-    }
-    if(invalidPwd($password) !== false){
-        header("location: ../SignUp.php?error=invalidPassword");
-        exit();
-    }
     if(uidExists($conn, $username) !== false){
         header("location: ../SignUp.php?error=usernameTaken");
         exit();
@@ -42,6 +34,15 @@ if(isset($_POST["submit"])){
         header("location: ../SignUp.php?error=emailTaken");
         exit();
     }
+    if(pwdMatch($password, $con_password) !== false){
+        header("location: ../SignUp.php?error=passwordNotMatch");
+        exit();
+    }
+    if(invalidPwd($password, $first_name, $last_name, $username) !== false){
+        header("location: ../SignUp.php?error=invalidPassword");
+        exit();
+    }
+    
 
     createUser($conn, $first_name, $last_name, $email, $username, $password);
 

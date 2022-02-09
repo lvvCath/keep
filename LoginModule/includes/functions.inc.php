@@ -30,26 +30,6 @@ function invalidEmail($email){
     return $result;
 }
 
-function pwdMatch($password, $con_password){
-    $result;
-    if($password !== $con_password){
-        $result = true;
-    }else{
-        $result = false;
-    }
-    return $result;
-}
-
-function invalidPwd($password){
-    $result;
-    if(!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z].{10,}$/", $password)){
-        $result = true;
-    }else{
-        $result = false;
-    }
-    return $result;
-}
-
 function uidExists($conn, $username){
     $sql = "SELECT * FROM users WHERE usersUid = ?;";
     $stmt = mysqli_stmt_init($conn);
@@ -94,6 +74,45 @@ function emailExists($conn, $email){
     }
     
     mysqli_stmt_close($stmt);
+}
+
+function pwdMatch($password, $con_password){
+    $result;
+    if($password !== $con_password){
+        $result = true;
+    }else{
+        $result = false;
+    }
+    return $result;
+}
+
+function invalidPwd($password, $first_name, $last_name, $username){
+    $result;
+    // Password must be at least (10) characters long, which consist of at least (1) upper case letter, 1 lower case letter, 1 number and 1 special character.
+    if(!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z].{10,}$/", $password)){
+        $result = true;
+    }else{
+        $result = false;
+    }
+
+    $password = strtolower($password);
+    $first_name = strtolower($first_name);
+    $last_name = strtolower($last_name);
+    $username = strtolower($username);
+
+    // Password must not contain the username, first or last name
+    if(strpos($password, $first_name) !== false || strpos($password, $last_name) !== false || strpos($password, $username) !== false) {
+        $result = true;
+    }else{
+        $result = false;
+    }
+
+    // Password must not contain dictionary words.
+    // insert code block here..
+
+    return $result;
+
+
 }
 
 function createUser($conn, $first_name, $last_name, $email, $username, $password){
