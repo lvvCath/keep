@@ -116,22 +116,24 @@ function invUserPwd($password, $first_name, $last_name, $username){
 function invDictPwd($password){
     $result;
     $password = strtolower($password);
-    $dictarray = file('../assets/dictionary.txt');
+    $dictarray = file('../../assets/dictionary.txt');
+
     foreach($dictarray as $word){
         $word = strtolower(trim($word));
         if(strlen($word) > 3){
             if(stripos($password, $word) !== false){
-            echo "<p>" . $line . "</p><br>";
-            echo "FOUND";
+                $result = true;
+                break;
+            }else{
+                $result = false;
             }
         }
     }
+    return $result;
 }
 
-
-
 function createUser($conn, $first_name, $last_name, $email, $username, $password){
-    $sql = "INSERT INTO users (usersFirstName, usersLastName, usersEmail, usersUid, usersPassword) VALUES (?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO users (usersFirstName, usersLastName, usersEmail, usersUid, usersPassword, usersPwdDate) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
         header("location: ../SignUp.php?error=stmtFailed");
@@ -139,8 +141,9 @@ function createUser($conn, $first_name, $last_name, $email, $username, $password
     }
 
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
+    $pwdDate = date("Y-m-d");
 
-    mysqli_stmt_bind_param($stmt, "sssss", $first_name, $last_name, $email, $username, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "ssssss", $first_name, $last_name, $email, $username, $hashedPwd, $pwdDate);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
@@ -148,8 +151,8 @@ function createUser($conn, $first_name, $last_name, $email, $username, $password
     
 }
 
-// Login Functions
 
+// Login Functions
 function emptyInputLogin($username, $password){
     $result;
     if(empty($username) || empty($password)){
@@ -194,16 +197,27 @@ function loginUser($conn, $username, $password){
     $pwdHashed = $uidOrEmailExists["usersPassword"];
     $checkPassword = password_verify($password, $pwdHashed);
 
+    $pwdDate = $uidOrEmailExists["usersPwdDate"];
+    $expiredPwd = false;
+    if(strtotime($pwdDate) < strtotime('-30 days')){
+        $expiredPwd = true;
+    }
+
     if($checkPassword === false){
         header('location: ../LogIn.php?error=invalidLogin');
         exit();
-    }else if($checkPassword === true){
+    }else if($checkPassword === true AND $expiredPwd === false){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         header("location: ../main.php");
         exit();
+    }else if($checkPassword === true AND $expiredPwd === true){
+        session_start();
+        $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
+        $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
+        header("location: ../ChangePass.php");
+        exit();
     }
 
 }
-
