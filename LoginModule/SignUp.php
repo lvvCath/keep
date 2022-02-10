@@ -71,19 +71,32 @@
 if(isset($_GET["error"])){
     if($_GET["error"] == "emptyinput"){
         echo '<script>alert("Please fill all the input fields.")</script>';
-    }else if($_GET["error"] == "invalidUid"){
+    }
+    else if($_GET["error"] == "invalidUid"){
         echo '<script>alert("The Username you entered is invalid.")</script>';
-    }else if($_GET["error"] == "invalidEmail"){
+    }
+    else if($_GET["error"] == "invalidEmail"){
         echo '<script>alert("Please enter a valid email")</script>';
-    }else if($_GET["error"] == "passwordNotMatch"){
+    }
+    else if($_GET["error"] == "passwordNotMatch"){
         echo '<script>alert("Password does not match. Please confirm your password again.")</script>';
-    }else if($_GET["error"] == "invalidPassword"){
-        echo '<script>alert("Password does not conform to the Password Policy.")</script>';
-    }else if($_GET["error"] == "usernameTaken"){
+    }
+    else if($_GET["error"] == "usernameTaken"){
         echo '<script>alert("The Username you entered is already taken.")</script>';
-    }else if($_GET["error"] == "emailTaken"){
+    }
+    else if($_GET["error"] == "emailTaken"){
         echo '<script>alert("The Email you entered is already taken. \r\nPlease Use different Email to create a new account.")</script>';
-    }else if($_GET["error"] == "stmtfailed"){
+    }
+    else if($_GET["error"] == "invalidPasswordFormat"){
+        echo '<script>alert("Password does not conform to the Password Policy. \r\nPassword must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.")</script>';
+    }
+    else if($_GET["error"] == "invalidPasswordfndName"){
+        echo '<script>alert("Password does not conform to the Password Policy. \r\nDo not use your name or username in your password.")</script>';
+    }
+    else if($_GET["error"] == "invalidPasswordDict"){
+        echo '<script>alert("Password does not conform to the Password Policy. \r\nDo not use words from the Dictionary on your password.")</script>';
+    }
+    else if($_GET["error"] == "stmtfailed"){
         echo '<script>alert("Something went wrong, please try again.")</script>';
     }
 }

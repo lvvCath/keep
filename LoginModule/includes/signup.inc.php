@@ -38,8 +38,16 @@ if(isset($_POST["submit"])){
         header("location: ../SignUp.php?error=passwordNotMatch");
         exit();
     }
-    if(invalidPwd($password, $first_name, $last_name, $username) !== false){
-        header("location: ../SignUp.php?error=invalidPassword");
+    if(invFormatPwd($password) !== false){
+        header("location: ../SignUp.php?error=invalidPasswordFormat");
+        exit();
+    }
+    if(invUserPwd($password, $first_name, $last_name, $username) !== false){
+        header("location: ../SignUp.php?error=invalidPasswordfndName");
+        exit();
+    }
+    if(invDictPwd($password) !== false){
+        header("location: ../SignUp.php?error=invalidPasswordDict");
         exit();
     }
     

@@ -86,7 +86,7 @@ function pwdMatch($password, $con_password){
     return $result;
 }
 
-function invalidPwd($password, $first_name, $last_name, $username){
+function invFormatPwd($password){
     $result;
     // Password must be at least (10) characters long, which consist of at least (1) upper case letter, 1 lower case letter, 1 number and 1 special character.
     if(!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z].{10,}$/", $password)){
@@ -94,7 +94,11 @@ function invalidPwd($password, $first_name, $last_name, $username){
     }else{
         $result = false;
     }
+    return $result;
+}
 
+function invUserPwd($password, $first_name, $last_name, $username){
+    $result;
     $password = strtolower($password);
     $first_name = strtolower($first_name);
     $last_name = strtolower($last_name);
@@ -106,14 +110,25 @@ function invalidPwd($password, $first_name, $last_name, $username){
     }else{
         $result = false;
     }
-
-    // Password must not contain dictionary words.
-    // insert code block here..
-
     return $result;
-
-
 }
+
+function invDictPwd($password){
+    $result;
+    $password = strtolower($password);
+    $dictarray = file('../assets/dictionary.txt');
+    foreach($dictarray as $word){
+        $word = strtolower(trim($word));
+        if(strlen($word) > 3){
+            if(stripos($password, $word) !== false){
+            echo "<p>" . $line . "</p><br>";
+            echo "FOUND";
+            }
+        }
+    }
+}
+
+
 
 function createUser($conn, $first_name, $last_name, $email, $username, $password){
     $sql = "INSERT INTO users (usersFirstName, usersLastName, usersEmail, usersUid, usersPassword) VALUES (?, ?, ?, ?, ?);";
