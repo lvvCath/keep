@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2022 at 03:03 PM
+-- Generation Time: Feb 10, 2022 at 09:25 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -33,15 +33,17 @@ CREATE TABLE `users` (
   `usersLastName` varchar(128) NOT NULL,
   `usersEmail` varchar(128) NOT NULL,
   `usersUid` varchar(20) NOT NULL,
-  `usersPassword` varchar(128) NOT NULL
+  `usersPassword` varchar(128) NOT NULL,
+  `usersPwdDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersEmail`, `usersUid`, `usersPassword`) VALUES
-(3, 'Bob', 'Smith', 'bobsmith002@gmail.com', 'bobby001', '$2y$10$LO9u8QMyGzPnk3wewwIwr.0BvWgbyGz7uBsRnR8j/fk/yiRBfc9.2');
+INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersEmail`, `usersUid`, `usersPassword`, `usersPwdDate`) VALUES
+(24, 'Rosalyn', 'Quenca', 'rose@gmail.com', 'Rosal_08', '$2y$10$Dv/ctmml5WksWfzLSbxbKeLUC/RkLMcKzqU2N6LBj2XDlRPwbe66O', '2022-01-11'),
+(25, 'Bob', 'Smith', 'bobsmith002@gmail.com', 'bobby001', '$2y$10$vkfGhHea.lKVHGiz54gRQ.4MwaJUjXF/xz1tAniIRpGSp.7V.wJUe', '2022-02-10');
 
 --
 -- Indexes for dumped tables
@@ -63,7 +65,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
