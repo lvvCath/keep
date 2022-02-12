@@ -67,6 +67,9 @@ if(isset($_GET["error"])){
     else if($_GET["error"] == "invalidPasswordDict"){
         echo '<script>alert("Password does not conform to the Password Policy. \r\nDo not use words from the Dictionary on your password.")</script>';
     }
+    else if($_GET["error"] == "prevPassword"){
+        echo '<script>alert("You have already used the password before. \r\nPlease enter a new password.")</script>';
+    }
     else if($_GET["error"] == "stmtfailed"){
         echo '<script>alert("Something went wrong, please try again.")</script>';
     }

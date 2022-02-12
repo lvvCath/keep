@@ -251,7 +251,6 @@ function changePass($conn, $useruid, $last_password, $new_password){
         exit();
     }else if($checkPassword === true){
 
-        //Todo Update Password in the database
         $sql = "UPDATE users SET usersPassword=?, usersPwdDate=?  WHERE usersUid=?;";
         $stmt = mysqli_stmt_init($conn);
 
@@ -271,4 +270,32 @@ function changePass($conn, $useruid, $last_password, $new_password){
         header("location: ../LogIn.php?msg=changePwdSuccess");
         exit();
     }
+}
+
+function invPrevPwd($conn, $userid, $new_password){
+    $result;
+    $sql = "SELECT user_history.pwdPassword FROM users INNER JOIN user_history ON user_history.pwdUserId = users.usersId WHERE users.usersId = ? ORDER BY user_history.pwdUpdateDt DESC LIMIT 6;";
+    $stmt = mysqli_stmt_init($conn);
+    $sentToList = array();
+    if ($stmt = mysqli_prepare($conn, $sql)) {
+        mysqli_stmt_bind_param($stmt, "i", $userid);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $prepwd);
+        $i=0;
+        while (mysqli_stmt_fetch($stmt)) {
+            $sentToList[$i] =  $prepwd;
+            $i++;
+        }
+        mysqli_stmt_close($stmt);
+    }
+    
+    foreach($sentToList as $pwdHashed){
+        if(password_verify($new_password, $pwdHashed) === true){
+            $result = true;
+                break;
+        }else{
+            $result = false;
+        }
+    }
+    return $result;
 }

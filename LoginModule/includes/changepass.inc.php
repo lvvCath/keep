@@ -2,6 +2,7 @@
 
 if(isset($_POST["submit"])){
     session_start();
+    $userid = $_SESSION["userid"];
     $useruid = $_SESSION["useruid"];
     $last_password = $_POST["last_password"];
     $new_password = $_POST["new_password"];
@@ -28,6 +29,10 @@ if(isset($_POST["submit"])){
     }
     if(invDictPwd($new_password) !== false){
         header("location: ../ChangePass.php?error=invalidPasswordDict");
+        exit();
+    }
+    if(invPrevPwd($conn, $userid, $new_password) !== false){
+        header("location: ../ChangePass.php?error=prevPassword");
         exit();
     }
     
