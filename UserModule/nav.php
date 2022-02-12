@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="sidebar">
-        <img src="..\image\brgyLogo.png" alt="Brgy Icon" class="brgyLogo">
+        <img src="..\assets\images\default-profile.jpg" alt="Brgy Icon" class="brgyLogo">
         <?php
         if(isset($_SESSION["useruid"])){
             echo "<h2>" . $_SESSION["useruid"] . "</h2>";

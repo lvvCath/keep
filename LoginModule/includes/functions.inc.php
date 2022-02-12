@@ -236,7 +236,7 @@ function invUserPwdUid($conn, $new_password, $useruid){
 
 }
 
-function changePass($conn, $useruid, $last_password, $new_password){
+function changePass($conn, $userid, $useruid, $last_password, $new_password){
     $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
 
     if ($uidExists === false) {
@@ -263,6 +263,20 @@ function changePass($conn, $useruid, $last_password, $new_password){
         $pwdDate = date("Y-m-d");
 
         mysqli_stmt_bind_param($stmt, "sss", $hashedPwd, $pwdDate, $useruid);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+
+        // insert a copy to child table
+        $sql = "INSERT INTO user_history (pwdUserId, pwdPassword, pwdUpdateDt) SELECT usersId, usersPassword, usersPwdDate FROM users WHERE usersId = ?;";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql) ){
+            header("location: ../LogIn.php?error=stmtFailed");
+            exit();
+        }
+
+        mysqli_stmt_bind_param($stmt, "i", $userid);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 

@@ -36,7 +36,7 @@ if(isset($_POST["submit"])){
         exit();
     }
     
-    changePass($conn, $useruid, $last_password, $new_password);
+    changePass($conn, $userid, $useruid, $last_password, $new_password);
 
 }else{
     header("location: ../ChangePass.php");
