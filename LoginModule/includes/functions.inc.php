@@ -228,6 +228,7 @@ function loginUser($conn, $username, $password){
     }
 }
 
+<<<head
 function getUserIpAddr(){  
    if(!empty($_SERVER['HTTP_CLIENT_IP'])){  
      $ip = $_SERVER['HTTP_CLIENT_IP'];  
@@ -238,3 +239,99 @@ function getUserIpAddr(){
    }  
    return $ip;  
  }  
+=======
+}
+
+// Change Pass
+function invUserPwdUid($conn, $new_password, $useruid){
+    $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
+
+    if ($uidExists === false) {
+        header('location: ../LogIn.php?error=invalidLogin');
+        exit();
+    }
+    
+    $usersFirstName = $uidExists["usersFirstName"];
+    $usersLastName = $uidExists["usersLastName"];
+    return invUserPwd($new_password, $usersFirstName, $usersLastName, $useruid);
+
+}
+
+function changePass($conn, $userid, $useruid, $last_password, $new_password){
+    $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
+
+    if ($uidExists === false) {
+        header('location: ../LogIn.php?error=invalidLogin');
+        exit();
+    }
+
+    $pwdHashed = $uidExists["usersPassword"];
+    $checkPassword = password_verify($last_password, $pwdHashed);
+    if($checkPassword === false){
+        header('location: ../ChangePass.php?error=invalidLastPwd');
+        exit();
+    }else if($checkPassword === true){
+
+        $sql = "UPDATE users SET usersPassword=?, usersPwdDate=?  WHERE usersUid=?;";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql) ){
+            header("location: ../LogIn.php?error=stmtFailed");
+            exit();
+        }
+
+        $hashedPwd = password_hash($new_password, PASSWORD_DEFAULT);
+        $pwdDate = date("Y-m-d");
+
+        mysqli_stmt_bind_param($stmt, "sss", $hashedPwd, $pwdDate, $useruid);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+
+        // insert a copy to child table
+        $sql = "INSERT INTO user_history (pwdUserId, pwdPassword, pwdUpdateDt) SELECT usersId, usersPassword, usersPwdDate FROM users WHERE usersId = ?;";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql) ){
+            header("location: ../LogIn.php?error=stmtFailed");
+            exit();
+        }
+
+        mysqli_stmt_bind_param($stmt, "i", $userid);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+
+        header("location: ../LogIn.php?msg=changePwdSuccess");
+        exit();
+    }
+}
+
+function invPrevPwd($conn, $userid, $new_password){
+    $result;
+    $sql = "SELECT user_history.pwdPassword FROM users INNER JOIN user_history ON user_history.pwdUserId = users.usersId WHERE users.usersId = ? ORDER BY user_history.pwdUpdateDt DESC LIMIT 6;";
+    $stmt = mysqli_stmt_init($conn);
+    $sentToList = array();
+    if ($stmt = mysqli_prepare($conn, $sql)) {
+        mysqli_stmt_bind_param($stmt, "i", $userid);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $prepwd);
+        $i=0;
+        while (mysqli_stmt_fetch($stmt)) {
+            $sentToList[$i] =  $prepwd;
+            $i++;
+        }
+        mysqli_stmt_close($stmt);
+    }
+    
+    foreach($sentToList as $pwdHashed){
+        if(password_verify($new_password, $pwdHashed) === true){
+            $result = true;
+                break;
+        }else{
+            $result = false;
+        }
+    }
+    return $result;
+}
+>>>>>>> 2d8d1da7c79cb8e892920ddca7610c6ec052efb7
