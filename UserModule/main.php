@@ -93,7 +93,7 @@ $username =  $row['usersUid'];
                 Password must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.
                 </small>
                 <hr style="height:5px; background-color: #045de9;background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);">
-                <form id="createForm" name="createForm" method="POST" action="includes/changepass.inc.php">
+                <form id="createForm" name="createForm" method="POST" action="includes/updatepwd.inc.php">
                     <div class="form-group">
                         <label class="text-muted" for="last_password">Current Password</label>
                         <input class="form-control" id="last_password" name="last_password" type="password" required> 
@@ -130,52 +130,34 @@ $username =  $row['usersUid'];
         <!-- /Body End-->
         </div> <!-- /main_content  -->
     </div> <!-- /wrapper  -->
-
-
-<!-- Modal Update Form -->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title align-middle" id="updateModalLabel">Update Report Status</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="updateForm" name="updateForm" method="POST">
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">    
-                                <label class="text-muted" for="status_u">Status</label> <br>
-                                <select class="custom-select custom-select-lg mb-5" id="status_u">
-                                    <option selected>Select</option>
-                                    <option value="On-Going">On-Going</option>
-                                    <option value="Solved">Solved</option>
-                                </select>
-                            </div> 
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary updateBtn_report" >Save Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="PdfDataHolder" hidden>
-        <form id="pdfForm" name="pdfForm" method="POST" action="../Database/ReportCRUD/report_pdf.php">
-            <div class="form-row">
-                <input id="case_no_pdf" type="text" >
-                <input id="complainant_pdf" type="text" >
-                <input id="c_address_pdf" type="text" >
-                <input id="respondent_pdf" type="text" >
-                <input id="r_address_pdf" type="text" >
-                <input id="complain_pdf" type="text" >
-                <input id="date_time_pdf" type="text" >
-            </div>
-        </form>
-    </div>
-
+<?php
+if(isset($_GET["error"])){
+    if($_GET["error"] == "emptyinput"){
+        echo '<script>alert("Please fill all the input fields.")</script>';
+    }
+    else if($_GET["error"] == "invalidLastPwd"){
+        echo '<script>alert("Wrong Last password, Please enter your last password correctly.")</script>';
+    }
+    else if($_GET["error"] == "passwordNotMatch"){
+        echo '<script>alert("Password does not match. Please confirm your password again.")</script>';
+    }
+    else if($_GET["error"] == "invalidPasswordFormat"){
+        echo '<script>alert("Password does not conform to the Password Policy. \r\nPassword must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.")</script>';
+    }
+    else if($_GET["error"] == "invalidPasswordfndName"){
+        echo '<script>alert("Password does not conform to the Password Policy. \r\nDo not use your name or username in your password.")</script>';
+    }
+    else if($_GET["error"] == "invalidPasswordDict"){
+        echo '<script>alert("Password does not conform to the Password Policy. \r\nDo not use words from the Dictionary on your password.")</script>';
+    }
+    else if($_GET["error"] == "prevPassword"){
+        echo '<script>alert("You have already used the password before. \r\nPlease enter a new password.")</script>';
+    }
+    else if($_GET["error"] == "stmtfailed"){
+        echo '<script>alert("Something went wrong, please try again.")</script>';
+    }
+}
+?>
 </body>
 
 

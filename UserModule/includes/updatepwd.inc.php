@@ -9,37 +9,37 @@ if(isset($_POST["submit"])){
     $con_password = $_POST["con_password"];
 
     require_once '../../Database/db.php';
-    require_once 'functions.inc.php';
+    require_once 'updatepwdfunctions.inc.php';
 
     if(emptyInputPass($last_password, $new_password, $con_password) !== false){
-        header("location: ../ChangePass.php?error=emptyinput");
+        header("location: ../Main.php?error=emptyinput");
         exit();
     }
     if(pwdMatch($new_password, $con_password) !== false){
-        header("location: ../ChangePass.php?error=passwordNotMatch");
+        header("location: ../Main.php?error=passwordNotMatch");
         exit();
     }
     if(invFormatPwd($new_password) !== false){
-        header("location: ../ChangePass.php?error=invalidPasswordFormat");
+        header("location: ../Main.php?error=invalidPasswordFormat");
         exit();
     }
     if(invUserPwdUid($conn, $new_password, $useruid) !== false){
-        header("location: ../ChangePass.php?error=invalidPasswordfndName");
+        header("location: ../Main.php?error=invalidPasswordfndName");
         exit();
     }
     if(invDictPwd($new_password) !== false){
-        header("location: ../ChangePass.php?error=invalidPasswordDict");
+        header("location: ../Main.php?error=invalidPasswordDict");
         exit();
     }
     if(invPrevPwd($conn, $userid, $new_password) !== false){
-        header("location: ../ChangePass.php?error=prevPassword");
+        header("location: ../Main.php?error=prevPassword");
         exit();
     }
     
     changePass($conn, $userid, $useruid, $last_password, $new_password);
 
 }else{
-    header("location: ../ChangePass.php");
+    header("location: ../Main.php.php");
     exit();
 }
 ?>

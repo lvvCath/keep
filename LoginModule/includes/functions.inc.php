@@ -229,6 +229,16 @@ function loginUser($conn, $username, $password){
 }
 
 // Change Pass
+function emptyInputPass($last_password, $new_password, $con_password){
+    $result;
+    if(empty($last_password) || empty($new_password) || empty($con_password)){
+        $result = true;
+    }else{
+        $result = false;
+    }
+    return $result;
+}
+
 function invUserPwdUid($conn, $new_password, $useruid){
     $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
 
