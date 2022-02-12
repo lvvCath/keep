@@ -209,7 +209,7 @@ function loginUser($conn, $username, $password){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
-        header("location: ../../UserModule/main.php");
+        header("location: ../../UserModule/Main.php");
         exit();
     }else if($checkPassword === true AND $expiredPwd === true){
         session_start();
