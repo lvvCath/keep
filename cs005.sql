@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2022 at 05:50 AM
+-- Generation Time: Feb 12, 2022 at 03:11 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -42,15 +42,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersEmail`, `usersUid`, `usersPassword`, `usersPwdDate`) VALUES
-(24, 'Rosalyn', 'Quenca', 'rose@gmail.com', 'Rosal_08', '$2y$10$Dv/ctmml5WksWfzLSbxbKeLUC/RkLMcKzqU2N6LBj2XDlRPwbe66O', '2022-01-11'),
-(25, 'Bob', 'Smith', 'bobsmith002@gmail.com', 'bobby001', '$2y$10$vkfGhHea.lKVHGiz54gRQ.4MwaJUjXF/xz1tAniIRpGSp.7V.wJUe', '2022-02-10'),
-(30, 'Anne', 'Watson', 'appleanne@gmail.com', 'anne008', '$2y$10$sx6r8wLzzvP.NhVi1b/fD.cFnbRzD4ZUFqugJ2Zfr9bLLk.g7nLZm', '2022-02-12');
+(33, 'Rosalyn', 'Quenca', 'rose@gmail.com', 'Rosal_08', '$2y$10$xAFILPIlOi5YSiEppSoCFu8044G7fV3ta0OwSV8Hwb41CDD8t2z1S', '2022-02-12'),
+(34, 'Bob', 'Smith', 'bobsmith002@gmail.com', 'bobby001', '$2y$10$Fjqw/nZgf8SRE1xqwHlaOOXnKBEzC0gecxdhR9ZZ2ufYTH5274nki', '2022-02-12'),
+(35, 'Anne', 'Watson', 'appleanne@gmail.com', 'anne008', '$2y$10$djZeUN1h3umdG3aF/misbOi8VSeV4zLTOFaqerpHZ7TBrTLpdjAje', '2022-02-12');
 
 --
 -- Triggers `users`
 --
 DELIMITER $$
-CREATE TRIGGER `trigger_new_child` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO user_history (pwdUserId) SELECT MAX(usersId) FROM users
+CREATE TRIGGER `trigger_new_child` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO user_history (pwdUserId, pwdPassword, pwdUpdateDt) 
+SELECT usersId, usersPassword, usersPwdDate 
+FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
 
@@ -72,7 +74,9 @@ CREATE TABLE `user_history` (
 --
 
 INSERT INTO `user_history` (`pwdId`, `pwdUserId`, `pwdPassword`, `pwdUpdateDt`) VALUES
-(4, 30, '', '0000-00-00');
+(8, 33, '$2y$10$xAFILPIlOi5YSiEppSoCFu8044G7fV3ta0OwSV8Hwb41CDD8t2z1S', '2022-02-12'),
+(9, 34, '$2y$10$Fjqw/nZgf8SRE1xqwHlaOOXnKBEzC0gecxdhR9ZZ2ufYTH5274nki', '2022-02-12'),
+(10, 35, '$2y$10$djZeUN1h3umdG3aF/misbOi8VSeV4zLTOFaqerpHZ7TBrTLpdjAje', '2022-02-12');
 
 --
 -- Indexes for dumped tables
@@ -101,13 +105,13 @@ ALTER TABLE `user_history`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `user_history`
 --
 ALTER TABLE `user_history`
-  MODIFY `pwdId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pwdId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -117,7 +121,7 @@ ALTER TABLE `user_history`
 -- Constraints for table `user_history`
 --
 ALTER TABLE `user_history`
-  ADD CONSTRAINT `userid_history_fk` FOREIGN KEY (`pwdUserId`) REFERENCES `users` (`usersId`);
+  ADD CONSTRAINT `userid_history_fk` FOREIGN KEY (`pwdUserId`) REFERENCES `users` (`usersId`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

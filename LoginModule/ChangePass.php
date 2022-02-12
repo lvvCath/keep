@@ -52,6 +52,9 @@ if(isset($_GET["error"])){
     if($_GET["error"] == "emptyinput"){
         echo '<script>alert("Please fill all the input fields.")</script>';
     }
+    else if($_GET["error"] == "invalidLastPwd"){
+        echo '<script>alert("Wrong Last password, Please enter your last password correctly.")</script>';
+    }
     else if($_GET["error"] == "passwordNotMatch"){
         echo '<script>alert("Password does not match. Please confirm your password again.")</script>';
     }
@@ -63,6 +66,9 @@ if(isset($_GET["error"])){
     }
     else if($_GET["error"] == "invalidPasswordDict"){
         echo '<script>alert("Password does not conform to the Password Policy. \r\nDo not use words from the Dictionary on your password.")</script>';
+    }
+    else if($_GET["error"] == "prevPassword"){
+        echo '<script>alert("You have already used the password before. \r\nPlease enter a new password.")</script>';
     }
     else if($_GET["error"] == "stmtfailed"){
         echo '<script>alert("Something went wrong, please try again.")</script>';

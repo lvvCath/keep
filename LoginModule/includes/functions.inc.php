@@ -228,6 +228,23 @@ function loginUser($conn, $username, $password){
     }
 }
 
+<<<<<<< Updated upstream
+=======
+
+function getUserIpAddr(){  
+   if(!empty($_SERVER['HTTP_CLIENT_IP'])){  
+     $ip = $_SERVER['HTTP_CLIENT_IP'];  
+   }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){  
+     $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+   }else{  
+     $ip = $_SERVER['REMOTE_ADDR'];  
+   }  
+   return $ip;  
+ }  
+
+}
+
+>>>>>>> Stashed changes
 // Change Pass
 function invUserPwdUid($conn, $new_password, $useruid){
     $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
