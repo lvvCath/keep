@@ -135,7 +135,8 @@ function invDictPwd($password){
 function createUser($conn, $first_name, $last_name, $email, $username, $password){
     $sql = "INSERT INTO users (usersFirstName, usersLastName, usersEmail, usersUid, usersPassword, usersPwdDate) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
+
+    if(!mysqli_stmt_prepare($stmt, $sql) ){
         header("location: ../SignUp.php?error=stmtFailed");
         exit();
     }
@@ -148,9 +149,7 @@ function createUser($conn, $first_name, $last_name, $email, $username, $password
     mysqli_stmt_close($stmt);
 
     header("location: ../LogIn.php?msg=registered");
-    
 }
-
 
 // Login Functions
 function emptyInputLogin($username, $password){
@@ -210,7 +209,7 @@ function loginUser($conn, $username, $password){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
-        header("location: ../main.php");
+        header("location: ../../UserModule/main.php");
         exit();
     }else if($checkPassword === true AND $expiredPwd === true){
         session_start();
