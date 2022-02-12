@@ -220,3 +220,55 @@ function loginUser($conn, $username, $password){
     }
 
 }
+
+// Change Pass
+function invUserPwdUid($conn, $new_password, $useruid){
+    $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
+
+    if ($uidExists === false) {
+        header('location: ../LogIn.php?error=invalidLogin');
+        exit();
+    }
+    
+    $usersFirstName = $uidExists["usersFirstName"];
+    $usersLastName = $uidExists["usersLastName"];
+    return invUserPwd($new_password, $usersFirstName, $usersLastName, $useruid);
+
+}
+
+function changePass($conn, $useruid, $last_password, $new_password){
+    $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
+
+    if ($uidExists === false) {
+        header('location: ../LogIn.php?error=invalidLogin');
+        exit();
+    }
+
+    $pwdHashed = $uidExists["usersPassword"];
+    $checkPassword = password_verify($last_password, $pwdHashed);
+    if($checkPassword === false){
+        header('location: ../ChangePass.php?error=invalidLastPwd');
+        exit();
+    }else if($checkPassword === true){
+
+        //Todo Update Password in the database
+        $sql = "UPDATE users SET usersPassword=?, usersPwdDate=?  WHERE usersUid=?;";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql) ){
+            header("location: ../LogIn.php?error=stmtFailed");
+            exit();
+        }
+
+        $hashedPwd = password_hash($new_password, PASSWORD_DEFAULT);
+        $pwdDate = date("Y-m-d");
+
+        mysqli_stmt_bind_param($stmt, "sss", $hashedPwd, $pwdDate, $useruid);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+
+        header("location: ../LogIn.php?msg=changePwdSuccess");
+        exit();
+    }
+}

@@ -52,6 +52,9 @@ if(isset($_GET["error"])){
     if($_GET["error"] == "emptyinput"){
         echo '<script>alert("Please fill all the input fields.")</script>';
     }
+    else if($_GET["error"] == "invalidLastPwd"){
+        echo '<script>alert("Wrong Last password, Please enter your last password correctly.")</script>';
+    }
     else if($_GET["error"] == "passwordNotMatch"){
         echo '<script>alert("Password does not match. Please confirm your password again.")</script>';
     }

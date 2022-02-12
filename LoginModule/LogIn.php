@@ -71,13 +71,17 @@ session_destroy();
 if(isset($_GET["error"])){
     if($_GET["error"] == "emptyinput"){
         echo '<script>alert("Please fill all the input fields.")</script>';
-    }else if($_GET["error"] == "invalidLogin"){
+    }
+	else if($_GET["error"] == "invalidLogin"){
         echo '<script>alert("Incorrect Login Information.")</script>';
     }
 }
 if(isset($_GET["msg"])){
     if($_GET["msg"] == "registered"){
         echo '<script>alert("You have successfully registered! \r\nYou can now Login!")</script>';
+    }
+	else if($_GET["msg"] == "changePwdSuccess"){
+        echo '<script>alert("You have successfully Updated your password! \r\nYou can now Login!")</script>';
     }
 }
 ?>	
