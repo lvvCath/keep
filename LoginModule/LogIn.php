@@ -73,6 +73,8 @@ if(isset($_GET["error"])){
         echo '<script>alert("Please fill all the input fields.")</script>';
     }else if($_GET["error"] == "invalidLogin"){
         echo '<script>alert("Incorrect Login Information.")</script>';
+    }else if($_GET["error"] == "lock_user"){
+        echo '<script>alert("Incorrect Login Information.")</script>';
     }
 }
 if(isset($_GET["msg"])){

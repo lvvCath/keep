@@ -198,25 +198,43 @@ function loginUser($conn, $username, $password){
 
     $pwdDate = $uidOrEmailExists["usersPwdDate"];
     $expiredPwd = false;
+    $notificationPwd = false;
     if(strtotime($pwdDate) < strtotime('-30 days')){
         $expiredPwd = true;
-    }
-
+    }else if(strtotime($pwdDate) < strtotime('-20 days')){
+        $notificationPwd = true;
+      }
+ 
     if($checkPassword === false){
         header('location: ../LogIn.php?error=invalidLogin');
         exit();
-    }else if($checkPassword === true AND $expiredPwd === false){
+    }else if($checkPassword === true AND $expiredPwd === false AND $notificationPwd === false){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         header("location: ../../UserModule/Main.php");
         exit();
-    }else if($checkPassword === true AND $expiredPwd === true){
+    }else if($checkPassword === true AND $expiredPwd === false AND $notificationPwd === true){
+        session_start();
+        $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
+        $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
+        echo "<script> alert('Your password will expire in 10 days !');window.location = '../../UserModule/Main.php' </script>";
+    }else if($checkPassword === true AND $expiredPwd === true AND $notificationPwd === false){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         header("location: ../ChangePass.php");
         exit();
     }
-
 }
+
+function getUserIpAddr(){  
+   if(!empty($_SERVER['HTTP_CLIENT_IP'])){  
+     $ip = $_SERVER['HTTP_CLIENT_IP'];  
+   }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){  
+     $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+   }else{  
+     $ip = $_SERVER['REMOTE_ADDR'];  
+   }  
+   return $ip;  
+ }  
