@@ -66,6 +66,9 @@ if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) {
                         <label class="text-muted" for="username">Username</label>
                         <input class="form-control" id="username" name="username" type="text" required>
                     </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="edit" class="btn btn-primary" onclick="clearForm()"><i class="fa fa-edit"></i>&nbspE D I T</button>
+                    </div>
                 </form>
             </div>
 
@@ -98,7 +101,7 @@ if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) {
                     </div>
 
                     <br>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-end">
                         <button type="button" id="clearBtn" class="btn btn-primary" onclick="clearForm()">C L E A R</button>
                         <button type="submit" id="createBtn" name="submit" class="btn btn-primary">C O N F I R M</button>
                     </div>
