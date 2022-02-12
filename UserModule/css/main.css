@@ -27,3 +27,34 @@
     float: right;
     padding-right: 15px;
 }
+
+.container-fluid{
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+}
+.panel{
+    padding: 3% !important;
+}
+
+.title{
+    font-weight: bold;
+}
+
+#createBtn, #clearBtn {
+    background-color: #045de9;
+    background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+    outline: none;
+    padding: 8px 30px 8px 30px;
+    margin: 0 15px 0 15px;
+    border-radius: 20px;
+    border:none;
+    width: 20rem;
+}
+#clearBtn {
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+}
+
+#createBtn:hover, #clearBtn:hover {
+    transform: scale(1.1);
+}
