@@ -147,7 +147,7 @@ function createUser($conn, $first_name, $last_name, $email, $username, $password
     mysqli_stmt_bind_param($stmt, "ssssss", $first_name, $last_name, $email, $username, $hashedPwd, $pwdDate);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-
+    
     header("location: ../LogIn.php?msg=registered");
 }
 

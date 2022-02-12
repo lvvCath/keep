@@ -1,5 +1,7 @@
 <?php
 session_start();
+session_unset();
+session_destroy();
 ?>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
