@@ -53,7 +53,7 @@ $username =  $row['usersUid'];
             <div class="panel">
                 <h4 class="title">General Account Settings</h4>
                 <hr style="height:5px; background-color: #045de9;background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);">
-                <form id="createForm" name="createForm" method="POST" action="includes/signup.inc.php">
+                <form id="createForm" name="createForm" method="POST" action="#">
                     <div class="form-row">
                         <div class="col">
                             <div class="form-group">
@@ -125,7 +125,6 @@ $username =  $row['usersUid'];
         </div>
 
         </div>
-        
 
         
         <!-- /Body End-->

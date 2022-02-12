@@ -228,7 +228,7 @@ function loginUser($conn, $username, $password){
     }
 }
 
-<<<head
+
 function getUserIpAddr(){  
    if(!empty($_SERVER['HTTP_CLIENT_IP'])){  
      $ip = $_SERVER['HTTP_CLIENT_IP'];  
@@ -239,8 +239,8 @@ function getUserIpAddr(){
    }  
    return $ip;  
  }  
-=======
-}
+
+
 
 // Change Pass
 function invUserPwdUid($conn, $new_password, $useruid){
@@ -334,4 +334,3 @@ function invPrevPwd($conn, $userid, $new_password){
     }
     return $result;
 }
->>>>>>> 2d8d1da7c79cb8e892920ddca7610c6ec052efb7
