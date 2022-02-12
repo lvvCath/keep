@@ -1,9 +1,21 @@
 <?php
+include('../Database/db.php'); 
 session_start();
-if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) {
+if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) { 
     header('location: ../index.php');
     exit();
+}else{
+     $id = $_SESSION["userid"];
 }
+
+$sql = "SELECT * FROM users  WHERE usersId = $id";
+$stmt= mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($stmt);
+$first_name = $row['usersFirstName'];
+$last_name =  $row['usersLastName'];
+$email = $row['usersEmail'];
+$username =  $row['usersUid'];
+
 ?>
 
 <head>
@@ -46,25 +58,27 @@ if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) {
                         <div class="col">
                             <div class="form-group">
                                 <label class="text-muted" for="first_name">First Name</label>
-                                <input class="form-control" id="first_name" name="first_name" type="text" required>
+                                <input class="form-control" id="first_name" name="first_name" type="text" required readonly value="<?php echo $row['usersFirstName']?>">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label class="text-muted" for="last_name">Last Name</label>
-                                <input class="form-control" id="last_name" name="last_name" type="text" required> 
+                                <input class="form-control" id="last_name" name="last_name" type="text" required readonly value="<?php echo $row['usersLastName']?>"> 
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="text-muted" for="email">Email</label>
-                        <input class="form-control" id="email" name="email" type="text" required> 
+                        <input class="form-control" id="email" name="email" type="text" required
+                            readonly value="<?php echo $row['usersEmail']?>"> 
                     </div>
 
                     <div class="form-group">
                         <label class="text-muted" for="username">Username</label>
-                        <input class="form-control" id="username" name="username" type="text" required>
+                        <input class="form-control" id="username" name="username" type="text" required
+                            readonly value="<?php echo $row['usersUid']?>">
                     </div>
                     <div class="d-flex justify-content-end">
                         <button type="button" id="edit" class="btn btn-primary" onclick="clearForm()"><i class="fa fa-edit"></i>&nbspE D I T</button>
