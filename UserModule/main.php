@@ -157,6 +157,11 @@ if(isset($_GET["error"])){
         echo '<script>alert("Something went wrong, please try again.")</script>';
     }
 }
+if(isset($_GET["msg"])){
+    if($_GET["msg"] == "changePwdSuccess"){
+        echo '<script>alert("You have successfully Updated your password!")</script>';
+    }
+}
 ?>
 </body>
 
