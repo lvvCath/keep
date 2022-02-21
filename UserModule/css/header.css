@@ -11,6 +11,11 @@
     color: #0084ff !important;
 }
 
+.notif{
+  padding: 1rem !important;
+}
+
+
 	body::-webkit-scrollbar {
 	width: 10px;               /* width of the entire scrollbar */
   }

@@ -174,6 +174,8 @@ function changePass($conn, $userid, $useruid, $last_password, $new_password){
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
+        session_start();
+        $_SESSION["notifpwd"] =  false;
 
         header("location: ../account.php?msg=changePwdSuccess");
         exit();

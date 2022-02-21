@@ -212,17 +212,21 @@ function loginUser($conn, $username, $password){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
+        $_SESSION["notifpwd"] =  false;
         header("location: ../../UserModule/Main.php");
         exit();
     }else if($checkPassword === true AND $expiredPwd === false AND $notificationPwd === true){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
-        echo "<script> alert('Your password will expire in 10 days !');window.location = '../../UserModule/Main.php' </script>";
+        $_SESSION["notifpwd"] =  true;
+        echo "<script> alert('Your password will expire in 10 days !');
+        window.location = '../../UserModule/Main.php' </script>";
     }else if($checkPassword === true AND $expiredPwd === true AND $notificationPwd === false){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
+        $_SESSION["notifpwd"] =  false;
         header("location: ../ChangePass.php");
         exit();
     }

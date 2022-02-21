@@ -1,3 +1,22 @@
+<?php
+include('../Database/db.php'); 
+session_start();
+if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) { 
+    header('location: ../index.php');
+    exit();
+}else{
+     $id = $_SESSION["userid"];
+}
+
+$sql = "SELECT * FROM users  WHERE usersId = $id";
+$stmt= mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($stmt);
+$first_name = $row['usersFirstName'];
+$last_name =  $row['usersLastName'];
+$email = $row['usersEmail'];
+$username =  $row['usersUid'];
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -31,9 +50,36 @@
               <li class="nav-item px-2">
                 <a class="nav-link h-portfolio" href="main.php"><span class="fa-solid fa-address-card"></span> Portfolio</a>
               </li>
+
               <li class="nav-item px-2">
-                <a class="nav-link h-notif" href="#"><span class="fa-solid fa-bell"></span> Notification</a>
+                <div class="dropdown">
+                  <a class="dropdown-toggle nav-link h-notif" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?php
+                      if($_SESSION["notifpwd"] == true) { 
+                        echo  '<span class="fa-solid fa-bell">
+                        <span class="position-absolute top-3 start-10 translate-middle p-1 bg-warning border border-light rounded-circle">
+                          <span class="visually-hidden">New alerts</span>
+                        </span>
+                        </span>';
+                      }else{
+                        echo '<span class="fa-solid fa-bell"></span> ';
+                      }
+                    ?>
+                  
+                    Notification
+                  </a>
+                  <ul class="dropdown-menu notif text-center" aria-labelledby="dropdownMenuLink">
+                    <?php
+                      if($_SESSION["notifpwd"] == true) { 
+                        echo  '<li><a class="dropdown-item">10 days before password expiration</a></li>';
+                      }else{
+                        echo ' <li>no notifs</li>';
+                      }
+                    ?>
+                  </ul>
+                </div>
               </li>
+
               <li class="nav-item px-2">
                 <a class="nav-link h-account" href="account.php"><span class="fa-solid fa-gears"></span> Account</a>
               </li>

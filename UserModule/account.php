@@ -1,22 +1,3 @@
-<?php
-include('../Database/db.php'); 
-session_start();
-if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) { 
-    header('location: ../index.php');
-    exit();
-}else{
-     $id = $_SESSION["userid"];
-}
-
-$sql = "SELECT * FROM users  WHERE usersId = $id";
-$stmt= mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($stmt);
-$first_name = $row['usersFirstName'];
-$last_name =  $row['usersLastName'];
-$email = $row['usersEmail'];
-$username =  $row['usersUid'];
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

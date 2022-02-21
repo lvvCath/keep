@@ -1,0 +1,10 @@
+.h-portfolio{
+    color: #0084ff !important;
+}
+
+body{
+    background-color: #fffdf6 !important;
+    background-image: linear-gradient(315deg, #fffdf6 0%, #fff7f3 74%) !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
