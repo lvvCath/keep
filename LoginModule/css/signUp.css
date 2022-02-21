@@ -18,10 +18,8 @@ body {
 
 .form {
     max-width: 100vh !important;
-    padding: 2rem !important;
     justify-content: center;
     background-color: #fff;
-    padding: 10px 50px 20px 50px;
     border-bottom: 10px solid #485461;
     border-top: 10px solid #0099ff;
     border-radius:10px;

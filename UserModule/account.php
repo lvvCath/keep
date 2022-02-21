@@ -8,7 +8,8 @@
 
 
 <body>
-<div id="sideNav"><?php include 'header.php';?></div>
+<?php include '../handler/error.php';?>
+<div><?php include 'header.php';?></div>
 
 
 
@@ -39,7 +40,7 @@
                     readonly value="<?php echo $row['usersUid']?>">
         </div>
         <div class="col-12 d-flex justify-content-center">
-            <button type="button" id="edit" class="btn btn-primary" onclick="clearForm()"><i class="fa fa-edit"></i>&nbspE D I T</button>
+            <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-edit"></i>&nbspE D I T</button>
         </div>
         </form>
     </div>
@@ -76,40 +77,48 @@
     </div>
 </div>
 
-
-<?php
-if(isset($_GET["error"])){
-    if($_GET["error"] == "emptyinput"){
-        echo '<script>alert("Please fill all the input fields.")</script>';
-    }
-    else if($_GET["error"] == "invalidLastPwd"){
-        echo '<script>alert("Wrong Last password, Please enter your last password correctly.")</script>';
-    }
-    else if($_GET["error"] == "passwordNotMatch"){
-        echo '<script>alert("Password does not match. Please confirm your password again.")</script>';
-    }
-    else if($_GET["error"] == "invalidPasswordFormat"){
-        echo '<script>alert("Password does not conform to the Password Policy. \r\nPassword must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.")</script>';
-    }
-    else if($_GET["error"] == "invalidPasswordfndName"){
-        echo '<script>alert("Password does not conform to the Password Policy. \r\nDo not use your name or username in your password.")</script>';
-    }
-    else if($_GET["error"] == "invalidPasswordDict"){
-        echo '<script>alert("Password does not conform to the Password Policy. \r\nDo not use words from the Dictionary on your password.")</script>';
-    }
-    else if($_GET["error"] == "prevPassword"){
-        echo '<script>alert("You have already used the password before. \r\nPlease enter a new password.")</script>';
-    }
-    else if($_GET["error"] == "stmtfailed"){
-        echo '<script>alert("Something went wrong, please try again.")</script>';
-    }
-}
-if(isset($_GET["msg"])){
-    if($_GET["msg"] == "changePwdSuccess"){
-        echo '<script>alert("You have successfully Updated your password!")</script>';
-    }
-}
-?>
+<!-- Modal Update -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Update Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 " id="createForm" name="createForm" method="POST" action="includes/updateacc.inc.php">
+            <div class="col-md-6">
+                <label class="text-muted" for="first_name">First Name</label>
+                <input class="form-control" id="first_name" name="first_name" type="text" required 
+                         value="<?php echo $row['usersFirstName']?>">
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted" for="last_name">Last Name</label>
+                <input class="form-control" id="last_name" name="last_name" type="text" required
+                         value="<?php echo $row['usersLastName']?>"> 
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="email">Email</label>
+                <input class="form-control" id="email" name="email" type="text" required 
+                         value="<?php echo $row['usersEmail']?>"> 
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="username">Username</label>
+                <input class="form-control" id="username" name="username" type="text" required
+                         value="<?php echo $row['usersUid']?>">
+            </div>
+            <!-- buttons -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="button" id="clearBtn" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>   
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="submit" id="createBtn" name="update" class="btn btn-primary">Update</button>      
+            </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 

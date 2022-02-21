@@ -18,7 +18,7 @@ session_destroy();
 <body>
     <!-- js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    
+    <?php include '../handler/error.php';?>
     <div class="container">
 
         <div class="blueBg">
@@ -87,28 +87,7 @@ session_destroy();
             formBx.classList.remove('active')
             body.classList.remove('active');
         }
-        
-        
     </script>
-
-<?php
-if(isset($_GET["error"])){
-    if($_GET["error"] == "emptyinput"){
-        echo '<script>alert("Please fill all the input fields.")</script>';
-    }
-	else if($_GET["error"] == "invalidLogin"){
-        echo '<script>alert("Incorrect Login Information.")</script>';
-    }
-}
-if(isset($_GET["msg"])){
-    if($_GET["msg"] == "registered"){
-        echo '<script>alert("You have successfully registered! \r\nYou can now Login!")</script>';
-    }
-	else if($_GET["msg"] == "changePwdSuccess"){
-        echo '<script>alert("You have successfully Updated your password! \r\nYou can now Login!")</script>';
-    }
-}
-?>	
 
 </body>
 </html>

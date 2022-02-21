@@ -3,7 +3,7 @@ session_start();
 
 if(isset($_SESSION["useruid"])){
     $debug = strval($_SESSION["debug"]);
-    // echo "<h2> DEBUG::" .  $_SESSION["debug"] . "</h2>";
+    echo "<h2> DEBUG::" .  $_SESSION["debug"] . "</h2>";
     // echo "<h2> DEBUG::" .  $_SESSION["debug1"] . "</h2>";
     foreach($_SESSION['debug'] as $debug){
         //Print out the product ID.
