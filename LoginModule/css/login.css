@@ -206,11 +206,12 @@ input[type=submit]:focus, button:focus {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 10px;
+        border-radius: 0%;
     }
     .container .blueBg{
         top: 0;
         height: 100%;
+        border-radius: 0%;
     }
     .formBx {
         width: 100%;

@@ -4,43 +4,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
     font-family: 'Josefin Sans', sans-serif;
-    justify-content: center;
-    
 }
 
 body {
-    background-color: #f1dfd1;
-    background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%);
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	height: 100vh;
-	/* background: url("https://image.freepik.com/free-vector/cyber-technology-background_23-2148390330.jpg?w=900") center center no-repeat; */
-    background-size: cover;
-    position: relative;
-}
-
-body:before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0; right: 0; top: 0; bottom: 0;
-	background: rgba(0,0,0, .5);
-}
-
-.container {
-    width: 50%;
-    display: relative;
+    display: flex;
     justify-content: center;
-    padding: 0;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #79736E !important;
+    transition: 0.5s;
 }
 
-form {
-	background-color: #FFFFFF;
-    margin:0;
+.form {
+    max-width: 100vh !important;
+    padding: 2rem !important;
+    justify-content: center;
+    background-color: #fff;
     padding: 10px 50px 20px 50px;
     border-bottom: 10px solid #485461;
     border-top: 10px solid #0099ff;
@@ -55,7 +35,6 @@ form {
     margin: 0 15px 0 15px;
     border-radius: 20px;
     border:none;
-    width: 20rem;
 }
 #clearBtn {
     background-color: #485461;
@@ -64,4 +43,16 @@ form {
 
 #createBtn:hover, #clearBtn:hover {
     transform: scale(1.1);
+}
+
+#passwordHelpBlock{
+    font-size: 0.60rem;
+}
+
+.hr{
+    padding: 3px; 
+    border-radius: 5px;
+    background-color: #045de9;
+    background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+    width: auto;
 }

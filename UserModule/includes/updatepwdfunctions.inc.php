@@ -13,7 +13,7 @@ function uidOrEmailExists($conn, $username, $email){
     $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../Main.php?error=stmtFailed");
+        header("location: ../account.php?error=stmtFailed");
         exit();
     }
 
@@ -57,7 +57,7 @@ function invUserPwdUid($conn, $new_password, $useruid){
     $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
 
     if ($uidExists === false) {
-        header('location: ../Main.php?error=invalidLogin');
+        header('location: ../account.php?error=invalidLogin');
         exit();
     }
     
@@ -134,14 +134,14 @@ function changePass($conn, $userid, $useruid, $last_password, $new_password){
     $uidExists = uidOrEmailExists($conn, $useruid, $useruid);
 
     if ($uidExists === false) {
-        header('location: ../Main.php?error=invalidLogin');
+        header('location: ../account.php?error=invalidLogin');
         exit();
     }
 
     $pwdHashed = $uidExists["usersPassword"];
     $checkPassword = password_verify($last_password, $pwdHashed);
     if($checkPassword === false){
-        header('location: ../Main.php?error=invalidLastPwd');
+        header('location: ../account.php?error=invalidLastPwd');
         exit();
     }else if($checkPassword === true){
 
@@ -149,7 +149,7 @@ function changePass($conn, $userid, $useruid, $last_password, $new_password){
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql) ){
-            header("location: ../Main.php?error=stmtFailed");
+            header("location: ../account.php?error=stmtFailed");
             exit();
         }
 
@@ -166,7 +166,7 @@ function changePass($conn, $userid, $useruid, $last_password, $new_password){
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql) ){
-            header("location: ../Main.php?error=stmtFailed");
+            header("location: ../account.php?error=stmtFailed");
             exit();
         }
 
@@ -175,7 +175,7 @@ function changePass($conn, $userid, $useruid, $last_password, $new_password){
         mysqli_stmt_close($stmt);
 
 
-        header("location: ../Main.php?msg=changePwdSuccess");
+        header("location: ../account.php?msg=changePwdSuccess");
         exit();
     }
 }

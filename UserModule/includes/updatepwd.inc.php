@@ -12,34 +12,34 @@ if(isset($_POST["submit"])){
     require_once 'updatepwdfunctions.inc.php';
 
     if(emptyInputPass($last_password, $new_password, $con_password) !== false){
-        header("location: ../Main.php?error=emptyinput");
+        header("location: ../account.php?error=emptyinput");
         exit();
     }
     if(pwdMatch($new_password, $con_password) !== false){
-        header("location: ../Main.php?error=passwordNotMatch");
+        header("location: ../account.php?error=passwordNotMatch");
         exit();
     }
     if(invFormatPwd($new_password) !== false){
-        header("location: ../Main.php?error=invalidPasswordFormat");
+        header("location: ../account.php?error=invalidPasswordFormat");
         exit();
     }
     if(invUserPwdUid($conn, $new_password, $useruid) !== false){
-        header("location: ../Main.php?error=invalidPasswordfndName");
+        header("location: ../account.php?error=invalidPasswordfndName");
         exit();
     }
     if(invDictPwd($new_password) !== false){
-        header("location: ../Main.php?error=invalidPasswordDict");
+        header("location: ../account.php?error=invalidPasswordDict");
         exit();
     }
     if(invPrevPwd($conn, $userid, $new_password) !== false){
-        header("location: ../Main.php?error=prevPassword");
+        header("location: ../account.php?error=prevPassword");
         exit();
     }
     
     changePass($conn, $userid, $useruid, $last_password, $new_password);
 
 }else{
-    header("location: ../Main.php.php");
+    header("location: ../account.php");
     exit();
 }
 ?>
