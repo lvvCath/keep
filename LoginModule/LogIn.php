@@ -63,13 +63,16 @@ if (isset($_SESSION["locked"])){
                 <a href="#" class="forgot">Forgot your password?</a><br>
                 
                 <?php
+                // echo $_SESSION["locked"];
+                // echo $_SESSION["login_attempt"];
                     if (isset($_SESSION["login_attempt"])){
                         if ($_SESSION["login_attempt"] > 2){
                             if (!isset($_SESSION["locked"])){
                                 $_SESSION["locked"] = time();
                             }
                             echo 'Locked';
-                            echo '<div id="timer">00:00:00</div>';
+                            echo '<div id="timer"></div>';
+                            
                         }else{
                             echo '<input name="LoginBtn" id="LoginBtn"  type="submit" class="btn signBtn" value="Login">';
                         }
@@ -118,7 +121,7 @@ if (isset($_SESSION["locked"])){
 
 <script>
 var timeoutHandle;
-function countdown(minutes,stat) {
+function countdown(minutes,stat){
     var seconds = 30;
     var mins = minutes;
 
@@ -143,22 +146,22 @@ function countdown(minutes,stat) {
             // if(mins > 1){  
             // setTimeout(function () { countdown(parseInt(mins)-1,false); }, 1000);
             // }
+            delcookie("seconds");
+            delcookie("minutes");
             location.replace("LogIn.php");
-            setCookie("minutes",0);
-            setCookie("seconds",0);
 
         }
     }
-
     tick();
  }
 
 function setCookie(cname,cvalue) {
     var d = new Date();
     // cookie expiration: days*hours*minutes*seconds*millisec
-    d.setTime(d.getTime() + (30*1000));
+    // d.setTime(d.getTime() + (30*1000)).interval=0;
     var expires = "expires=" + d.toGMTString();
-    document.cookie = cname+"="+cvalue+"; "+expires;
+    // document.cookie = cname+"="+cvalue+"; "+expires;
+    document.cookie = cname+"="+cvalue+"; Path=/;";
     console.log(document.cookie);
 }
 
@@ -173,6 +176,11 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function delcookie(name){
+    document.cookie = name+"=0; Path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    console.log(document.cookie);
 }
 
 window.onload = function startingTimer(){
