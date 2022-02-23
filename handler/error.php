@@ -1,39 +1,9 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Online Portfoio</title>
-    <!-- add icon link -->
-    <link rel="icon" href="../assets/images/icon.png" type="image/x-icon">
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="error.css">
-    <!-- Bootstrap CSS -->
-    <link href="../bootstrap-5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- Fontawesome -->
-    <link href="../assets/fontawesome-free-6.0.0-web/css/fontawesome.css" rel="stylesheet">
-    <link href="../assets/fontawesome-free-6.0.0-web/css/brands.css" rel="stylesheet">
-    <link href="../assets/fontawesome-free-6.0.0-web/css/solid.css" rel="stylesheet">
-
-    <style>
-        .alert{
-            position: absolute !important;
-            border-left: 5px solid red !important;
-            left: 0px ;
-            top: 1%;
-            z-index: 1;
-        }
-        .alert-success{
-            border-left: 5px solid green !important;
-        }
-    </style>
-  </head>
-<body>
+<!-- external css -->
+<link rel="stylesheet" href="../handler/error.css">
 <?php
 if(isset($_GET["error"])){
     echo '<div class="alert alert-danger alert-dismissible fade show " role="alert">';
     echo '  <h4 class="alert-heading"><span class="fa-solid fa-triangle-exclamation"></span> Invalid Input</h4>';
-
     if($_GET["error"] == "emptyinput"){
         echo '<p>Please fill all the input fields.</p>';
     }
@@ -66,9 +36,13 @@ if(isset($_GET["error"])){
     else if($_GET["error"] == "invalidPasswordDict"){
         echo '<p>Password does not conform to the Password Policy. <br>Do not use words from the Dictionary on your password.</p>';
     }
+    else if($_GET["error"] == "prevPassword"){
+        echo '<script>alert("You have already used the password before. \r\nPlease enter a new password.")</script>';
+    }
     else if($_GET["error"] == "stmtFailed"){
         echo '<p>Something went wrong, please try again.</p>';
     }
+
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }
 if(isset($_GET["msg"])){
@@ -93,5 +67,4 @@ if(isset($_GET["msg"])){
         $('#createForm').trigger("reset");
     }
 </script>
-</body>
-</html>
+

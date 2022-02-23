@@ -1,4 +1,5 @@
 <?php
+// 
 // SignUp Functions
 function emptyInputSignup($first_name, $last_name, $email, $username, $password, $con_password){
     $result;
@@ -189,6 +190,9 @@ function loginUser($conn, $username, $password){
     $uidOrEmailExists = uidOrEmailExists($conn, $username, $username);
 
     if ($uidOrEmailExists === false) {
+        session_start();
+        $_SESSION["login_attempt"] += 1;
+
         header('location: ../LogIn.php?error=invalidLogin');
         exit();
     }
@@ -206,6 +210,9 @@ function loginUser($conn, $username, $password){
       }
  
     if($checkPassword === false){
+        session_start();
+        $_SESSION["login_attempt"] += 1;
+
         header('location: ../LogIn.php?error=invalidLogin');
         exit();
     }else if($checkPassword === true AND $expiredPwd === false AND $notificationPwd === false){
@@ -220,8 +227,7 @@ function loginUser($conn, $username, $password){
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         $_SESSION["notifpwd"] =  true;
-        echo "<script> alert('Your password will expire in 10 days !');
-        window.location = '../../UserModule/Main.php' </script>";
+        header("location: ../../UserModule/Main.php");
     }else if($checkPassword === true AND $expiredPwd === true AND $notificationPwd === false){
         session_start();
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];

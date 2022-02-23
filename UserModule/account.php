@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/account.css">
-</head>
+<!-- external css -->
+<link rel="stylesheet" href="css/account.css">
 
-
-<body>
 <?php include '../handler/error.php';?>
-<div><?php include 'header.php';?></div>
-
-
+<?php include 'header.php';?>
 
 <div class="container d-flex justify-content-center flex-column mt-5">
     <div class="row g-5 p-3 mx-2">
@@ -119,8 +113,9 @@
     </div>
   </div>
 </div>
-</body>
-</html>
+
+
+<?php include 'footer.php';?>
 
 
 
