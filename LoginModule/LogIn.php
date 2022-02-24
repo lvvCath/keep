@@ -8,12 +8,11 @@ if (isset($_SESSION["userid"])) {
 
 if (isset($_SESSION["locked"])){
     $difference = time() - $_SESSION["locked"];
-    if ($difference > 30){
+    if ($difference > 29){
         unset($_SESSION["locked"]);
         unset($_SESSION["login_attempt"]);
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -63,15 +62,15 @@ if (isset($_SESSION["locked"])){
                 <a href="#" class="forgot">Forgot your password?</a><br>
                 
                 <?php
-                // echo $_SESSION["locked"];
-                // echo $_SESSION["login_attempt"];
                     if (isset($_SESSION["login_attempt"])){
                         if ($_SESSION["login_attempt"] > 2){
                             if (!isset($_SESSION["locked"])){
                                 $_SESSION["locked"] = time();
                             }
                             echo 'Locked';
-                            echo '<div id="timer"></div>';
+                            echo '<script src="js/lock.js"></script>';
+                            echo '<script>lock = true;</script>';
+                            echo '<div id="timer">00:00</div>';
                             
                         }else{
                             echo '<input name="LoginBtn" id="LoginBtn"  type="submit" class="btn signBtn" value="Login">';
@@ -117,75 +116,6 @@ if (isset($_SESSION["locked"])){
         formBx.classList.remove('active')
         body.classList.remove('active');
     }
-</script>
-
-<script>
-var timeoutHandle;
-function countdown(minutes,stat){
-    var seconds = 30;
-    var mins = minutes;
-
-    if(getCookie("minutes")&&getCookie("seconds")&&stat){
-        var seconds = getCookie("seconds");
-        var mins = getCookie("minutes");
-    }
-
-    function tick() {
-        var counter = document.getElementById("timer");
-        setCookie("minutes",mins);
-        setCookie("seconds",seconds);
-        var current_minutes = mins;
-        seconds--;
-        counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-        // console.log(seconds);
-        //save the time in cookie
-        if(seconds > 0){
-            timeoutHandle=setTimeout(tick, 1000);
-        }
-        else{
-            // if(mins > 1){  
-            // setTimeout(function () { countdown(parseInt(mins)-1,false); }, 1000);
-            // }
-            delcookie("seconds");
-            delcookie("minutes");
-            location.replace("LogIn.php");
-
-        }
-    }
-    tick();
- }
-
-function setCookie(cname,cvalue) {
-    var d = new Date();
-    // cookie expiration: days*hours*minutes*seconds*millisec
-    // d.setTime(d.getTime() + (30*1000)).interval=0;
-    var expires = "expires=" + d.toGMTString();
-    // document.cookie = cname+"="+cvalue+"; "+expires;
-    document.cookie = cname+"="+cvalue+"; Path=/;";
-    console.log(document.cookie);
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function delcookie(name){
-    document.cookie = name+"=0; Path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    console.log(document.cookie);
-}
-
-window.onload = function startingTimer(){
-    countdown(0, true);
-}
 </script>
 
 <!-- Optional JavaScript; choose one of the two! -->
