@@ -32,7 +32,7 @@ $username =  $row['usersUid'];
   <link href="../assets/fontawesome-free-6.0.0-web/css/solid.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light shadow bg-body rounded">
+<nav class="navbar navbar-expand-lg navbar-light shadow bg-body rounded h-navbar">
   <div class="container-fluid d-flex">
     <a class="navbar-brand" href="#">
     <img src="../assets/images/icon.png" alt="" width="30" height="30" class="d-inline-block align-text-top"> 

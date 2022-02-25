@@ -24,15 +24,6 @@ body{
     font-weight: bold;
 }
 
-.hr{
-    padding: 3px; 
-    border-radius: 5px;
-    background-color: #045de9;
-    background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
-    width: auto;
-    margin: 1rem 0;
-}
-
 #createBtn, #clearBtn, #edit {
     background-color: #045de9;
     background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
