@@ -172,32 +172,32 @@
                 </div>
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="about-phone">Phone</label>
-                    <input class="form-control" id="about-phone" name="about-phone" type="number" required
+                    <input class="form-control" id="about-phone" name="about-phone" type="text" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="about-website">Website</label>
-                    <input class="form-control" id="about-website" name="about-website" type="number" required
+                    <input class="form-control" id="about-website" name="about-website" type="text" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="about-city">City</label>
-                    <input class="form-control" id="about-city" name="about-city" type="number" required
+                    <input class="form-control" id="about-city" name="about-city" type="text" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="about-email">Email</label>
-                    <input class="form-control" id="about-email" name="about-email" type="number" required
+                    <input class="form-control" id="about-email" name="about-email" type="email" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="about-degree">Degree</label>
-                    <input class="form-control" id="about-degree" name="about-degree" type="number" required
+                    <input class="form-control" id="about-degree" name="about-degree" type="text" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="about-freelance">Freelance</label>
-                    <input class="form-control" id="about-freelance" name="about-freelance" type="number" required
+                    <input class="form-control" id="about-freelance" name="about-freelance" type="text" required
                             value="">
                 </div>
                 </div>

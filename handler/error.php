@@ -28,7 +28,7 @@ if(isset($_GET["error"])){
         echo '<p>Password does not match. Please confirm your password again.</p>';
     }
     else if($_GET["error"] == "invalidPasswordFormat"){
-        echo '<p>Password does not conform to the Password Policy. <br>Password must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.</p>';
+        echo '<p>Password does not conform to the Password Policy. <br>Password must be at least (10) characters long, <br>which consist of at least (1) upper case letter, <br>(1) lower case letter, (1) number <br>and (1) special character.</p>';
     }
     else if($_GET["error"] == "invalidPasswordfndName"){
         echo '<p>Password does not conform to the Password Policy. <br>Do not use your name or username in your password.</p>';
