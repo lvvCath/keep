@@ -4,6 +4,11 @@ session_start();
 if (isset($_SESSION["userid"])) { 
     header('location: ../UserModule/main.php');
     exit();
+}else if(!isset($_SESSION["userid"]) && isset($_SESSION["useruid"])){
+    session_unset();
+    session_destroy();
+    header('location: ../index.php');
+    exit();
 }
 
 if (isset($_SESSION["locked"])){
@@ -54,7 +59,7 @@ if (isset($_SESSION["locked"])){
 
     <div class="formBx">
         <div class="form signinForm">
-            <form method="POST" action="includes/login.inc.php" name="signinForm"> <br><br><br>
+            <form method="POST" action="<?php echo htmlspecialchars("includes/login.inc.php");?>" name="signinForm"> <br><br><br>
                 <h1>Log in</h1> <br>
                 <input name="uid" id="uid" type="text" class="email form-control" placeholder="Email or Username" required>
                 <input name="password" id="password" type="password" class="password form-control" placeholder="Password" required>

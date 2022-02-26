@@ -11,6 +11,16 @@ function emptyInputSignup($first_name, $last_name, $email, $username, $password,
     return $result;
 }
 
+function invalidName($first_name, $last_name){
+    $result;
+    if(!preg_match("/^[a-zA-Z-' ]*$/", $first_name) || !preg_match("/^[a-zA-Z-' ]*$/", $last_name)){
+        $result = true;
+    }else{
+        $result = false;
+    }
+    return $result;
+}
+
 function invalidUid($username){
     $result;
     if(!preg_match("/^[a-zA-Z][0-9a-zA-Z_]{4,19}[0-9a-zA-Z]$/", $username)){
@@ -217,6 +227,7 @@ function loginUser($conn, $username, $password){
         exit();
     }else if($checkPassword === true AND $expiredPwd === false AND $notificationPwd === false){
         session_start();
+        session_regenerate_id(TRUE);
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         $_SESSION["notifpwd"] =  false;
@@ -224,13 +235,14 @@ function loginUser($conn, $username, $password){
         exit();
     }else if($checkPassword === true AND $expiredPwd === false AND $notificationPwd === true){
         session_start();
+        session_regenerate_id(TRUE);
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         $_SESSION["notifpwd"] =  true;
         header("location: ../../UserModule/Main.php");
     }else if($checkPassword === true AND $expiredPwd === true AND $notificationPwd === false){
         session_start();
-        $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
+        session_regenerate_id(TRUE);
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         $_SESSION["notifpwd"] =  false;
         header("location: ../ChangePass.php");

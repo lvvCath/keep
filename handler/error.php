@@ -12,6 +12,9 @@ if(isset($_GET["error"])){
         echo '<p>Incorrect Login Information.</p>';
     }
     // Account
+    else if($_GET["error"] == "invalidName"){
+        echo '<p>The Name you entered is Invalid. <br>Only Letters and white spaces are allowed.</p>';
+    }
     else if($_GET["error"] == "invalidUid"){
         echo '<p>The Username you entered is invalid.</p>';
     }

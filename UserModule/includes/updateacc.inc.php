@@ -15,6 +15,10 @@ if(isset($_POST["update"])){
         header("location: ../account.php?error=emptyinput");
         exit();
     }
+    if(invalidName($first_name, $last_name) !== false){
+        header("location: ../account.php?error=invalidName");
+        exit();
+    }
     if(invalidUid($username) !== false){
         header("location: ../account.php?error=invalidUid");
         exit();
