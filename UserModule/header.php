@@ -7,14 +7,7 @@ if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) {
 }else{
      $id = $_SESSION["userid"];
 }
-
-$sql = "SELECT * FROM users  WHERE usersId = $id";
-$stmt= mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($stmt);
-$first_name = $row['usersFirstName'];
-$last_name =  $row['usersLastName'];
-$email = $row['usersEmail'];
-$username =  $row['usersUid'];
+include('../UserModule/includes/fetch_acc_info.php');
 
 ?>
   <title>KEEP</title>
