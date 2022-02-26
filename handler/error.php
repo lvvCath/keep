@@ -37,7 +37,13 @@ if(isset($_GET["error"])){
         echo '<p>Password does not conform to the Password Policy. <br>Do not use words from the Dictionary on your password.</p>';
     }
     else if($_GET["error"] == "prevPassword"){
-        echo '<script>alert("You have already used the password before. \r\nPlease enter a new password.")</script>';
+        echo '<p>You have already used the password before. <br>Please enter a new password.</p>';
+    }
+    else if($_GET["error"] == "invalidCredentials"){
+        echo '<p>Cannot Delete Account. <br>Invalid Account Credentials.</p>';
+    }
+    else if($_GET["error"] == "errDeleteAccVerification"){
+        echo '<p>Invalid Delete Account Verification</p>';
     }
     else if($_GET["error"] == "stmtFailed"){
         echo '<p>Something went wrong, please try again.</p>';
@@ -58,6 +64,9 @@ if(isset($_GET["msg"])){
     }
 	else if($_GET["msg"] == "changePwdSuccess"){
         echo '<p>You have successfully Updated your password!';
+    }
+    else if($_GET["msg"] == "accdeleted"){
+        echo '<p>You have successfully Deleted your Account <br>We are sad to see you go <i class="fa-solid fa-face-frown"></i></p>';
     }
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }

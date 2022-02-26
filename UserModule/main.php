@@ -13,6 +13,7 @@
             <img src="../assets/images/image-holder.svg" class="d-block mx-lg-auto img-fluid" width="500" height="500">
         </div>
         <div class="col-md-6 py-5 mx-auto">
+            <a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>
             <h1 class="display-5 fw-bold lh-1 mb-2"><?php echo "".$row['usersFirstName']. " " .$row['usersLastName']. " " ?></h1>
             <div class="hr"></div>
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit</p>
@@ -22,6 +23,39 @@
         </div>
     </div>
 </div><!-- End Hero -->
+
+<!-- Modal Hero Edit -->
+<div class="modal fade" id="modalHeroEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalHeroEditLabel">Introduction</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-4 " id="formHeroEdit" name="formHeroEdit" method="POST" action="#">
+            <div class="col-12">
+                <label class="text-muted" for="intro">Introduction</label>
+                <textarea class="form-control" id="intro" name="intro" rows="4" required
+                        value=""></textarea>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="introImage">Image Introduction Link</label>
+                <input class="form-control" id="introImage" name="introImage" type="text" placeholder="Insert image link" required
+                         value="">
+            </div>
+            <!-- buttons -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="button" class="modal-cancel-Btn btn btn-primary" data-bs-dismiss="modal">Cancel</button>   
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="submit" name="introUpdateBtn" class="modal-confirm-Btn btn btn-primary">Update</button>      
+            </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ======= Header ======= -->
 <header id="header" class="sticky-top">
@@ -38,7 +72,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
         <ul class="navbar-nav">
             <li class="nav-item px-2">
-                <a class="nav-link scrollto active" href="#hero">Home</a></li>
+                <a class="nav-link scrollto active" href="#">Home</a></li>
             <li class="nav-item px-2">
                 <a class="nav-link scrollto" href="#about">About</a></li>
             <li class="nav-item px-2">
@@ -61,7 +95,7 @@
 <div class="container-fluid">
     <!-- About -->
     <div class="section-title">
-        <h2>About</h2>
+        <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalAboutEdit"><i class="fa fa-edit"></i></a> About</h2>
         <p>Learn more about me</p>
     </div>
 
@@ -99,10 +133,96 @@
 </div>
 </section><!-- End About Section -->
 
+<!-- Modal About Edit -->
+<div class="modal fade" id="modalAboutEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAboutEditLabel">About Me</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formAboutEdit" name="formAboutEdit" method="POST" action="#">
+        <div class="row g-3">
+            <div class="divider col-lg-5">
+                <div class="row g-3">
+                <div class="col-12">
+                    <label class="text-muted" for="about-profession">Profession</label>
+                    <input class="form-control" id="about-profession" name="about-profession" type="text" required
+                            value="">
+                </div>
+                <div class="col-12">
+                    <label class="text-muted" for="about-desc">About Description</label>
+                    <textarea class="form-control" id="about-desc" name="about-desc" rows="8"  required
+                            value=""></textarea>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="row g-3">
+                <div class="col-6 col-sm-6">
+                    <label class="text-muted" for="about-age">Age</label>
+                    <input class="form-control" id="about-age" name="about-age" type="number" required
+                            value="">
+                </div>
+                <div class="col-6 col-sm-6">
+                    <label class="text-muted" for="about-experience">Years of Experience</label>
+                    <input class="form-control" id="about-experience" name="about-experience" type="number" required
+                            value="">
+                </div>
+                <div class="col-6 col-sm-6">
+                    <label class="text-muted" for="about-phone">Phone</label>
+                    <input class="form-control" id="about-phone" name="about-phone" type="number" required
+                            value="">
+                </div>
+                <div class="col-6 col-sm-6">
+                    <label class="text-muted" for="about-website">Website</label>
+                    <input class="form-control" id="about-website" name="about-website" type="number" required
+                            value="">
+                </div>
+                <div class="col-6 col-sm-6">
+                    <label class="text-muted" for="about-city">City</label>
+                    <input class="form-control" id="about-city" name="about-city" type="number" required
+                            value="">
+                </div>
+                <div class="col-6 col-sm-6">
+                    <label class="text-muted" for="about-email">Email</label>
+                    <input class="form-control" id="about-email" name="about-email" type="number" required
+                            value="">
+                </div>
+                <div class="col-6 col-sm-6">
+                    <label class="text-muted" for="about-degree">Degree</label>
+                    <input class="form-control" id="about-degree" name="about-degree" type="number" required
+                            value="">
+                </div>
+                <div class="col-6 col-sm-6">
+                    <label class="text-muted" for="about-freelance">Freelance</label>
+                    <input class="form-control" id="about-freelance" name="about-freelance" type="number" required
+                            value="">
+                </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-2 g-3">
+            <!-- buttons -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="button" class="modal-cancel-Btn btn btn-primary" data-bs-dismiss="modal">Cancel</button>   
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="submit" name="aboutUpdateBtn" class="modal-confirm-Btn btn btn-primary">Update</button>      
+            </div> 
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ======= Skills  ======= -->
 <section class="skills section-bg">
     <div class="section-title">
-    <h2>Skills</h2>
+    <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Skills</h2>
     </div>
 
     <div class="row g-4 skills-content">
@@ -150,7 +270,7 @@
 <div class="container-fluid">
 
     <div class="section-title">
-    <h2>Resume</h2>
+    <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Resume</h2>
     <p>Check My Resume</p>
     </div>
 
@@ -195,7 +315,7 @@
 <div class="container">
 
     <div class="section-title">
-        <h2>Services</h2>
+        <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Services</h2>
         <p>My Services</p>
     </div>
 
@@ -249,7 +369,7 @@
 <div class="container">
 
     <div class="section-title">
-    <h2>Portfolio</h2>
+    <h2><a class="main-add-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-circle-plus"></i></a> Portfolio</h2>
     <p>My Works</p>
     </div>
 

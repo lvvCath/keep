@@ -10,6 +10,28 @@ background-size: cover;
 color: #5a656e;
 }
 
+.modal-body form{
+padding: 20px 0px !important;
+}
+.divider{
+border-right: 2px dotted #5a656e !important;
+}
+@media (max-width: 768px) {
+.divider{
+border-right: none !important;
+}
+}
+.main-edit-ico, .main-add-ico{
+color: #7c7c7c;
+font-size: 1.1rem;
+}
+.main-edit-ico i:hover, .main-add-ico i:hover{
+transition: all 0.3s ease-in-out;
+transform: scale(1.15);
+cursor: pointer;
+color: #0084ff;
+}
+
 /* _____________________
 *  Hero 
 ______________________ */

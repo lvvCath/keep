@@ -38,6 +38,46 @@ body{
     background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
 }
 
-#createBtn:hover, #clearBtn:hover, #edit:hover {
+#createBtn:hover, #clearBtn:hover, #edit:hover, #deleteAccountBtn:hover {
     transform: scale(1.1);
+}
+
+.hr-red{
+    padding: 3px; 
+    border-radius: 5px;
+    background-color: #3f0d12;
+    background-image: linear-gradient(315deg, #3f0d12 0%, #a71d31 74%);
+    width: auto;
+    margin: 1rem 0;
+
+}
+
+#deleteBtn{
+    background-color: #3f0d12;
+    background-image: linear-gradient(315deg, #3f0d12 0%, #a71d31 74%);
+    outline: none;
+    padding: 8px 30px 8px 30px;
+    margin: 0 15px 0 15px;
+    border-radius: 20px;
+    border:none;
+}
+
+#deleteBtn:hover{
+    transform: scale(1.1);
+}
+
+/* General Modal CSS */
+.modal-content-red{
+    border-bottom: 10px solid #485461 !important;
+    border-top: 10px solid #8f1326 !important;
+    border-radius: 30px !important;
+}
+#deleteAccountBtn{
+    background-color: #3f0d12;
+    background-image: linear-gradient(315deg, #3f0d12 0%, #a71d31 74%);
+    outline: none;
+    padding: 10px 30px !important;
+    margin: 0 15px 0 15px;
+    border-radius: 20px !important;
+    border:none !important;
 }
