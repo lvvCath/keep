@@ -93,10 +93,6 @@
             </ul>
         </div>
         </div>
-        <p>
-        Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore. Et eius omnis.
-        Cupiditate ut dicta maxime officiis quidem quia. Sed et consectetur qui quia repellendus itaque neque. Aliquid amet quidem ut quaerat cupiditate. Ab et eum qui repellendus omnis culpa magni laudantium dolores.
-        </p>
     </div>
     </div>
 
@@ -160,19 +156,6 @@
 
     <div class="row">
     <div class="col-lg-6">
-        <h3 class="resume-title">Sumary</h3>
-        <div class="resume-item pb-0">
-        <h4>Alice Barkley</h4>
-        <p><em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</em></p>
-        <p>
-        <ul>
-            <li>Portland par 127,Orlando, FL</li>
-            <li>(123) 456-7891</li>
-            <li>alice.barkley@example.com</li>
-        </ul>
-        </p>
-        </div>
-
         <h3 class="resume-title">Education</h3>
         <div class="resume-item">
         <h4>Master of Fine Arts &amp; Graphic Design</h4>
@@ -193,27 +176,13 @@
         <h4>Senior graphic design specialist</h4>
         <h5>2019 - Present</h5>
         <p><em>Experion, New York, NY </em></p>
-        <p>
-        <ul>
-            <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
-            <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
-            <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
-            <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
-        </ul>
-        </p>
+        <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
         </div>
         <div class="resume-item">
         <h4>Graphic design specialist</h4>
         <h5>2017 - 2018</h5>
         <p><em>Stepping Stone Advertising, New York, NY</em></p>
-        <p>
-        <ul>
-            <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-            <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-            <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-            <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
-        </ul>
-        </p>
+        <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
         </div>
     </div>
     </div>
@@ -357,7 +326,7 @@
 </div>
 
 <!-- ======= Contact Section ======= -->
-<Section id="contact" class="contact-me">
+<Section id="Contact" class="contact-me">
 <div class="container-fluid">
     <div class="row">
         <div id="contact-left" class="col-md-6 py-5">
