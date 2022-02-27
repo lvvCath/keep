@@ -17,10 +17,14 @@ session_start();
 </head>
 <body>
 <?php include '../handler/error.php';?>
-
+<script>
+function clearForm() {
+    document.getElementById("form").reset();
+}
+</script>
 <div class="container d-flex justify-content-center">
     <div class="changePass-container p-4 shadow-lg p-3 mb-5 bg-body rounded">
-        <form name="changePassForm" method="POST" action="includes/changepass.inc.php">
+        <form name="changePassForm" id="form" method="POST" action="includes/changepass.inc.php">
             <h1>Change Password</h1>
             <p>Your password already expired. Please change you password to Login.</p> 
             <div class="hr"></div>
@@ -54,11 +58,7 @@ session_start();
 </div>
 
 
-<script>
-function clearForm() {
-    $('#clearBtn').trigger("reset");
-}
-</script>
+
 
 </body>
 </html>

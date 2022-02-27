@@ -44,7 +44,7 @@
         Password must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.
         </small>
         <div class="hr"></div>        
-        <form class="row g-3 " id="createForm" name="createForm" method="POST" action="includes/updatepwd.inc.php">
+        <form class="row g-3 " id="form" name="createForm" method="POST" action="includes/updatepwd.inc.php">
         <div class="col-12">
             <label class="text-muted" for="last_password">Current Password</label>
             <input class="form-control" id="last_password" name="last_password" type="password" required> 
@@ -171,7 +171,12 @@ if (window.location.hash) {
     }
     
 });
+
+function clearForm() {
+    document.getElementById("form").reset();
+}
 </script>
+
 <?php include 'footer.php';?>
 
 

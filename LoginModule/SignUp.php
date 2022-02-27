@@ -19,13 +19,14 @@
 <body>
 <div class="container d-flex justify-content-center">
     <div class="form px-4 shadow-lg p-3 mb-5 bg-body rounded">
-    <form class="row g-3" id="createForm" name="createForm" method="POST" action="includes/signup.inc.php">
+    <form class="row g-3" id="form" name="createForm" method="POST" action="includes/signup.inc.php">
         <div class="col-12">
             <a href="LogIn.php" class="float-end" style="color:grey;"><i class="fa-solid fa-right-to-bracket"></i></a> 
             <h1>Registration Form</h1>
-            <div class="hr"></div>
+            <div class="hr"+
+            ></div>
         </div>
-          
+        
         <div class="col-md-6">
             <label class="text-muted" for="first_name">First Name</label>
             <input class="form-control" id="first_name" name="first_name" type="text" required>
@@ -70,7 +71,7 @@
 <script src="../bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 function clearForm() {
-    $('#clearBtn').trigger("reset");
+    document.getElementById("form").reset();
 }
 </script>
 
