@@ -45,7 +45,7 @@ function pwdMatch($password, $con_password){
 function invFormatPwd($password){
     $result;
     // Password must be at least (10) characters long, which consist of at least (1) upper case letter, 1 lower case letter, 1 number and 1 special character.
-    if(!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z].{10,}$/", $password)){
+    if(!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z].{9,}$/", $password)){
         $result = true;
     }else{
         $result = false;
