@@ -47,6 +47,10 @@
         <form class="row g-3 " id="form" name="createForm" method="POST" action="includes/updatepwd.inc.php">
         <div class="col-12">
             <label class="text-muted" for="last_password">Current Password</label>
+            <span class="pwd-eye" onclick="password_show_hide();">
+                <i class="fa fa-eye" id="show_eye"></i>
+                <i class="fa fa-eye-slash d-none" id="hide_eye"></i>
+            </span>
             <input class="form-control" id="last_password" name="last_password" type="password" required> 
         </div>
         <div class="col-md-6">
@@ -121,7 +125,7 @@
   </div>
 </div>
 
-<!-- Modal Update -->
+<!-- Modal Delete -->
 <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modal-content-red">
@@ -140,6 +144,10 @@
             </div>
             <div class="col-12">
                 <label class="text-muted" for="password">Password</label>
+                <span class="pwd-eye" onclick="modal_password_show_hide();">
+                    <i class="fa fa-eye" id="show_eye_m"></i>
+                    <i class="fa fa-eye-slash d-none" id="hide_eye_m"></i>
+                </span>
                 <input class="form-control" id="password" name="password" type="password" required> 
             </div>
             <div class="col-12">
@@ -174,6 +182,44 @@ if (window.location.hash) {
 
 function clearForm() {
     document.getElementById("form").reset();
+}
+// Password Hide/Unhide
+function password_show_hide() {
+  var x = document.getElementById("last_password");
+  var y = document.getElementById("new_password");
+  var z = document.getElementById("con_password");
+  var show_eye = document.getElementById("show_eye");
+  var hide_eye = document.getElementById("hide_eye");
+  hide_eye.classList.remove("d-none");
+  if (x.type === "password") {
+    x.type = "text";
+    y.type = "text";
+    z.type = "text";
+    show_eye.style.display = "none";
+    hide_eye.style.display = "block";
+  } else {
+    x.type = "password";
+    y.type = "password";
+    z.type = "password";
+    show_eye.style.display = "block";
+    hide_eye.style.display = "none";
+  }
+}
+// Modal Password Hide/Unhide
+function modal_password_show_hide() {
+  var x = document.getElementById("password");
+  var show_eye = document.getElementById("show_eye_m");
+  var hide_eye = document.getElementById("hide_eye_m");
+  hide_eye.classList.remove("d-none");
+  if (x.type === "password") {
+    x.type = "text";
+    show_eye.style.display = "none";
+    hide_eye.style.display = "block";
+  } else {
+    x.type = "password";
+    show_eye.style.display = "block";
+    hide_eye.style.display = "none";
+  }
 }
 </script>
 

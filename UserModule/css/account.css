@@ -81,3 +81,11 @@ body{
     border-radius: 20px !important;
     border:none !important;
 }
+
+/* Password Eye Icon */
+.pwd-eye{
+    float: right;
+    color: #59636d;
+    font-size: 15px;
+    padding-right: 4px;
+}

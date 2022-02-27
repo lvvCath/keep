@@ -55,8 +55,15 @@ body {
     width: auto;
 }
 
-/* ChangePass.php */
+/* Password Eye Icon */
+.pwd-eye{
+    float: right;
+    color: #59636d;
+    font-size: 15px;
+    padding-right: 4px;
+}
 
+/* ChangePass.php */
 .changePass-container{
     max-width: 50% !important;
 }

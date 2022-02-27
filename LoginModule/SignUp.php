@@ -44,7 +44,11 @@
             <input class="form-control" id="username" name="username" type="text" required>
         </div>
         <div class="col-md-6">
-            <label class="text-muted" for="password">Password</label>
+            <label class="text-muted" for="password">Password </label>
+            <span class="pwd-eye" onclick="password_show_hide();">
+                <i class="fa fa-eye" id="show_eye"></i>
+                <i class="fa fa-eye-slash d-none" id="hide_eye"></i>
+            </span>
             <input class="form-control" id="password" name="password" type="password" required>
             <small id="passwordHelpBlock" class="form-text text-muted">
             Password must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.
@@ -52,6 +56,10 @@
         </div>
         <div class="col-md-6">
             <label class="text-muted" for="con_password">Confirm Password</label>
+            <span class="pwd-eye" onclick="con_password_show_hide();">
+                <i class="fa fa-eye" id="show_eye_c"></i>
+                <i class="fa fa-eye-slash d-none" id="hide_eye_c"></i>
+            </span>
             <input class="form-control" id="con_password" name="con_password" type="password" required> 
         </div>
         <!-- buttons -->
@@ -72,6 +80,38 @@
 <script>
 function clearForm() {
     document.getElementById("form").reset();
+}
+// Password Hide/Unhide
+function password_show_hide() {
+  var x = document.getElementById("password");
+  var show_eye = document.getElementById("show_eye");
+  var hide_eye = document.getElementById("hide_eye");
+  hide_eye.classList.remove("d-none");
+  if (x.type === "password") {
+    x.type = "text";
+    show_eye.style.display = "none";
+    hide_eye.style.display = "block";
+  } else {
+    x.type = "password";
+    show_eye.style.display = "block";
+    hide_eye.style.display = "none";
+  }
+}
+// Confirm Password Hide/Unhide
+function con_password_show_hide() {
+  var x = document.getElementById("con_password");
+  var show_eye = document.getElementById("show_eye_c");
+  var hide_eye = document.getElementById("hide_eye_c");
+  hide_eye.classList.remove("d-none");
+  if (x.type === "password") {
+    x.type = "text";
+    show_eye.style.display = "none";
+    hide_eye.style.display = "block";
+  } else {
+    x.type = "password";
+    show_eye.style.display = "block";
+    hide_eye.style.display = "none";
+  }
 }
 </script>
 
