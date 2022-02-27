@@ -68,6 +68,11 @@
 <!-- Optional JavaScript; choose one of the two! -->
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="../bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function clearForm() {
+    $('#clearBtn').trigger("reset");
+}
+</script>
 
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
