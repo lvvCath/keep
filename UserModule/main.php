@@ -16,7 +16,9 @@
             <a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>
             <h1 class="display-5 fw-bold lh-1 mb-2"><?php echo "".$row['usersFirstName']. " " .$row['usersLastName']. " " ?></h1>
             <div class="hr"></div>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit</p>
+            <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+            </p>
             <div class="d-grid d-md-flex justify-content-md-center">
                 <a href="#about" class="btn-get-started scrollto"><i class="fa-solid fa-angles-down"></i></a>
             </div>
@@ -36,8 +38,9 @@
         <form class="row g-4 " id="formHeroEdit" name="formHeroEdit" method="POST" action="#">
             <div class="col-12">
                 <label class="text-muted" for="intro">Introduction</label>
-                <textarea class="form-control" id="intro" name="intro" rows="4" required
-                        value=""></textarea>
+                <textarea class="form-control" id="intro" name="intro" rows="7" maxlength="300" required
+                oninput="introLimit(this)" value=""></textarea>
+                <div id="charCounter" class="form-text text-end"></div>
             </div>
             <div class="col-12">
                 <label class="text-muted" for="introImage">Image Introduction Link</label>

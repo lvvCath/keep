@@ -57,3 +57,20 @@
 
 </body>
 </html> -->
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>This example demonstrates how to assign an "onfocus" event to an input element.</p>
+
+Enter your name: <input type="text" id="fname" onfocus="myFunction()">
+
+<script>
+function myFunction() {
+  document.getElementById("fname").style.backgroundColor = "red";
+}
+</script>
+
+</body>
+</html>

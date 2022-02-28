@@ -89,3 +89,43 @@ body{
     font-size: 15px;
     padding-right: 4px;
 }
+
+/* Password validation */
+#passwordHelpBlock, #usernameHelpBlock{
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
+  
+  /* Add a green text color and a checkmark when the requirements are right */
+  .valid {
+    color: #045de9;
+  }
+  
+  .valid:before {
+    position: relative;
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: normal;
+    content: "\f058";
+    padding-right: 10px;
+  }
+  
+  /* Add a red text color and an "x" when the requirements are wrong */
+  .invalid {
+    color: rgb(255, 49, 49);
+  }
+  
+  .invalid:before {
+    position: relative;
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: normal;
+    content: "\f057";
+    padding-right: 10px;
+  }

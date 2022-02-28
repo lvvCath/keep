@@ -12,7 +12,7 @@ function emptyInputSignup($first_name, $last_name, $email, $username){
 
 function invalidName($first_name, $last_name){
     $result;
-    if(!preg_match("/^[a-zA-Z-' ]*$/", $first_name) || !preg_match("/^[a-zA-Z-' ]*$/", $last_name)){
+    if(!preg_match("/^[a-zA-Z\s]*$/", $first_name) || !preg_match("/^[a-zA-Z\s]*$/", $last_name)){
         $result = true;
     }else{
         $result = false;

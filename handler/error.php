@@ -58,7 +58,7 @@ if(isset($_GET["msg"])){
     echo '<div class="alert alert-success alert-dismissible fade show " role="alert">';
     echo '  <h4 class="alert-heading"><span class="fa-solid fa-circle-check"></span> Success!</h4>';
     // Update Acc
-    if($_GET["msg"] == "accUpdated"){
+    if($_GET["msg"] == "accupdated"){
         echo '<p>You have successfully Updated your Account!</p>';
     }
     // Login
