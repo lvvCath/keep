@@ -70,6 +70,10 @@ p{
     color: #fff;
 }
 
+.form-floating{
+    width: 100%;
+}
+
 .question{
     position: absolute;
     bottom: 80px;   /* set the value to move the icons over down */

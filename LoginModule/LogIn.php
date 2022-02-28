@@ -61,8 +61,16 @@ if (isset($_SESSION["locked"])){
         <div class="form signinForm">
             <form method="POST" action="<?php echo htmlspecialchars("includes/login.inc.php");?>" name="signinForm"> <br><br><br>
                 <h1>Log in</h1> <br>
-                <input name="uid" id="uid" type="text" class="email form-control" placeholder="Email or Username" required>
-                <input name="password" id="password" type="password" class="password form-control" placeholder="Password" required>
+                <div class="form-floating">
+                    <input name="uid" id="uid" type="text" class="email form-control" placeholder="Email or Username" required>
+                    <label for="floatingInput">Email or Username</label>
+                </div>
+                 <div class="form-floating">
+                    <input name="password" id="password" type="password" class="password form-control" placeholder="Password" required>
+                    <label for="floatingPassword">Password</label>
+                </div>
+                
+                
                 <br><br>
                 <a href="#" class="forgot">Forgot your password?</a><br>
                 
