@@ -30,7 +30,7 @@ function clearForm() {
 }
 </script>
 <div class="container d-flex justify-content-center">
-    <div class="changePass-container p-4 shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="form p-4 shadow-lg p-3 mb-5 bg-body rounded">
         <form name="changePassForm" id="form" method="POST" action="includes/changepass.inc.php">
             <h1>Change Password</h1>
             <p>Your password already expired. Please change you password to Login.</p> 

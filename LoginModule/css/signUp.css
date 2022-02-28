@@ -62,8 +62,3 @@ body {
     font-size: 15px;
     padding-right: 4px;
 }
-
-/* ChangePass.php */
-.changePass-container{
-    max-width: 50% !important;
-}

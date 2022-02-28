@@ -1,13 +1,13 @@
 <?php
 session_start();
+// prevents user from going to main from changepass
+if(isset($_SESSION["changepass"])){
+    session_unset();
+    session_destroy();
+}
 // prevents user from going back to Login Page
 if (isset($_SESSION["userid"])) { 
     header('location: ../UserModule/main.php');
-    exit();
-}else if(!isset($_SESSION["userid"]) && isset($_SESSION["useruid"])){
-    session_unset();
-    session_destroy();
-    header('location: ../index.php');
     exit();
 }
 

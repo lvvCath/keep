@@ -243,8 +243,10 @@ function loginUser($conn, $username, $password){
     }else if($checkPassword === true AND $expiredPwd === true AND $notificationPwd === false){
         session_start();
         session_regenerate_id(TRUE);
+        $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         $_SESSION["notifpwd"] =  false;
+        $_SESSION["changepass"] =  true;
         header("location: ../ChangePass.php");
         exit();
     }
