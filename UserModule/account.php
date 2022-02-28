@@ -68,13 +68,16 @@
               <p id="pwd_number" class="font-awesome-icons invalid">1 <b>Number</b></p>
               <p id="pwd_symbol" class="font-awesome-icons invalid">1 <b>Special character</b></p>
               <p id="pwd_length" class="font-awesome-icons invalid">Minimum <b>10 characters</b></p>
-            </small> 
-            
-            
+            </small>
           </div>
         <div class="col-md-6">
             <label class="text-muted" for="con_password">Confirm New Password</label>
-            <input class="form-control" id="con_password" name="con_password" type="password" required> 
+            <input class="form-control" id="con_password" name="con_password" type="password" 
+              onfocus="conPasswordValidation()"
+                required>
+            <small id="conpasswordHelpBlock"  class="form-text text-muted">
+                <p id="conpwd_match" class="font-awesome-icons invalid">Password does not match</p>
+            </small>
         </div>
         <!-- buttons -->
         <div class="col-md-6 d-flex justify-content-center">
@@ -136,15 +139,13 @@
                       pattern="[a-zA-Z][0-9a-zA-Z_]{4,19}[0-9a-zA-Z]" 
                       title="Please conform to the Username requirements."
                       required>
-                      <small id="usernameHelpBlock"  class="form-text text-muted">
-                        <p>	Must be at least (6-20) char long, which can consist of letters (a-z A-Z), numbers (0-9), and underscore (_)</p>
-                        <p id="uid_firstChar" class="font-awesome-icons invalid">first character should be a <b>letter</b></p>
-                        <p id="uid_lastChar" class="font-awesome-icons invalid">Last letter can be a <b>letter/number</b></p>
-                        <p id="uid_space" class="font-awesome-icons invalid">No <b>Whitespace</b></p>
-                        <p id="uid_length" class="font-awesome-icons invalid">username length <b>6-20 characters</b></p>
-
-                      </small> 
-
+                <small id="usernameHelpBlock"  class="form-text text-muted">
+                  <p>	Must be at least (6-20) char long, which can consist of letters (a-z A-Z), numbers (0-9), and underscore (_)</p>
+                  <p id="uid_firstChar" class="font-awesome-icons invalid">first character should be a <b>letter</b></p>
+                  <p id="uid_lastChar" class="font-awesome-icons invalid">Last letter can be a <b>letter/number</b></p>
+                  <p id="uid_space" class="font-awesome-icons invalid">No <b>Whitespace</b></p>
+                  <p id="uid_length" class="font-awesome-icons invalid">username length <b>6-20 characters</b></p>
+                </small>
             </div>
             <!-- buttons -->
             <div class="col-md-6 d-flex justify-content-center">

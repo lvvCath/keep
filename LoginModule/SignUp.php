@@ -29,19 +29,39 @@
         
         <div class="col-md-6">
             <label class="text-muted" for="first_name">First Name</label>
-            <input class="form-control" id="first_name" name="first_name" type="text" required>
+            <input class="form-control" id="first_name" name="first_name" type="text" 
+                pattern="^[a-zA-Z\s]*$"
+                title="Name should only contain letters and whitespace."
+                required>
         </div>
         <div class="col-md-6">
             <label class="text-muted" for="last_name">Last Name</label>
-            <input class="form-control" id="last_name" name="last_name" type="text" required> 
+            <input class="form-control" id="last_name" name="last_name" type="text" 
+                pattern="^[a-zA-Z\s]*$"
+                title="Name should only contain letters and whitespace."
+                required> 
         </div>
         <div class="col-12">
             <label class="text-muted" for="email">Email</label>
-            <input class="form-control" id="email" name="email" type="text" required> 
+            <input class="form-control" id="email" name="email" type="text" 
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                title="Please enter a valid Email (example@domain.com)"
+                required> 
         </div>
         <div class="col-12">
             <label class="text-muted" for="username">Username</label>
-            <input class="form-control" id="username" name="username" type="text" required>
+            <input class="form-control" id="username" name="username" type="text" 
+                onfocus="uidValidation()"
+                pattern="[a-zA-Z][0-9a-zA-Z_]{4,19}[0-9a-zA-Z]" 
+                title="Please conform to the Username requirements."
+                required>
+            <small id="usernameHelpBlock"  class="form-text text-muted">
+            <p>	Must be at least (6-20) char long, which can consist of letters (a-z A-Z), numbers (0-9), and underscore (_)</p>
+            <p id="uid_firstChar" class="font-awesome-icons invalid">first character should be a <b>letter</b></p>
+            <p id="uid_lastChar" class="font-awesome-icons invalid">Last letter can be a <b>letter/number</b></p>
+            <p id="uid_space" class="font-awesome-icons invalid">No <b>Whitespace</b></p>
+            <p id="uid_length" class="font-awesome-icons invalid">username length <b>6-20 characters</b></p>
+            </small>
         </div>
         <div class="col-md-6">
             <label class="text-muted" for="password">Password </label>
@@ -49,10 +69,19 @@
                 <i class="fa fa-eye" id="show_eye"></i>
                 <i class="fa fa-eye-slash d-none" id="hide_eye"></i>
             </span>
-            <input class="form-control" id="password" name="password" type="password" required>
-            <small id="passwordHelpBlock" class="form-text text-muted">
-            Password must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.
+            <input class="form-control" id="password" name="password" type="password"
+                onfocus="showValidation()"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_\W]).{10,}" title="Please conform to the Password Policy."
+                required>
+            <small id="passwordHelpBlock"  class="form-text text-muted">
+                <p>Password must conform the following requirements:</p>
+                <p id="pwd_letter" class="font-awesome-icons invalid">1 <b>Lowercase</b> letter</p>
+                <p id="pwd_capital" class="font-awesome-icons invalid">1 <b>Uppercase</b> letter</p>
+                <p id="pwd_number" class="font-awesome-icons invalid">1 <b>Number</b></p>
+                <p id="pwd_symbol" class="font-awesome-icons invalid">1 <b>Special character</b></p>
+                <p id="pwd_length" class="font-awesome-icons invalid">Minimum <b>10 characters</b></p>
             </small>
+            
         </div>
         <div class="col-md-6">
             <label class="text-muted" for="con_password">Confirm Password</label>
@@ -60,7 +89,12 @@
                 <i class="fa fa-eye" id="show_eye_c"></i>
                 <i class="fa fa-eye-slash d-none" id="hide_eye_c"></i>
             </span>
-            <input class="form-control" id="con_password" name="con_password" type="password" required> 
+            <input class="form-control" id="con_password" name="con_password" type="password" 
+                onfocus="conPasswordValidation()"
+                required>
+            <small id="conpasswordHelpBlock"  class="form-text text-muted">
+                <p id="conpwd_match" class="font-awesome-icons invalid">Password does not match</p>
+            </small>
         </div>
         <!-- buttons -->
         <div class="col-md-6 d-flex justify-content-center">
@@ -74,47 +108,11 @@
      
     
 </div>
+
+<script src="js/signup.js"></script>
 <!-- Optional JavaScript; choose one of the two! -->
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="../bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-function clearForm() {
-    document.getElementById("form").reset();
-}
-// Password Hide/Unhide
-function password_show_hide() {
-  var x = document.getElementById("password");
-  var show_eye = document.getElementById("show_eye");
-  var hide_eye = document.getElementById("hide_eye");
-  hide_eye.classList.remove("d-none");
-  if (x.type === "password") {
-    x.type = "text";
-    show_eye.style.display = "none";
-    hide_eye.style.display = "block";
-  } else {
-    x.type = "password";
-    show_eye.style.display = "block";
-    hide_eye.style.display = "none";
-  }
-}
-// Confirm Password Hide/Unhide
-function con_password_show_hide() {
-  var x = document.getElementById("con_password");
-  var show_eye = document.getElementById("show_eye_c");
-  var hide_eye = document.getElementById("hide_eye_c");
-  hide_eye.classList.remove("d-none");
-  if (x.type === "password") {
-    x.type = "text";
-    show_eye.style.display = "none";
-    hide_eye.style.display = "block";
-  } else {
-    x.type = "password";
-    show_eye.style.display = "block";
-    hide_eye.style.display = "none";
-  }
-}
-</script>
-
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

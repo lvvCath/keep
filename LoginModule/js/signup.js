@@ -1,13 +1,27 @@
-// Cler form input fields
 function clearForm() {
     document.getElementById("form").reset();
 }
-
-// Modal Password Hide/Unhide #########################
-function modal_password_show_hide() {
+// Password Hide/Unhide
+function password_show_hide() {
   var x = document.getElementById("password");
-  var show_eye = document.getElementById("show_eye_m");
-  var hide_eye = document.getElementById("hide_eye_m");
+  var show_eye = document.getElementById("show_eye");
+  var hide_eye = document.getElementById("hide_eye");
+  hide_eye.classList.remove("d-none");
+  if (x.type === "password") {
+    x.type = "text";
+    show_eye.style.display = "none";
+    hide_eye.style.display = "block";
+  } else {
+    x.type = "password";
+    show_eye.style.display = "block";
+    hide_eye.style.display = "none";
+  }
+}
+// Confirm Password Hide/Unhide
+function con_password_show_hide() {
+  var x = document.getElementById("con_password");
+  var show_eye = document.getElementById("show_eye_c");
+  var hide_eye = document.getElementById("hide_eye_c");
   hide_eye.classList.remove("d-none");
   if (x.type === "password") {
     x.type = "text";
@@ -20,31 +34,8 @@ function modal_password_show_hide() {
   }
 }
 
-// Password Hide/Unhide #########################
-function password_show_hide() {
-    var x = document.getElementById("last_password");
-    var y = document.getElementById("new_password");
-    var z = document.getElementById("con_password");
-    var show_eye = document.getElementById("show_eye");
-    var hide_eye = document.getElementById("hide_eye");
-    hide_eye.classList.remove("d-none");
-    if (x.type === "password") {
-      x.type = "text";
-      y.type = "text";
-      z.type = "text";
-      show_eye.style.display = "none";
-      hide_eye.style.display = "block";
-    } else {
-      x.type = "password";
-      y.type = "password";
-      z.type = "password";
-      show_eye.style.display = "block";
-      hide_eye.style.display = "none";
-    }
-  }
-
 // PASSWORD LIVE VALIDATION #########################
-var myInput = document.getElementById("new_password");
+var myInput = document.getElementById("password");
 var pwd_letter = document.getElementById("pwd_letter");
 var pwd_capital = document.getElementById("pwd_capital");
 var pwd_number = document.getElementById("pwd_number");
@@ -122,7 +113,6 @@ var uid_length = document.getElementById("uid_length");
 function uidValidation(){
     document.getElementById("usernameHelpBlock").style.display = "block";
 }
-
 // When the user clicks outside of the username field, hide the message box
 usernameInput.addEventListener('blur', (event) => {
     document.getElementById("usernameHelpBlock").style.display = "none";
@@ -169,7 +159,7 @@ usernameInput.onkeyup = function() {
 
 // CONFIRM PASSWORD LIVE VALIDATION #########################
 var conpasswordInput = document.getElementById("con_password");
-var password = document.getElementById("new_password");
+var password = document.getElementById("password");
 var conpwd_match = document.getElementById("conpwd_match");
 const reg_button = document.getElementById("createBtn");
 
