@@ -46,14 +46,27 @@ function clearForm() {
                 </div>
                 <div class="col-md-6">
                     <label class="text-muted" for="new_password">New Password</label>
-                    <input class="form-control" id="new_password" name="new_password" type="password" required>
-                    <small id="passwordHelpBlock" class="form-text text-muted">
-                    Password must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.
+                    <input class="form-control" id="new_password" name="new_password" type="password" 
+                        onfocus="showValidation()"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_\W]).{10,}" title="Please conform to the Password Policy."
+                        required>
+                    <small id="passwordHelpBlock"  class="form-text text-muted">
+                        <p>Password must conform the following requirements:</p>
+                        <p id="pwd_letter" class="font-awesome-icons invalid">1 <b>Lowercase</b> letter</p>
+                        <p id="pwd_capital" class="font-awesome-icons invalid">1 <b>Uppercase</b> letter</p>
+                        <p id="pwd_number" class="font-awesome-icons invalid">1 <b>Number</b></p>
+                        <p id="pwd_symbol" class="font-awesome-icons invalid">1 <b>Special character</b></p>
+                        <p id="pwd_length" class="font-awesome-icons invalid">Minimum <b>10 characters</b></p>
                     </small>
                 </div>
                 <div class="col-md-6">
                     <label class="text-muted" for="con_password">Confirm Password</label>
-                    <input class="form-control" id="con_password" name="con_password" type="password" required> 
+                    <input class="form-control" id="con_password" name="con_password" type="password" 
+                        onfocus="conPasswordValidation()"
+                        required>
+                    <small id="conpasswordHelpBlock"  class="form-text text-muted">
+                        <p id="conpwd_match" class="font-awesome-icons invalid">Password does not match</p>
+                    </small>
                 </div>
                 <!-- buttons -->
                 <div class="col-md-6 d-flex justify-content-center">
@@ -68,33 +81,7 @@ function clearForm() {
     </div>
 </div>
 
-<script>
-function clearForm() {
-    document.getElementById("form").reset();
-}
-// Password Hide/Unhide
-function password_show_hide() {
-  var x = document.getElementById("last_password");
-  var y = document.getElementById("new_password");
-  var z = document.getElementById("con_password");
-  var show_eye = document.getElementById("show_eye");
-  var hide_eye = document.getElementById("hide_eye");
-  hide_eye.classList.remove("d-none");
-  if (x.type === "password") {
-    x.type = "text";
-    y.type = "text";
-    z.type = "text";
-    show_eye.style.display = "none";
-    hide_eye.style.display = "block";
-  } else {
-    x.type = "password";
-    y.type = "password";
-    z.type = "password";
-    show_eye.style.display = "block";
-    hide_eye.style.display = "none";
-  }
-}
-</script>
+<script src="js/changepass.js"></script>
 
 <script src="../bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
