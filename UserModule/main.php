@@ -4,20 +4,24 @@
 <link rel="icon" href="../assets/images/icon.png" type="image/x-icon">
 <!-- external css -->
 <link rel="stylesheet" href="css/main.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
 
 <div id="hero" class="container-fluid">
     <div class="row"><?php include 'header.php';?></div>
     <div id="hero-content" class="row flex-lg-row-reverse d-flex align-items-center justify-content-center">
         <div class="col-md-6">
-            <img src="../assets/images/image-holder.svg" class="d-block mx-lg-auto img-fluid" width="500" height="500">
+            <img id="read_image1" src="../assets/images/image-holder.svg" class="d-block mx-lg-auto img-fluid" width="242" height="363" >
         </div>
         <div class="col-md-6 py-5 mx-auto">
             <a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>
             <h1 class="display-5 fw-bold lh-1 mb-2"><?php echo "".$row['usersFirstName']. " " .$row['usersLastName']. " " ?></h1>
             <div class="hr"></div>
-            <p class="lead">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+            <p id="read_lead" class="lead">
+                Tell readers here who you are in the first line of your portfolio introduction. Keep it short and simple.</br>
+                <span class="edit_Help font-monospace">To edit this section, click the edit icon <i class="fa fa-edit"></i> found the top left</span>.
             </p>
             <div class="d-grid d-md-flex justify-content-md-center">
                 <a href="#about" class="btn-get-started scrollto"><i class="fa-solid fa-angles-down"></i></a>
@@ -37,14 +41,14 @@
       <div class="modal-body">
         <form class="row g-4 " id="formHeroEdit" name="formHeroEdit" method="POST" action="#">
             <div class="col-12">
-                <label class="text-muted" for="intro">Introduction</label>
-                <textarea class="form-control" id="intro" name="intro" rows="7" maxlength="300" required
+                <label class="text-muted" for="update_description1">Introduction</label>
+                <textarea class="form-control" id="update_description1" name="update_description1" rows="7" maxlength="300" required
                 oninput="introLimit(this)" value=""></textarea>
                 <div id="charCounter" class="form-text text-end"></div>
             </div>
             <div class="col-12">
-                <label class="text-muted" for="introImage">Image Introduction Link</label>
-                <input class="form-control" id="introImage" name="introImage" type="text" placeholder="Insert image link" required
+                <label class="text-muted" for="update_image1">Image Introduction Link</label>
+                <input class="form-control" id="update_image1" name="update_image1" type="text" placeholder="Insert image link" required
                          value="">
             </div>
             <!-- buttons -->
@@ -52,7 +56,7 @@
                 <button type="button" class="modal-cancel-Btn btn btn-primary" data-bs-dismiss="modal">Cancel</button>   
             </div>
             <div class="col-md-6 d-flex justify-content-center">
-                <button type="submit" name="introUpdateBtn" class="modal-confirm-Btn btn btn-primary">Update</button>      
+                <button type="submit" id="introUpdateBtn"  name="introUpdateBtn" class="modal-confirm-Btn btn btn-primary">Update</button>      
             </div> 
         </form>
       </div>
@@ -104,29 +108,31 @@
 
     <div class="row">
     <div class="col-lg-4" data-aos="fade-right">
-        <img src="../assets/images/default-profile.jpg" class="img-fluid" alt="">
+        <img id="read_image2" src="../assets/images/default-profile.jpg" class="img-fluid" width="242" height="363">
     </div>
     <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-        <h3>UI/UX &amp; Graphic Designer</h3>
-        <p class="fst-italic">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua.
+        <h3 id="read_profession">Your Profession</h3>
+        <p id="read_description2">
+        Tell the readers in this About me section more about you. You want to make sure visitors and readers 
+        of your online portfolio to understand your work, but you don’t want to go into too much detail and create 
+        a long essay about yourself in case they lose interest. </br>
+        <span class="edit_Help font-monospace">To edit this section, click the edit icon <i class="fa fa-edit"></i> found the top left.</span>
         </p>
         <div class="row">
         <div class="col-lg-6">
             <ul>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Age:</strong> <span>30</span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>City:</strong> <span>New York, USA</span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Degree:</strong> <span>Master</span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Age:</strong> <span id="read_age"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Phone:</strong> <span id="read_phone"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>City:</strong> <span id="read_city"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Degree:</strong> <span id="read_degree"></span></li>
             </ul>
         </div>
         <div class="col-lg-6">
             <ul>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Years of Experience:</strong> <span>10</span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Website:</strong> <span>www.example.com</span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Email:</strong> <span>email@example.com</span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Freelance:</strong> <span>Available</span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Years of Experience:</strong> <span id="read_experience"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Website:</strong> <span id="read_website"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Work Email:</strong> <span id="read_email"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Freelance:</strong> <span id="read_freelance"></span></li>
             </ul>
         </div>
         </div>
@@ -150,57 +156,63 @@
             <div class="divider col-lg-5">
                 <div class="row g-3">
                 <div class="col-12">
-                    <label class="text-muted" for="about-profession">Profession</label>
-                    <input class="form-control" id="about-profession" name="about-profession" type="text" required
+                    <label class="text-muted" for="update_profession">Profession</label>
+                    <input class="form-control" id="update_profession" name="update_profession" type="text" required
                             value="">
                 </div>
                 <div class="col-12">
-                    <label class="text-muted" for="about-desc">About Description</label>
-                    <textarea class="form-control" id="about-desc" name="about-desc" rows="8"  required
-                            value=""></textarea>
+                    <label class="text-muted" for="update_image2">Image Link</label>
+                    <input class="form-control" id="update_image2" name="update_image2" type="text" required
+                            value="">
+                </div>
+                <div class="col-12">
+                    <label class="text-muted" for="update_description2">About Description</label>
+                    <textarea class="form-control" id="update_description2" name="update_description2" rows="7"  required
+                    oninput="desc2Limit(this)" value=""></textarea>
+                    <div id="char2Counter" class="form-text text-end"></div>
                 </div>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="row g-3">
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-age">Age</label>
-                    <input class="form-control" id="about-age" name="about-age" type="number" required
+                    <label class="text-muted" for="update_age">Age</label>
+                    <input class="form-control" id="update_age" name="update_age" type="number" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-experience">Years of Experience</label>
-                    <input class="form-control" id="about-experience" name="about-experience" type="number" required
+                    <label class="text-muted" for="update_experience">Years of Experience</label>
+                    <input class="form-control" id="update_experience" name="update_experience" type="number" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-phone">Phone</label>
-                    <input class="form-control" id="about-phone" name="about-phone" type="text" required
+                    <label class="text-muted" for="update_phone">Phone</label>
+                    <input class="form-control" id="update_phone" name="update_phone" type="text" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-website">Website</label>
-                    <input class="form-control" id="about-website" name="about-website" type="text" required
+                    <label class="text-muted" for="update_website">Website</label>
+                    <input class="form-control" id="update_website" name="update_website" type="text" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-city">City</label>
-                    <input class="form-control" id="about-city" name="about-city" type="text" required
+                    <label class="text-muted" for="update_city">City</label>
+                    <input class="form-control" id="update_city" name="update_city" type="text" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-email">Email</label>
-                    <input class="form-control" id="about-email" name="about-email" type="email" required
+                    <label class="text-muted" for="update_email">Email</label>
+                    <input class="form-control" id="update_email" name="update_email" type="email" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-degree">Degree</label>
-                    <input class="form-control" id="about-degree" name="about-degree" type="text" required
+                    <label class="text-muted" for="update_degree">Degree</label>
+                    <input class="form-control" id="update_degree" name="update_degree" type="text" required
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-freelance">Freelance</label>
-                    <input class="form-control" id="about-freelance" name="about-freelance" type="text" required
+                    <label class="text-muted" for="update_freelance">Freelance</label>
+                    <input class="form-control" id="update_freelance" name="update_freelance" type="text" required
                             value="">
                 </div>
                 </div>
@@ -213,7 +225,7 @@
                 <button type="button" class="modal-cancel-Btn btn btn-primary" data-bs-dismiss="modal">Cancel</button>   
             </div>
             <div class="col-md-6 d-flex justify-content-center">
-                <button type="submit" name="aboutUpdateBtn" class="modal-confirm-Btn btn btn-primary">Update</button>      
+                <button type="submit" id="aboutUpdateBtn" name="aboutUpdateBtn" class="modal-confirm-Btn btn btn-primary">Update</button>      
             </div> 
         </div>
         </form>
@@ -514,6 +526,7 @@
 </Section> 
 <!-- /CONTACT US -->
 
+<script src="PortfolioCRUD\About\about_ajax.js"></script>
 
 <?php include 'footer.php';?>
 
