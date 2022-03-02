@@ -8,7 +8,7 @@ if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) {
      $id = $_SESSION["userid"];
 }
 include('../UserModule/includes/fetch_acc_info.php');
-include('../UserModule/includes/fetch_resume_info.php');
+// include('../UserModule/includes/fetch_resume_info.php');
 ?>
   <title>KEEP</title>
   <link rel="icon" href="../assets/images/icon.png" type="image/x-icon">
