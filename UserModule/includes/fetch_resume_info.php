@@ -3,4 +3,14 @@
 
 $stmtResume= mysqli_query($conn, $sqlResume);
 $rowResume= mysqli_fetch_array($stmtResume);
+
+
+
+$sqlWork = "SELECT * FROM users INNER JOIN users_work INNER JOIN work_information ON 
+users.usersId = users_work.userid AND
+users_work.workid = work_information.workid WHERE users.usersId = $id";
+
+$stmtWork= mysqli_query($conn, $sqlWork);
+$rowWork= mysqli_fetch_array($stmtWork);
+          
  ?>
