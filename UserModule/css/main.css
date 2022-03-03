@@ -32,6 +32,12 @@ cursor: pointer;
 color: #0084ff;
 }
 
+.edit_Help{
+text-decoration: underline;
+font-weight: bold;
+font-size: .9rem;
+}
+
 /* _____________________
 *  Hero 
 ______________________ */
@@ -64,7 +70,11 @@ height: 60px;
 padding-top: 10px;
 color: #0084ff;
 }
-
+#read_image1 {
+object-fit: cover !important;
+width: 75vh !important;
+height: 55vh !important;
+}
 /* _____________________
 *  Sections General 
 ______________________ */
@@ -139,7 +149,11 @@ line-height: 0;
 .about .content p:last-child {
 margin-bottom: 0;
 }
-
+#read_image2 {
+object-fit: cover !important;
+width: 75vh !important;
+height: 55vh !important;
+}
 /* _____________________
 *  Skills
 ______________________ */
