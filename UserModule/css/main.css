@@ -21,7 +21,12 @@ border-right: 2px dotted #5a656e !important;
 border-right: none !important;
 }
 }
-.main-edit-ico, .main-add-ico{
+.main-edit-ico{
+color: #7c7c7c;
+font-size: 1.1rem;
+padding-right: 10px;
+}
+.main-add-ico{
 color: #7c7c7c;
 font-size: 1.1rem;
 }
@@ -32,11 +37,21 @@ cursor: pointer;
 color: #0084ff;
 }
 
+
 .edit_Help{
 text-decoration: underline;
 font-weight: bold;
 font-size: .9rem;
 }
+
+#educationCreateBtn{
+display: none;
+}
+#educationUpdateBtn{
+display: none;
+}
+/* Hide DATATABLE default search */
+/* .dataTables_filter{ display: none; } */
 
 /* _____________________
 *  Hero 

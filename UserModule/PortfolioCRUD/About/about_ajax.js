@@ -1,3 +1,4 @@
+// ! THIS FILE IS NOT USED
 Load();
 var userid;
 // READ About =================
@@ -77,7 +78,8 @@ $(document).ready(function(){
                 }
             }
         });
-        return false;
+        Load();
+        return false; 
     });
 });
 

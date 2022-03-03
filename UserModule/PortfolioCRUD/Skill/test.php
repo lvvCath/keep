@@ -72,26 +72,37 @@
 
 include("../../../Database/db.php");
 
-    session_start();
-    $id = $_SESSION['userid'];
-    echo $id; 
+session_start();
+$id = $_SESSION['userid'];
 
-    $sql = "SELECT * FROM users_info WHERE userid = ?";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../account.php?error=stmtFailed");
-        exit();
-    }
+$sql = "SELECT * FROM users_skill WHERE userid = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt, $sql)){
+    header("location: main.php?error=stmtFailed");
+    exit();
+}
 
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
 
-    $resultData = mysqli_stmt_get_result($stmt);
+$resultData = mysqli_stmt_get_result($stmt);
 
-    $row = mysqli_fetch_assoc($resultData);
 
-    echo $row['description1']; 
-    echo json_encode($row);
+while($row = mysqli_fetch_assoc($resultData)) {
+    $array[] = $row;
+}
+$dataset = array(
+    "echo" => 1,
+    "totalrecords" => count($array),
+    "totaldisplayrecords" => count($array),
+    "data" => $array
+);
+echo json_encode($dataset);
+
+mysqli_stmt_close($stmt);
+
+
+
 // echo $_SESSION["test2"]; 
 // echo $_SESSION["test3"]; 
 // echo $_SESSION["test4"]; 

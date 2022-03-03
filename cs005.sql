@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2022 at 12:13 PM
+-- Generation Time: Mar 03, 2022 at 05:46 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -118,16 +118,18 @@ CREATE TABLE `users_education` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `degree` varchar(250) NOT NULL,
-  `description` text NOT NULL,
-  `year` varchar(250) NOT NULL
+  `description` varchar(500) NOT NULL,
+  `year` varchar(50) NOT NULL,
+  `location` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_education`
 --
 
-INSERT INTO `users_education` (`id`, `userid`, `degree`, `description`, `year`) VALUES
-(7, 60, '', '', '');
+INSERT INTO `users_education` (`id`, `userid`, `degree`, `description`, `year`, `location`) VALUES
+(11, 60, 'Bachelor of Graphics Design', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', '2020-2022', 'Far Eastern University'),
+(14, 60, 'Bachelor of Science in Computer Science', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet', '2015-2019', 'T.I.P');
 
 -- --------------------------------------------------------
 
@@ -140,16 +142,18 @@ CREATE TABLE `users_experience` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `job` varchar(250) NOT NULL,
-  `year` varchar(250) NOT NULL,
-  `description` text NOT NULL
+  `year` varchar(50) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `location` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_experience`
 --
 
-INSERT INTO `users_experience` (`id`, `userid`, `job`, `year`, `description`) VALUES
-(7, 60, '', '', '');
+INSERT INTO `users_experience` (`id`, `userid`, `job`, `year`, `description`, `location`) VALUES
+(8, 60, 'Software Engineer', '2020-2022', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ', 'Google'),
+(9, 60, 'Security Analyst', '2019-2020', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', 'Technological Institute of the Philippines');
 
 -- --------------------------------------------------------
 
@@ -181,7 +185,7 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`id`, `userid`, `age`, `phone`, `city`, `degree`, `experience`, `website`, `email`, `freelance`, `profession`, `description1`, `description2`, `image1`, `image2`) VALUES
-(9, 60, 27, '09984368854', 'Caloocan City', 'Bachelor\'s Degree', 6, 'https://www.google.com', 'rose@gmail.com', 'Not Available', 'Software Engineer', 'HELLO THERE AGAIN!', 'mvkdmf kdjf sjjsei eisj isri isdf ier seir sidf sjfw iei eiur sjfefu si ie siu sif seu seu siu su sidf eujri sisuef ieusi s sr sufie su iseu isiuise suer su i su siu eiuriu seuisu u siui suisusis', 'https://digitalsynopsis.com/wp-content/uploads/2019/08/beautiful-illustrations-design-inspiration-39.png', 'https://trendland.com/wp-content/uploads/2019/03/editorial-illustration-by-spiros-halaris-3.jpg');
+(9, 60, 27, '09984368854', 'Caloocan City', 'Bachelor\'s Degree', 6, 'https://www.google.com', 'rose@gmail.com', 'Not Available', 'Software Engineer', 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules.', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.', 'https://cdn.dribbble.com/uploads/599/original/86d75f5ebf6abc13a630dda33b292727.png?1544829141', 'https://trendland.com/wp-content/uploads/2019/03/editorial-illustration-by-spiros-halaris-3.jpg');
 
 -- --------------------------------------------------------
 
@@ -246,12 +250,12 @@ CREATE TABLE `users_skill` (
 --
 
 INSERT INTO `users_skill` (`id`, `userid`, `skill`, `percentage`) VALUES
-(20, 60, 'html', 87),
 (21, 60, 'java', 99),
-(22, 60, 'html', 88),
 (23, 60, 'Python', 92),
-(24, 60, 'java', 15),
-(25, 60, 'THIS IS NEW', 88);
+(25, 60, 'C#', 88),
+(27, 60, 'MySql', 90),
+(28, 60, 'C++', 70),
+(29, 60, 'Jupyter', 89);
 
 -- --------------------------------------------------------
 
@@ -380,13 +384,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_education`
 --
 ALTER TABLE `users_education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users_experience`
 --
 ALTER TABLE `users_experience`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users_info`
@@ -410,7 +414,7 @@ ALTER TABLE `users_service`
 -- AUTO_INCREMENT for table `users_skill`
 --
 ALTER TABLE `users_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `users_work`

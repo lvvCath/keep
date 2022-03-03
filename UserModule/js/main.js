@@ -23,3 +23,18 @@ let desc2Limit = (element) => {
         p.innerHTML = 0 + ' characters remaining'; 
     }
 }
+
+let descEduLimit = (element) => {
+    const maxChar = 500;
+    let ele = document.getElementById(element.id);
+    let charLen = ele.value.length;
+    let p = document.getElementById('descEduLimit');
+    p.innerHTML = maxChar - charLen + ' characters remaining';
+    
+    if (charLen > maxChar){
+        ele.value = ele.value.substring(0, maxChar);
+        p.innerHTML = 0 + ' characters remaining'; 
+    }
+}
+
+

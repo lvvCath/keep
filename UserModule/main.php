@@ -7,6 +7,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/date-1.1.2/datatables.min.css"/> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/date-1.1.2/datatables.min.js"></script> -->
 <script src="js/main.js"></script>
 
 <div id="hero" class="container-fluid">
@@ -19,7 +21,7 @@
             <a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>
             <h1 class="display-5 fw-bold lh-1 mb-2"><?php echo "".$row['usersFirstName']. " " .$row['usersLastName']. " " ?></h1>
             <div class="hr"></div>
-            <p id="read_lead" class="lead">
+            <p id="read_lead" class="lead text-break">
                 Tell readers here who you are in the first line of your portfolio introduction. Keep it short and simple.</br>
                 <span class="edit_Help font-monospace">To edit this section, click the edit icon <i class="fa fa-edit"></i> found the top left</span>.
             </p>
@@ -112,7 +114,7 @@
     </div>
     <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
         <h3 id="read_profession">Your Profession</h3>
-        <p id="read_description2">
+        <p id="read_description2" class="text-break">
         Tell the readers in this About me section more about you. You want to make sure visitors and readers 
         of your online portfolio to understand your work, but you don’t want to go into too much detail and create 
         a long essay about yourself in case they lose interest. </br>
@@ -144,7 +146,7 @@
 
 <!-- Modal About Edit -->
 <div class="modal fade" id="modalAboutEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
+  <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalAboutEditLabel">About Me</h5>
@@ -237,94 +239,176 @@
 <!-- ======= Skills  ======= -->
 <section class="skills section-bg">
     <div class="section-title">
-    <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Skills</h2>
+    <h2><a class="skillsAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalSkill"><i class="fa fa-circle-plus"></i></a> Skills</h2>
     </div>
 
-    <div class="row g-4 skills-content">
-        <div class="col-md-6">
-        <div class="progress">
-            <span class="skill">HTML <i class="val">90%</i></span>
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="progress">
-            <span class="skill">HTML <i class="val">80%</i></span>
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 80%"></div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="progress">
-            <span class="skill">HTML <i class="val">100%</i></span>
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="progress">
-            <span class="skill">HTML <i class="val">60%</i></span>
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="progress">
-            <span class="skill">HTML <i class="val">100%</i></span>
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="progress">
-            <span class="skill">HTML <i class="val">60%</i></span>
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
-        </div>
-        </div>
+    <div id="SkillSection" class="row g-4 skills-content">
+        <!-- <table id="skillsTable" style="width:100%" cellpadding="0" cellspacing="0" BORDER="0">
+            <thead></thead>
+            <tbody>
+
+            </tbody>
+        </table> -->
     </div>
 </section><!-- End Skills -->
+
+<!-- Modal Skills Create -->
+<div class="modal fade" id="modalSkill" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSkillLabel">Skill</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-4 " id="formSkill" name="formSkill" method="POST" action="#">
+            <div class="col-12">
+                <label class="text-muted" for="input_skill">Skill</label>
+                <input class="form-control" id="input_skill" name="input_skill" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="input_percentage">Skill Level %</label>
+                <input class="form-control" id="input_percentage" name="input_percentage" type="number" required>
+            </div>
+            <!-- buttons -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="button" class="skillDeleteBtn modal-cancel-Btn btn btn-primary">Delete</button>   
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="submit" name="skillCreateBtn" class="skillCreateBtn modal-confirm-Btn btn btn-primary">Add Skill</button>
+                <button type="submit" name="skillUpdateBtn" class="skillUpdateBtn modal-confirm-Btn btn btn-primary">Update</button>      
+            </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ======= Resume Section ======= -->
 <section id="resume" class="resume section-bg">
 <div class="container-fluid">
 
     <div class="section-title">
-    <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Resume</h2>
+    <h2>Resume</h2>
     <p>Check My Resume</p>
     </div>
 
     <div class="row">
+
     <div class="col-lg-6">
-        <h3 class="resume-title">Education</h3>
-        <div class="resume-item">
-        <h4>Master of Fine Arts &amp; Graphic Design</h4>
-        <h5>2015 - 2016</h5>
-        <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-        <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
-        </div>
-        <div class="resume-item">
-        <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
-        <h5>2010 - 2014</h5>
-        <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-        <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
+        <h3 class="resume-title"> Education
+        <a class="educationAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalEducation"><i class="fa fa-circle-plus"></i></a> 
+        </h3>
+        <div id="EducationSection">
+            <!-- insert -->
         </div>
     </div>
+
     <div class="col-lg-6">
-        <h3 class="resume-title">Professional Experience</h3>
-        <div class="resume-item">
-        <h4>Senior graphic design specialist</h4>
-        <h5>2019 - Present</h5>
-        <p><em>Experion, New York, NY </em></p>
-        <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
-        </div>
-        <div class="resume-item">
-        <h4>Graphic design specialist</h4>
-        <h5>2017 - 2018</h5>
-        <p><em>Stepping Stone Advertising, New York, NY</em></p>
-        <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
+        <h3 class="resume-title">Professional Experience 
+        <a class="experienceAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalExperience"><i class="fa fa-circle-plus"></i></a> 
+        </h3>
+        <div id="ExperienceSection">
+            <!-- insert -->
+            <div class="resume-item">
+            <h4>job</h4>
+            <h5>year</h5>
+            <p><em>location</em></p>
+            <p>description</p>
+            </div>
         </div>
     </div>
     </div>
 
 </div>
 </section><!-- End Resume Section -->
- 
+
+<!-- Modal Education Create & Edit -->
+<div class="modal fade" id="modalEducation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEducationLabel">Resume: Education Background</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 " id="formEducation" name="formEducation" method="POST" action="#">
+            <div class="col-12">
+                <label class="text-muted" for="degree_edu">Degree Name/Major</label>
+                <input class="form-control" id="degree_edu" name="degree_edu" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="year_edu">Graduation Year (or anticipated graduation date)</label>
+                <input class="form-control" id="year_edu" name="year_edu" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="location_edu">Institution Name and Location</label>
+                <input class="form-control" id="location_edu" name="location_edu" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="description_edu">Description & Additional Details</label>
+                <textarea class="form-control" id="description_edu" name="description_edu" rows="5"  required
+                oninput="descEduLimit(this)" value=""></textarea>
+                <div id="descEduLimit" class="form-text text-end"></div>
+            </div>
+
+            <!-- buttons -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="button" class="educationDeleteBtn modal-cancel-Btn btn btn-primary">Delete</button>   
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="submit" class="educationCreateBtn modal-confirm-Btn btn btn-primary">Create</button> 
+                <button type="submit" class="educationUpdateBtn modal-confirm-Btn btn btn-primary">Update</button>      
+            </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Experience Create & Edit -->
+<div class="modal fade" id="modalExperience" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalExperienceLabel">Resume: Professional Experience Background</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 " id="formExperience" name="formExperience" method="POST" action="#">
+            <div class="col-12">
+                <label class="text-muted" for="job_exp">Job Title and Position</label>
+                <input class="form-control" id="job_exp" name="job_exp" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="year_exp">Dates Employed</label>
+                <input class="form-control" id="year_exp" name="year_exp" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="location_exp">Company Name & Location</label>
+                <input class="form-control" id="location_exp" name="location_exp" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="description_exp">Description & Additional Details</label>
+                <textarea class="form-control" id="description_exp" name="description_exp" rows="5"  required
+                oninput="descEduLimit(this)" value=""></textarea>
+                <div id="descEduLimit" class="form-text text-end"></div>
+            </div>
+
+            <!-- buttons -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="button" class="experienceDeleteBtn modal-cancel-Btn btn btn-primary">Delete</button>   
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="submit" class="experienceCreateBtn modal-confirm-Btn btn btn-primary">Create</button> 
+                <button type="submit" class="experienceUpdateBtn modal-confirm-Btn btn btn-primary">Update</button>      
+            </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ======= Services Section ======= -->
 <section id="services" class="services section-bg">
 <div class="container">
@@ -526,8 +610,9 @@
 </Section> 
 <!-- /CONTACT US -->
 
-<script src="PortfolioCRUD\About\about_ajax.js"></script>
-
+<!-- <script src="PortfolioCRUD\About\about_ajax.js"></script>
+<script src="PortfolioCRUD\Skill\skill_ajax.js"></script> -->
+<script src="PortfolioCRUD\portfolio.ajax.js"></script>
 <?php include 'footer.php';?>
 
 
