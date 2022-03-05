@@ -293,31 +293,18 @@
     <p>Check My Resume</p>
     </div>
 
-    <div class="row">
-
-    <div class="col-lg-6">
-        <h3 class="resume-title"> Education
+    <h3 class="resume-title"> Education
         <a class="educationAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalEducation"><i class="fa fa-circle-plus"></i></a> 
-        </h3>
-        <div id="EducationSection">
-            <!-- insert -->
-        </div>
+    </h3>
+    <div id="EducationSection" class="row">
+    <!-- Insert Education Background -->
     </div>
 
-    <div class="col-lg-6">
-        <h3 class="resume-title">Professional Experience 
+    <h3 class="resume-title">Professional Experience 
         <a class="experienceAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalExperience"><i class="fa fa-circle-plus"></i></a> 
-        </h3>
-        <div id="ExperienceSection">
-            <!-- insert -->
-            <div class="resume-item">
-            <h4>job</h4>
-            <h5>year</h5>
-            <p><em>location</em></p>
-            <p>description</p>
-            </div>
-        </div>
-    </div>
+    </h3>
+    <div id="ExperienceSection" class="row">
+    <!-- Insert Professional Background -->
     </div>
 
 </div>
@@ -414,54 +401,52 @@
 <div class="container">
 
     <div class="section-title">
-        <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Services</h2>
+        <h2><a class="serviceAdd_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalService"><i class="fa fa-circle-plus"></i></a> Services</h2>
         <p>My Services</p>
     </div>
 
-    <div class="row g-5 d-flex align-items-center justify-content-center">
-        <div class="col-md-4">
-        <div class="icon-box">
-            <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-        </div>
-        </div>
-
-        <div class="col-md-4">
-        <div class="icon-box">
-            <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-        </div>
-        </div>
-
-        <div class="col-md-4">
-        <div class="icon-box">
-            <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
-            <h4 class="title"><a href="">Magni Dolores</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-        </div>
-        </div>
-
-        <div class="col-md-4">
-        <div class="icon-box">
-            <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-        </div>
-        </div>
-        <div class="col-md-4">
-        <div class="icon-box">
-            <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-        </div>
-        </div>
-
+    <div id="ServiceSection"  class="row g-5 d-flex align-items-center justify-content-center">
+        <!-- insert service/s -->
     </div>
 
 </div>
 </section><!-- End Services Section -->
+
+<!-- Modal Service Create -->
+<div class="modal fade" id="modalService" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalServiceLabel">Service</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-4 " id="formService" name="formService" method="POST" action="#">
+            <div class="col-12">
+                <label class="text-muted" for="service_service">Service</label>
+                <input class="form-control" id="service_service" name="service_service" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="service_link">Link to your Service (if none, leave blank)</label>
+                <input class="form-control" id="service_link" name="service_link" type="text" required>
+            </div>
+            <div class="col-12">
+                <label class="text-muted" for="service_description">Description</label>
+                <input class="form-control" id="service_description" name="service_description" type="text" required>
+            </div>
+            <!-- buttons -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="button" class="serviceDeleteBtn modal-cancel-Btn btn btn-primary">Delete</button>   
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <button type="submit" name="serviceCreateBtn" class="serviceCreateBtn modal-confirm-Btn btn btn-primary">Add Service</button>
+                <button type="submit" name="serviceUpdateBtn" class="serviceUpdateBtn modal-confirm-Btn btn btn-primary">Update</button>      
+            </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio section-bg">
@@ -471,17 +456,6 @@
     <h2><a class="main-add-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-circle-plus"></i></a> Portfolio</h2>
     <p>My Works</p>
     </div>
-
-    <!-- <div class="row">
-    <div class="col-lg-12 d-flex justify-content-center">
-        <ul id="portfolio-flters">
-        <li data-filter="*" class="filter-active">All</li>
-        <li data-filter=".filter-app">App</li>
-        <li data-filter=".filter-card">Card</li>
-        <li data-filter=".filter-web">Web</li>
-        </ul>
-    </div>
-    </div> -->
 
     <div class="row portfolio-container ">
 

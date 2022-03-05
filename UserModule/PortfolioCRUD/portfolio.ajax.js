@@ -264,7 +264,7 @@ function educationLoad(){
         success: function(response){
             response.forEach(function (data, index) {
                 $('#EducationSection').append(
-                    '<div class="resume-item">'+
+                    '<div class="resume-item col-md-6">'+
                     '<h4> <a class="educationEdit_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalEducation" ' +
                     'data-id="'+data.id+'"' +
                     'data-degree="'+data.degree+'"' +
@@ -406,7 +406,7 @@ function experienceLoad(){
         success: function(response){
             response.forEach(function (data, index) {
                 $('#ExperienceSection').append(
-                    '<div class="resume-item">'+
+                    '<div class="resume-item  col-md-6">'+
                     '<h4> <a class="experienceEdit_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalExperience" ' +
                     'data-id="'+data.id+'"' +
                     'data-job="'+data.job+'"' +
@@ -526,6 +526,150 @@ $(document).on('click','.experienceCreateBtn',function(e) {
                 $('#modalExperience').modal('hide');
                 $('#formExperience').trigger("reset");
                 experienceLoad();
+            }else{
+                console.log('Error');
+                alert("Please Fill out all the Fields");
+            }
+        }
+    });
+});
+
+//#################################################################################################
+//#################################################################################################
+//#################################################################################################
+
+serviceLoad();
+serviceUpdate();
+function serviceLoad(){
+    $('#ServiceSection').empty();
+    $.ajax({
+        url: "PortfolioCRUD/Service/service_list.php",
+        type: "GET",
+        success: function(response){
+            response.forEach(function (data, index) {
+                let link = data.service_link;
+                if(data.service_link == 0){
+                    link = "#services";
+                }
+                $('#ServiceSection').append(
+                    '<div class="col-md-4">'+
+                    '<div class="icon-box">'+
+                        '<a class="serviceEdit_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalService" ' +
+                            'data-id="'+data.id+'"' +
+                            'data-service="'+data.service+'"' +
+                            'data-description="'+data.description+'"' +
+                            'data-link="'+data.service_link+'"' +
+                            '><i class="fa fa-edit"></i></a>'+
+                        '<div class="icon"><i class="fa-solid fa-briefcase"></i></div>'+
+                        '<h4 class="title"><a href="'+link+'">'+data.service+'</a></h4>'+
+                        '<p class="description">'+data.description+'</p>'+
+                    '</div>'+
+                    '</div>'
+                );
+
+            });
+        }
+    });  
+    
+}
+
+$(document).on('click','.serviceAdd_openModal',function(e) {
+    $('#formService').trigger("reset");
+    $(".serviceUpdateBtn").hide();
+    $(".serviceDeleteBtn").hide();
+    $(".serviceCreateBtn").show();
+});
+
+// Update
+function serviceUpdate(){
+    $curr_id = 0;
+    $(document).on('click','.serviceEdit_openModal',function(e) {
+        $(".serviceCreateBtn").hide();
+        $(".serviceDeleteBtn").show();
+        $(".serviceUpdateBtn").show();
+        var id=$(this).attr("data-id");
+        var service=$(this).attr("data-service");
+        var description=$(this).attr("data-description");
+        var link=$(this).attr("data-link");
+
+        $('#service_service').val(service);
+        $('#service_description').val(description);
+        $('#service_link').val(link);
+
+        $curr_id = id;
+    });
+
+    $(document).on('click', '.serviceUpdateBtn', function(e){
+        e.preventDefault();
+        let id = $curr_id;
+        $.ajax({
+            url: "PortfolioCRUD/Service/service_update.php",
+            type: "POST",
+            data: {
+                "id": id,
+                "service": $('#service_service').val(), 
+                "description": $('#service_description').val(),
+                "link": $('#service_link').val()
+            },
+            success: function(response){
+                if(response.code=='201'){
+                    $('#modalService').modal('hide');
+                    console.log('Updated Successfully');
+                    serviceLoad();
+                }
+                if(response.code=='400'){
+                    console.log('Error');
+                    alert("Please Fill out all the Fields");
+                }
+            }
+        });
+        return false;
+    });
+
+    // Delete
+    $(document).on('click', '.serviceDeleteBtn', function(){
+        let id = $curr_id;
+        $.ajax({
+            url: "PortfolioCRUD/Service/service_delete.php",
+            type: "POST",
+            data: {
+                "id": id
+            },
+            success: function(response){
+                if(response.code=='201'){
+                    $('#modalService').modal('hide');
+                    console.log('Deleted Successfully');
+                    serviceLoad();
+                }
+                if(response.code=='400'){
+                    console.log('Error');
+                }
+            }
+        });
+        return false;
+    });
+}
+
+// Create
+$(document).on('click','.serviceCreateBtn',function(e) {
+    e.preventDefault();
+    console.log($('#service_service').val());
+        console.log($('#service_description').val());
+        console.log($('#service_link').val());
+    $.ajax({
+        url: "PortfolioCRUD/Service/service_create.php",
+        type: "POST",
+        data: {
+            "service": $('#service_service').val(), 
+            "description": $('#service_description').val(),
+            "link": $('#service_link').val()
+        },
+        success: function(response){
+            if(response.code=='201'){
+                console.log('Created Successfully');
+                $('#modalService').modal('hide');
+                $('#formService').trigger("reset");
+                serviceLoad();
             }else{
                 console.log('Error');
                 alert("Please Fill out all the Fields");

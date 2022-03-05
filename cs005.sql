@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2022 at 05:46 PM
+-- Generation Time: Mar 05, 2022 at 09:53 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -45,7 +45,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersEmail`, `usersUid`, `usersPassword`, `usersPwdDate`) VALUES
-(60, 'Bob', 'Smith', 'bobsmith002@gmail.com', 'bobby001', '$2y$10$e92.ci4Hxbf6Dszr.CsOEeBn.b4gGy19KXFee./JaiuBxW1dBP0S.', '2022-03-03');
+(60, 'Bob', 'Smith', 'bobsmith002@gmail.com', 'bobby001', '$2y$10$e92.ci4Hxbf6Dszr.CsOEeBn.b4gGy19KXFee./JaiuBxW1dBP0S.', '2022-03-03'),
+(61, 'Andrea', 'Austin', 'andrea.austin@gmail.com', 'andrea', '$2y$10$q3Qh0nDeiONu6zMIYfpHX.m4IMFs.gxFqIidGt4nKqmIhrIQTi5.q', '2022-03-05'),
+(63, 'Rosalyn', 'Quenca', 'rose@gmail.com', 'Rosal_08', '$2y$10$ExD1RC4tdwNHDAPBirLSHOQi2i4ug2rxRHRQQ7WjgKM6Xv7Xi3.Ha', '2022-03-05'),
+(64, 'Anne', 'Watson', 'appleanne@gmail.com', 'atlassan_101', '$2y$10$8xFCw/lEfqM4bRm2Sjf0UOXD2Sj3EHl64ekT0n0pe82XpUT21V/kK', '2022-03-05');
 
 --
 -- Triggers `users`
@@ -59,15 +62,15 @@ $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `trigger_new_child_education`;
 DELIMITER $$
-CREATE TRIGGER `trigger_new_child_education` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_education(userid) 
-SELECT usersId
+CREATE TRIGGER `trigger_new_child_education` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_education(userid, degree, location, year, description) 
+SELECT usersId, 'Degree Name/Major', 'Graduation Year (or anticipated graduation date)', 'Institution Name and Location', 'Description & Additional Details'
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `trigger_new_child_experience`;
 DELIMITER $$
-CREATE TRIGGER `trigger_new_child_experience` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_experience(userid) 
-SELECT usersId
+CREATE TRIGGER `trigger_new_child_experience` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_experience(userid, job, location, year, description) 
+SELECT usersId, 'Job Title and Position', 'Dates Employed', 'Company Name & Location', 'Description & Additional Details'
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
@@ -87,8 +90,8 @@ $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `trigger_new_child_service`;
 DELIMITER $$
-CREATE TRIGGER `trigger_new_child_service` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_service(userid) 
-SELECT usersId
+CREATE TRIGGER `trigger_new_child_service` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_service(userid, service, description) 
+SELECT usersId, 'Service', 'short description about your service'
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
@@ -129,7 +132,11 @@ CREATE TABLE `users_education` (
 
 INSERT INTO `users_education` (`id`, `userid`, `degree`, `description`, `year`, `location`) VALUES
 (11, 60, 'Bachelor of Graphics Design', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', '2020-2022', 'Far Eastern University'),
-(14, 60, 'Bachelor of Science in Computer Science', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet', '2015-2019', 'T.I.P');
+(14, 60, 'Bachelor of Science in Computer Science', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet', '2015-2019', 'T.I.P'),
+(16, 61, 'B.S. in Integrated Science and Technology', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2019-2022', 'T.I.P'),
+(17, 61, 'Bachelor of Science Computer Science', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia', '2015-2019', 'T.I.P'),
+(21, 63, 'Degree Name/Major', 'Description & Additional Details', 'Institution Name and Location', 'Graduation Year (or anticipated graduation date)'),
+(22, 64, 'Degree Name/Major', 'Description & Additional Details', 'Institution Name and Location', 'Graduation Year (or anticipated graduation date)');
 
 -- --------------------------------------------------------
 
@@ -153,7 +160,9 @@ CREATE TABLE `users_experience` (
 
 INSERT INTO `users_experience` (`id`, `userid`, `job`, `year`, `description`, `location`) VALUES
 (8, 60, 'Software Engineer', '2020-2022', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ', 'Google'),
-(9, 60, 'Security Analyst', '2019-2020', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', 'Technological Institute of the Philippines');
+(9, 60, 'Security Analyst', '2019-2020', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', 'Technological Institute of the Philippines'),
+(11, 61, '', '', '', ''),
+(18, 64, 'Job Title and Position', 'Company Name & Location', 'Description & Additional Details', 'Dates Employed');
 
 -- --------------------------------------------------------
 
@@ -185,7 +194,10 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`id`, `userid`, `age`, `phone`, `city`, `degree`, `experience`, `website`, `email`, `freelance`, `profession`, `description1`, `description2`, `image1`, `image2`) VALUES
-(9, 60, 27, '09984368854', 'Caloocan City', 'Bachelor\'s Degree', 6, 'https://www.google.com', 'rose@gmail.com', 'Not Available', 'Software Engineer', 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules.', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.', 'https://cdn.dribbble.com/uploads/599/original/86d75f5ebf6abc13a630dda33b292727.png?1544829141', 'https://trendland.com/wp-content/uploads/2019/03/editorial-illustration-by-spiros-halaris-3.jpg');
+(9, 60, 27, '09984368854', 'Caloocan City', 'Bachelor\'s Degree', 6, 'https://www.google.com', 'rose@gmail.com', 'Not Available', 'Software Engineer', 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules.', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.', 'https://cdn.dribbble.com/uploads/599/original/86d75f5ebf6abc13a630dda33b292727.png?1544829141', 'https://trendland.com/wp-content/uploads/2019/03/editorial-illustration-by-spiros-halaris-3.jpg'),
+(10, 61, 0, '', '', '', 0, '', '', '', '', '', '', '', ''),
+(12, 63, 0, '', '', '', 0, 'https://www.google.com', '', '', 'Software Engineer', '', '', '', 'https://i.pinimg.com/originals/d3/02/e4/d302e4d06d9afae957b686985215270a.jpg'),
+(13, 64, 0, '', '', '', 0, '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -208,7 +220,10 @@ CREATE TABLE `users_message` (
 --
 
 INSERT INTO `users_message` (`id`, `userid`, `subject`, `msgr_name`, `msgr_email`, `message`) VALUES
-(7, 60, '', '', '', '');
+(7, 60, '', '', '', ''),
+(8, 61, '', '', '', ''),
+(10, 63, '', '', '', ''),
+(11, 64, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -221,15 +236,19 @@ CREATE TABLE `users_service` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `service` varchar(250) NOT NULL,
-  `description` text NOT NULL
+  `description` varchar(250) NOT NULL,
+  `service_link` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_service`
 --
 
-INSERT INTO `users_service` (`id`, `userid`, `service`, `description`) VALUES
-(7, 60, '', '');
+INSERT INTO `users_service` (`id`, `userid`, `service`, `description`, `service_link`) VALUES
+(7, 60, '', '', ''),
+(8, 61, '', '', ''),
+(11, 63, 'Photography', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', ''),
+(13, 64, 'Service', 'short description about your service', '');
 
 -- --------------------------------------------------------
 
@@ -255,7 +274,10 @@ INSERT INTO `users_skill` (`id`, `userid`, `skill`, `percentage`) VALUES
 (25, 60, 'C#', 88),
 (27, 60, 'MySql', 90),
 (28, 60, 'C++', 70),
-(29, 60, 'Jupyter', 89);
+(29, 60, 'Jupyter', 89),
+(37, 61, 'Skill', 100),
+(39, 63, 'PHP', 94),
+(41, 64, 'Skill', 100);
 
 -- --------------------------------------------------------
 
@@ -279,7 +301,10 @@ CREATE TABLE `users_work` (
 --
 
 INSERT INTO `users_work` (`id`, `userid`, `category`, `client`, `project_date`, `project_url`, `description`) VALUES
-(7, 60, '', '', '0000-00-00', '', '');
+(7, 60, '', '', '0000-00-00', '', ''),
+(8, 61, '', '', '0000-00-00', '', ''),
+(10, 63, '', '', '0000-00-00', '', ''),
+(11, 64, '', '', '0000-00-00', '', '');
 
 -- --------------------------------------------------------
 
@@ -300,7 +325,10 @@ CREATE TABLE `user_history` (
 --
 
 INSERT INTO `user_history` (`pwdId`, `pwdUserId`, `pwdPassword`, `pwdUpdateDt`) VALUES
-(73, 60, '$2y$10$e92.ci4Hxbf6Dszr.CsOEeBn.b4gGy19KXFee./JaiuBxW1dBP0S.', '2022-03-03');
+(73, 60, '$2y$10$e92.ci4Hxbf6Dszr.CsOEeBn.b4gGy19KXFee./JaiuBxW1dBP0S.', '2022-03-03'),
+(74, 61, '$2y$10$q3Qh0nDeiONu6zMIYfpHX.m4IMFs.gxFqIidGt4nKqmIhrIQTi5.q', '2022-03-05'),
+(76, 63, '$2y$10$ExD1RC4tdwNHDAPBirLSHOQi2i4ug2rxRHRQQ7WjgKM6Xv7Xi3.Ha', '2022-03-05'),
+(77, 64, '$2y$10$8xFCw/lEfqM4bRm2Sjf0UOXD2Sj3EHl64ekT0n0pe82XpUT21V/kK', '2022-03-05');
 
 --
 -- Indexes for dumped tables
@@ -378,55 +406,55 @@ ALTER TABLE `user_history`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `users_education`
 --
 ALTER TABLE `users_education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users_experience`
 --
 ALTER TABLE `users_experience`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users_info`
 --
 ALTER TABLE `users_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users_message`
 --
 ALTER TABLE `users_message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users_service`
 --
 ALTER TABLE `users_service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users_skill`
 --
 ALTER TABLE `users_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users_work`
 --
 ALTER TABLE `users_work`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_history`
 --
 ALTER TABLE `user_history`
-  MODIFY `pwdId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `pwdId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- Constraints for dumped tables
