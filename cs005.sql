@@ -3,13 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2022 at 09:53 AM
+-- Generation Time: Mar 06, 2022 at 01:04 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -48,7 +47,7 @@ INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersEmail`,
 (60, 'Bob', 'Smith', 'bobsmith002@gmail.com', 'bobby001', '$2y$10$e92.ci4Hxbf6Dszr.CsOEeBn.b4gGy19KXFee./JaiuBxW1dBP0S.', '2022-03-03'),
 (61, 'Andrea', 'Austin', 'andrea.austin@gmail.com', 'andrea', '$2y$10$q3Qh0nDeiONu6zMIYfpHX.m4IMFs.gxFqIidGt4nKqmIhrIQTi5.q', '2022-03-05'),
 (63, 'Rosalyn', 'Quenca', 'rose@gmail.com', 'Rosal_08', '$2y$10$ExD1RC4tdwNHDAPBirLSHOQi2i4ug2rxRHRQQ7WjgKM6Xv7Xi3.Ha', '2022-03-05'),
-(64, 'Anne', 'Watson', 'appleanne@gmail.com', 'atlassan_101', '$2y$10$8xFCw/lEfqM4bRm2Sjf0UOXD2Sj3EHl64ekT0n0pe82XpUT21V/kK', '2022-03-05');
+(65, 'Anne', 'Watson', 'appleanne@gmail.com', 'atlassan_101', '$2y$10$9DPAs9wZLStfXwvdtZkq6eI3mfRVm5B5Ovf3UDY1jjCi6.Q2a3lfC', '2022-03-05');
 
 --
 -- Triggers `users`
@@ -136,7 +135,7 @@ INSERT INTO `users_education` (`id`, `userid`, `degree`, `description`, `year`, 
 (16, 61, 'B.S. in Integrated Science and Technology', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2019-2022', 'T.I.P'),
 (17, 61, 'Bachelor of Science Computer Science', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia', '2015-2019', 'T.I.P'),
 (21, 63, 'Degree Name/Major', 'Description & Additional Details', 'Institution Name and Location', 'Graduation Year (or anticipated graduation date)'),
-(22, 64, 'Degree Name/Major', 'Description & Additional Details', 'Institution Name and Location', 'Graduation Year (or anticipated graduation date)');
+(23, 65, 'Degree Name/Major', 'Description & Additional Details', 'Institution Name and Location', 'Graduation Year (or anticipated graduation date)');
 
 -- --------------------------------------------------------
 
@@ -162,7 +161,7 @@ INSERT INTO `users_experience` (`id`, `userid`, `job`, `year`, `description`, `l
 (8, 60, 'Software Engineer', '2020-2022', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ', 'Google'),
 (9, 60, 'Security Analyst', '2019-2020', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', 'Technological Institute of the Philippines'),
 (11, 61, '', '', '', ''),
-(18, 64, 'Job Title and Position', 'Company Name & Location', 'Description & Additional Details', 'Dates Employed');
+(19, 65, 'Job Title and Position', 'Company Name & Location', 'Description & Additional Details', 'Dates Employed');
 
 -- --------------------------------------------------------
 
@@ -194,10 +193,10 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`id`, `userid`, `age`, `phone`, `city`, `degree`, `experience`, `website`, `email`, `freelance`, `profession`, `description1`, `description2`, `image1`, `image2`) VALUES
-(9, 60, 27, '09984368854', 'Caloocan City', 'Bachelor\'s Degree', 6, 'https://www.google.com', 'rose@gmail.com', 'Not Available', 'Software Engineer', 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules.', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.', 'https://cdn.dribbble.com/uploads/599/original/86d75f5ebf6abc13a630dda33b292727.png?1544829141', 'https://trendland.com/wp-content/uploads/2019/03/editorial-illustration-by-spiros-halaris-3.jpg'),
+(9, 60, 27, '09984368854', 'Caloocan City', 'Bachelor\'s Degree', 6, 'https://www.google.com', 'rose@gmail.com', 'Not Available', 'Software Engineer', 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules.', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.', 'https://cdn.dribbble.com/uploads/599/original/86d75f5ebf6abc13a630dda33b292727.png?1544829141', ''),
 (10, 61, 0, '', '', '', 0, '', '', '', '', '', '', '', ''),
 (12, 63, 0, '', '', '', 0, 'https://www.google.com', '', '', 'Software Engineer', '', '', '', 'https://i.pinimg.com/originals/d3/02/e4/d302e4d06d9afae957b686985215270a.jpg'),
-(13, 64, 0, '', '', '', 0, '', '', '', '', '', '', '', '');
+(14, 65, 36, '+1-202-555-0162', 'New York City', 'Bachelor\'s Degree', 10, 'www.myPhotowork.com', 'anna.atwork@gmail.com', 'Available', 'Photographer', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere.', 'https://i.pinimg.com/originals/d3/02/e4/d302e4d06d9afae957b686985215270a.jpg', 'https://www.boredart.com/wp-content/uploads/2016/02/illustration-art-3.jpg');
 
 -- --------------------------------------------------------
 
@@ -223,7 +222,7 @@ INSERT INTO `users_message` (`id`, `userid`, `subject`, `msgr_name`, `msgr_email
 (7, 60, '', '', '', ''),
 (8, 61, '', '', '', ''),
 (10, 63, '', '', '', ''),
-(11, 64, '', '', '', '');
+(12, 65, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -248,7 +247,8 @@ INSERT INTO `users_service` (`id`, `userid`, `service`, `description`, `service_
 (7, 60, '', '', ''),
 (8, 61, '', '', ''),
 (11, 63, 'Photography', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', ''),
-(13, 64, 'Service', 'short description about your service', '');
+(19, 65, 'Service', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia vo', ''),
+(20, 65, 'Photography', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia vo', 'https://www.canva.com/');
 
 -- --------------------------------------------------------
 
@@ -277,7 +277,7 @@ INSERT INTO `users_skill` (`id`, `userid`, `skill`, `percentage`) VALUES
 (29, 60, 'Jupyter', 89),
 (37, 61, 'Skill', 100),
 (39, 63, 'PHP', 94),
-(41, 64, 'Skill', 100);
+(42, 65, 'Skill', 100);
 
 -- --------------------------------------------------------
 
@@ -289,22 +289,24 @@ DROP TABLE IF EXISTS `users_work`;
 CREATE TABLE `users_work` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `project` varchar(250) NOT NULL,
+  `image` varchar(250) NOT NULL,
   `category` varchar(50) NOT NULL,
   `client` varchar(250) NOT NULL,
-  `project_date` date NOT NULL,
+  `project_date` varchar(50) NOT NULL,
   `project_url` varchar(250) NOT NULL,
-  `description` text NOT NULL
+  `description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_work`
 --
 
-INSERT INTO `users_work` (`id`, `userid`, `category`, `client`, `project_date`, `project_url`, `description`) VALUES
-(7, 60, '', '', '0000-00-00', '', ''),
-(8, 61, '', '', '0000-00-00', '', ''),
-(10, 63, '', '', '0000-00-00', '', ''),
-(11, 64, '', '', '0000-00-00', '', '');
+INSERT INTO `users_work` (`id`, `userid`, `project`, `image`, `category`, `client`, `project_date`, `project_url`, `description`) VALUES
+(7, 60, '', '', '', '', '0000-00-00', '', ''),
+(8, 61, '', '', '', '', '0000-00-00', '', ''),
+(10, 63, '', '', '', '', '0000-00-00', '', ''),
+(18, 65, 'BarangEye', 'https://cdn.dribbble.com/uploads/599/original/86d75f5ebf6abc13a630dda33b292727.png?1544829141', 'Website', 'ABC Company', '0000-00-00', 'www.website.com', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi temp');
 
 -- --------------------------------------------------------
 
@@ -328,7 +330,7 @@ INSERT INTO `user_history` (`pwdId`, `pwdUserId`, `pwdPassword`, `pwdUpdateDt`) 
 (73, 60, '$2y$10$e92.ci4Hxbf6Dszr.CsOEeBn.b4gGy19KXFee./JaiuBxW1dBP0S.', '2022-03-03'),
 (74, 61, '$2y$10$q3Qh0nDeiONu6zMIYfpHX.m4IMFs.gxFqIidGt4nKqmIhrIQTi5.q', '2022-03-05'),
 (76, 63, '$2y$10$ExD1RC4tdwNHDAPBirLSHOQi2i4ug2rxRHRQQ7WjgKM6Xv7Xi3.Ha', '2022-03-05'),
-(77, 64, '$2y$10$8xFCw/lEfqM4bRm2Sjf0UOXD2Sj3EHl64ekT0n0pe82XpUT21V/kK', '2022-03-05');
+(78, 65, '$2y$10$9DPAs9wZLStfXwvdtZkq6eI3mfRVm5B5Ovf3UDY1jjCi6.Q2a3lfC', '2022-03-05');
 
 --
 -- Indexes for dumped tables
@@ -406,55 +408,55 @@ ALTER TABLE `user_history`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `users_education`
 --
 ALTER TABLE `users_education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users_experience`
 --
 ALTER TABLE `users_experience`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users_info`
 --
 ALTER TABLE `users_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users_message`
 --
 ALTER TABLE `users_message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users_service`
 --
 ALTER TABLE `users_service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users_skill`
 --
 ALTER TABLE `users_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `users_work`
 --
 ALTER TABLE `users_work`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user_history`
 --
 ALTER TABLE `user_history`
-  MODIFY `pwdId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `pwdId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- Constraints for dumped tables
