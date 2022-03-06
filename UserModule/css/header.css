@@ -4,7 +4,7 @@
 }
 
 .h-navbar{
-    border-bottom: 2.5px solid #008cff;;
+    border-bottom: 2.5px solid #008cff;
 }
 
 .h-navbar .nav-link:hover{
@@ -13,6 +13,10 @@
 
 .h-navbar .notif{
   padding: 1rem !important;
+}
+
+.dropdown-toggle::after {
+  content: none !important;
 }
 
 .hr{

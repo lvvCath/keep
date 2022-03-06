@@ -484,8 +484,9 @@ footer{
 }
 
 footer .footer-links a,
+footer .footer-links p,
 footer .social-icons a {
-   color: #898fa1;
+   color: #ffffff;
 }
 
 footer .social-icons a {
