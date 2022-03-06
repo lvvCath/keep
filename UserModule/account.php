@@ -1,16 +1,74 @@
+<?php
+include('../Database/db.php'); 
+session_start();
+if (!isset($_SESSION["userid"]) ||(trim ($_SESSION["userid"]) == '')) { 
+    header('location: ../index.php');
+    exit();
+}else{
+     $id = $_SESSION["userid"];
+}
+include('../UserModule/includes/fetch_acc_info.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>KEEP</title>
+  <link rel="icon" href="../assets/images/icon.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- external css -->
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/account.css">
+  <!-- Bootstrap CSS -->
+  <link href="../bootstrap-5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Fontawesome -->
+  <link href="../assets/fontawesome-free-6.0.0-web/css/fontawesome.css" rel="stylesheet">
+  <link href="../assets/fontawesome-free-6.0.0-web/css/brands.css" rel="stylesheet">
+  <link href="../assets/fontawesome-free-6.0.0-web/css/solid.css" rel="stylesheet">
+  <?php include '../handler/error.php';?>
+</head>
 
-<?php include '../handler/error.php';?>
+<body>
 <?php include 'header.php';?>
-<!-- external css -->
-<link rel="stylesheet" href="css/account.css">
-
 <div class="container d-flex justify-content-center flex-column mt-5">
     <div class="row g-5 p-3 mx-2">
+
     <div class="col-12 shadow p-3 mb-5 bg-body rounded">
-        <h4 class="title">General Account Settings</h4>
+        <h4 class="title"><i class="fa-solid fa-share-nodes"></i> Online Portfolio Share Settings</h4>
+        <div class="hr"></div>
+        <form class="row g-3 ">
+        <div class="col-12">
+            <label class="text-muted" for="share_link"><h5>Get Link</h5></label>
+            <input class="form-control" name="share_link" type="text" value="" readonly>
+        </div>
+        <div class="col-12">
+            <h5>Set Restriction</h5>
+            <div class="restriction-radioBtn">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="public_flexRadioDefault1">
+                <label class="form-check-label" for="public_flexRadioDefault1">
+                  <strong>Public:</strong> <i>Anyone on the internet with this link can view your Online Portfolio</i>
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="private_flexRadioDefault2" checked>
+                <label class="form-check-label" for="private_flexRadioDefault2">
+                  <strong>Private:</strong> <i>No one on the internet can view your Online Portfolio</i>
+                </label>
+              </div>
+            </div>
+            <div class="col-12 d-flex mt-4 justify-content-end">
+              <button id="genLinkBtn" class="btn btn-primary" type="button"><i class="fa fa-link"></i>&nbspGenerate link</button>
+            </div>
+
+        </div>
+
+        </form>
+    </div>
+
+    <div class="col-12 shadow p-3 mb-5 bg-body rounded">
+        <h4 class="title"><i class="fa-solid fa-gear"></i> General Account Settings</h4>
         <div class="hr"></div>
         <form class="row g-3 ">
         <div class="col-md-6">
@@ -40,7 +98,7 @@
     </div>
 
     <div class="col-12 shadow p-3 mb-5 bg-body rounded">
-        <h4 class="title">Change Password</h4>
+        <h4 class="title"><i class="fa-solid fa-lock"></i> Change Password</h4>
         <small class="form-text text-muted">
         It's a good idea to use a strong password that you're not using elsewhere <br>
         Password must be at least (10) characters long, which consist of at least (1) upper case letter, (1) lower case letter, (1) number and (1) special character.
@@ -90,7 +148,7 @@
     </div>
 
     <div id="deleteAccount" class="col-12 shadow p-3 mb-5 bg-body rounded">
-        <h4 class="title" style="color: rgb(181 0 18);">DELETE ACCOUNT</h4>
+        <h4 class="title" style="color: rgb(181 0 18);"><i class="fa-solid fa-user-xmark"></i> DELETE ACCOUNT</h4>
         <p>Once you delete your account, there is no going back. Please be certain.</p>
         <div class="hr-red"></div>
         <div class="d-flex justify-content-center py-4">
@@ -202,6 +260,11 @@
   </div>
 </div>
 
+
+
+
+<!-- To Top -->
+<button onclick="topFunction()" id="toTop" title="Go to top"><i class="fa fa-chevron-up"></i></button>
 <script src="js/account.js"></script>
 
 <?php include 'footer.php';?>

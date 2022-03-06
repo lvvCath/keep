@@ -231,7 +231,7 @@ function loginUser($conn, $username, $password){
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         $_SESSION["notifpwd"] =  false;
-        header("location: ../../UserModule/Main.php");
+        header("location: ../../UserModule/main.php");
         exit();
     }else if($checkPassword === true AND $expiredPwd === false AND $notificationPwd === true){
         session_start();
@@ -239,7 +239,7 @@ function loginUser($conn, $username, $password){
         $_SESSION["userid"] =  $uidOrEmailExists["usersId"];
         $_SESSION["useruid"] =  $uidOrEmailExists["usersUid"];
         $_SESSION["notifpwd"] =  true;
-        header("location: ../../UserModule/Main.php");
+        header("location: ../../UserModule/main.php");
     }else if($checkPassword === true AND $expiredPwd === true AND $notificationPwd === false){
         session_start();
         session_regenerate_id(TRUE);

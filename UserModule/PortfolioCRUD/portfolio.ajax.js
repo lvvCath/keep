@@ -41,6 +41,11 @@ function aboutLoad(){
             $('#update_website').val(response["website"]);
             $('#update_email').val(response["email"]);
             $('#update_freelance').val(response["freelance"]);
+
+            // Contact
+            $('#contact_city').text(response["city"]);
+            $('#contact_email').text(response["email"]);
+            $('#contact_phone').text(response["phone"]);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
             alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -548,7 +553,7 @@ function serviceLoad(){
         success: function(response){
             response.forEach(function (data, index) {
                 let link = data.service_link;
-                if(data.service_link == 0){
+                if($.trim(data.service_link).replace(/\s+/g, ' ') == 0){
                     link = "#services";
                 }
                 $('#ServiceSection').append(
@@ -670,6 +675,213 @@ $(document).on('click','.serviceCreateBtn',function(e) {
                 $('#modalService').modal('hide');
                 $('#formService').trigger("reset");
                 serviceLoad();
+            }else{
+                console.log('Error');
+                alert("Please Fill out all the Fields");
+            }
+        }
+    });
+});
+
+//#################################################################################################
+//#################################################################################################
+//#################################################################################################
+
+workLoad();
+workUpdate();
+function workLoad(){
+    $('#WorkSection').empty();
+    $.ajax({
+        url: "PortfolioCRUD/Work/work_list.php",
+        type: "GET",
+        success: function(response){
+            response.forEach(function (data, index) {
+                let img = data.image;
+                if($.trim(data.image).replace(/\s+/g, ' ') == 0){
+                    img = "../assets/images/image-holder.svg";
+                }
+                $('#WorkSection').append(
+                '<div class="col-md-4">'+
+                '<div class="portfolio-wrap">'+
+                    '<img src="'+ img +'" class="img-fluid portfolio-img" alt="project-image">'+
+                    '<div class="portfolio-info">'+
+                        '<h4>'+ data.project +'</h4>'+
+                        '<p>'+ data.category +'</p>'+
+                        '<div class="portfolio-links">'+
+                        '<a class="btn workView_openModal" title="Portfolio Details" data-bs-toggle="modal" data-bs-target="#portfolio-modal"' +
+                            'data-id="'+data.id+'"' +
+                            'data-project="'+data.project+'"' +
+                            'data-image="'+data.image+'"' +
+                            'data-category="'+data.category+'"' +
+                            'data-client="'+data.client+'"' +
+                            'data-project_date="'+data.project_date+'"' +
+                            'data-project_url="'+data.project_url+'"' +
+                            'data-description="'+data.description+'"' +
+                        '><i class="fa-solid fa-arrow-up-right-from-square"></i>'+
+                        '</a>'+
+                        '<a class="workEdit_openModal btn main-edit-ico" title="Edit" data-bs-toggle="modal" data-bs-target="#modalWork" ' +
+                            'data-id="'+data.id+'"' +
+                            'data-project="'+data.project+'"' +
+                            'data-image="'+data.image+'"' +
+                            'data-category="'+data.category+'"' +
+                            'data-client="'+data.client+'"' +
+                            'data-project_date="'+data.project_date+'"' +
+                            'data-project_url="'+data.project_url+'"' +
+                            'data-description="'+data.description+'"' +
+                            '><i class="fa fa-edit"></i></a>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+                '</div>'
+                );
+            });
+        }
+    });  
+    
+}
+
+$(document).on('click','.workAdd_openModal',function(e) {
+    $('#formWork').trigger("reset");
+    $(".workUpdateBtn").hide();
+    $(".workDeleteBtn").hide();
+    $(".workCreateBtn").show();
+});
+
+// Update
+function workUpdate(){
+    $curr_id = 0;
+
+    $(document).on('click','.workView_openModal',function(e) {
+        var id=$(this).attr("data-id");
+        var project=$(this).attr("data-project");
+        var image=$(this).attr("data-image");
+        var category=$(this).attr("data-category");
+        var client=$(this).attr("data-client");
+        var project_date=$(this).attr("data-project_date");
+        var project_url=$(this).attr("data-project_url");
+        var description=$(this).attr("data-description");
+
+        if($.trim(image).replace(/\s+/g, ' ') == 0){
+            image = "../assets/images/image-holder.svg";
+        }
+        $('#view_image').attr('src', image);
+        $('#portfolioModalLabel').html(project);
+        $('#view_category').html(category);
+        $('#view_description').html(description);
+        $('#view_client').html(client);
+        $('#view_date').html(project_date);
+        $('#view_url').html(project_url);
+
+        $curr_id = id;
+    });
+
+    $(document).on('click','.workEdit_openModal',function(e) {
+        $(".workCreateBtn").hide();
+        $(".workDeleteBtn").show();
+        $(".workUpdateBtn").show();
+        var id=$(this).attr("data-id");
+        var project=$(this).attr("data-project");
+        var image=$(this).attr("data-image");
+        var category=$(this).attr("data-category");
+        var client=$(this).attr("data-client");
+        var project_date=$(this).attr("data-project_date");
+        var project_url=$(this).attr("data-project_url");
+        var description=$(this).attr("data-description");
+
+        $('#work_project').val(project);
+        $('#work_category').val(category);
+        $('#work_description').val(description);
+        $('#work_image').val(image);
+        $('#work_client').val(client);
+        $('#work_date').val(project_date);
+        $('#work_url').val(project_url);
+
+        $curr_id = id;
+    });
+
+    $(document).on('click', '.workUpdateBtn', function(e){
+        e.preventDefault();
+        let id = $curr_id;
+        $.ajax({
+            url: "PortfolioCRUD/Work/work_update.php",
+            type: "POST",
+            data: {
+                "id": id,
+                "project": $('#work_project').val(), 
+                "category": $('#work_category').val(),
+                "description": $('#work_description').val(),
+                "image": $('#work_image').val(),
+                "client": $('#work_client').val(),
+                "project_date": $('#work_date').val(),
+                "project_url": $('#work_url').val()
+            },
+            success: function(response){
+                if(response.code=='201'){
+                    $('#modalWork').modal('hide');
+                    console.log('Updated Successfully');
+                    workLoad();
+                }
+                if(response.code=='400'){
+                    console.log('Error');
+                    alert("Please Fill out all the Fields");
+                }
+            }
+        });
+        return false;
+    });
+
+    // Delete
+    $(document).on('click', '.workDeleteBtn', function(){
+        let id = $curr_id;
+        $.ajax({
+            url: "PortfolioCRUD/Work/work_delete.php",
+            type: "POST",
+            data: {
+                "id": id
+            },
+            success: function(response){
+                if(response.code=='201'){
+                    $('#modalWork').modal('hide');
+                    console.log('Deleted Successfully');
+                    workLoad();
+                }
+                if(response.code=='400'){
+                    console.log('Error');
+                }
+            }
+        });
+        return false;
+    });
+}
+
+// Create
+$(document).on('click', '.workCreateBtn',function(e) {
+    e.preventDefault();
+    console.log($('#work_project').val());
+    console.log($('#work_category').val());
+    console.log($('#work_description').val());
+    console.log($('#work_image').val());
+    console.log($('#work_client').val());
+    console.log($('#work_date').val());
+    console.log($('#work_url').val());
+    $.ajax({
+        url: "PortfolioCRUD/Work/work_create.php",
+        type: "POST",
+        data: {
+            "project": $('#work_project').val(), 
+            "category": $('#work_category').val(),
+            "description": $('#work_description').val(),
+            "image": $('#work_image').val(),
+            "client": $('#work_client').val(),
+            "project_date": $('#work_date').val(),
+            "project_url": $('#work_url').val()
+        },
+        success: function(response){
+            if(response.code=='201'){
+                console.log('Created Successfully');
+                $('#modalWork').modal('hide');
+                $('#formWork').trigger("reset");
+                workLoad();
             }else{
                 console.log('Error');
                 alert("Please Fill out all the Fields");

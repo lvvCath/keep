@@ -24,7 +24,7 @@ body{
     font-weight: bold;
 }
 
-#createBtn, #clearBtn, #edit {
+#createBtn, #clearBtn, #edit, #genLinkBtn {
     background-color: #045de9;
     background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
     outline: none;
@@ -38,8 +38,12 @@ body{
     background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
 }
 
-#createBtn:hover, #clearBtn:hover, #edit:hover, #deleteAccountBtn:hover {
+#createBtn:hover, #clearBtn:hover, #edit:hover, #deleteAccountBtn:hover, #genLinkBtn:hover {
     transform: scale(1.1);
+}
+
+.restriction-radioBtn{
+    padding-left: 15px;
 }
 
 .hr-red{
@@ -133,3 +137,33 @@ body{
     content: "\f057";
     padding-right: 10px;
   }
+
+/* TO TOP */
+#toTop:hover {
+    background-color: rgba(180, 180, 180, 0.472);
+    box-shadow: 0px 3px 6px 0px rgba(50, 50, 50, 0.62);
+}
+
+#toTop:focus {
+    outline: none;
+}
+
+/* To Top Button */
+#toTop {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
+    padding: 30px;
+}
+
+#toTop{
+    background-color: #045de9;
+    background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 7px 12px 7px 12px;
+    border-radius: 20px;
+    margin-left: 6%;
+}
