@@ -69,10 +69,8 @@ if (isset($_SESSION["locked"])){
                     <input name="password" id="password" type="password" class="password form-control" placeholder="Password" required>
                     <label for="floatingPassword">Password</label>
                 </div>
-                
-                
                 <br><br>
-                <a href="#" class="forgot">Forgot your password?</a><br>
+                <a href="forgot-password.php" class="forgot">Forgot your password?</a><br>
                 
                 <?php
                     if (isset($_SESSION["login_attempt"])){
