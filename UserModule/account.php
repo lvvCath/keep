@@ -26,6 +26,11 @@ include('../UserModule/includes/fetch_acc_info.php');
   <link href="../assets/fontawesome-free-6.0.0-web/css/fontawesome.css" rel="stylesheet">
   <link href="../assets/fontawesome-free-6.0.0-web/css/brands.css" rel="stylesheet">
   <link href="../assets/fontawesome-free-6.0.0-web/css/solid.css" rel="stylesheet">
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
   <?php include '../handler/error.php';?>
 </head>
 
@@ -34,34 +39,57 @@ include('../UserModule/includes/fetch_acc_info.php');
 <div class="container d-flex justify-content-center flex-column mt-5">
     <div class="row g-5 p-3 mx-2">
 
-    <div class="col-12 shadow p-3 mb-5 bg-body rounded">
+    <div class="col-12 restriction shadow p-3 mb-5 bg-body rounded">
         <h4 class="title"><i class="fa-solid fa-share-nodes"></i> Online Portfolio Share Settings</h4>
         <div class="hr"></div>
-        <form class="row g-3 ">
+        <form class="row g-3">
         <div class="col-12">
             <label class="text-muted" for="share_link"><h5>Get Link</h5></label>
-            <input class="form-control" name="share_link" type="text" value="" readonly>
+            <div class="input-group mb-3">
+              <input class="form-control" id="share_link" name="share_link" type="text" value="" readonly>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" onclick="copyBtn()" type="button">Copy</button>
+            </div>
+          </div>
         </div>
+        
+        
         <div class="col-12">
             <h5>Set Restriction</h5>
-            <div class="restriction-radioBtn">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="public_flexRadioDefault1">
-                <label class="form-check-label" for="public_flexRadioDefault1">
-                  <strong>Public:</strong> <i>Anyone on the internet with this link can view your Online Portfolio</i>
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="private_flexRadioDefault2" checked>
-                <label class="form-check-label" for="private_flexRadioDefault2">
-                  <strong>Private:</strong> <i>No one on the internet can view your Online Portfolio</i>
-                </label>
-              </div>
+            <div class="permission btn-group">
+              <button type="button" class="btn-desc btn">
+              <p id="btn-desc"></p>
+              </button>
+              <button id="dropdown-permission" type="button" class="btn btn-drop dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-caret-down"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="row">
+                  <div class="col-1">
+                    <i id="fa-public-i" class="fa-solid fa-check"></i> 
+                  </div>
+                  <div class="col-10">
+                    <a id="public" class="dropdown-item" href="#"> Public</a>
+                  </div>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li class="row">
+                  <div class="col-1">
+                    <i id="fa-private-i" class="fa-solid fa-check"></i> 
+                  </div>
+                  <div class="col-10">
+                    <a id="private" class="dropdown-item" href="#"> Private</a>
+                  </div>
+                </li>
+              </ul>
             </div>
             <div class="col-12 d-flex mt-4 justify-content-end">
               <button id="genLinkBtn" class="btn btn-primary" type="button"><i class="fa fa-link"></i>&nbspGenerate link</button>
             </div>
-
+            <div id="copiedmsg">
+              <p>Link copied to clipboard!</p>
+            </div>
+            
         </div>
 
         </form>
@@ -266,6 +294,7 @@ include('../UserModule/includes/fetch_acc_info.php');
 <!-- To Top -->
 <button onclick="topFunction()" id="toTop" title="Go to top"><i class="fa fa-chevron-up"></i></button>
 <script src="js/account.js"></script>
+<script src="PortfolioCRUD/share.ajax.js"></script>
 
 <?php include 'footer.php';?>
 
