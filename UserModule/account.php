@@ -120,7 +120,7 @@ include('../UserModule/includes/fetch_acc_info.php');
                     readonly value="<?php echo $row['usersUid']?>">
         </div>
         <div class="col-12 d-flex justify-content-center">
-            <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-edit"></i>&nbspE D I T</button>
+            <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateAccModal"><i class="fa fa-edit"></i>&nbspE D I T</button>
         </div>
         </form>
     </div>
@@ -187,11 +187,11 @@ include('../UserModule/includes/fetch_acc_info.php');
 </div>
 
 <!-- Modal Update -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="updateAccModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateAccModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Update Account</h5>
+        <h5 class="modal-title" id="updateAccModalLabel">Update Account</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -233,6 +233,16 @@ include('../UserModule/includes/fetch_acc_info.php');
                   <p id="uid_length" class="font-awesome-icons invalid">username length <b>6-20 characters</b></p>
                 </small>
             </div>
+            <div class="hr"></div>
+            <h5>Enter your password to confirm changes</h5>
+            <div class="col-12">
+                <label class="text-muted" for="ver_password">Password</label>
+                <span class="pwd-eye" onclick="ver_password_show_hide();">
+                    <i class="fa fa-eye" id="show_eye_v"></i>
+                    <i class="fa fa-eye-slash d-none" id="hide_eye_v"></i>
+                </span>
+                <input class="form-control" id="ver_password" name="ver_password" type="password" required> 
+            </div>
             <!-- buttons -->
             <div class="col-md-6 d-flex justify-content-center">
                 <button type="button" id="clearBtn" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>   
@@ -247,7 +257,7 @@ include('../UserModule/includes/fetch_acc_info.php');
 </div>
 
 <!-- Modal Delete -->
-<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modal-content-red">
       <div class="modal-header">

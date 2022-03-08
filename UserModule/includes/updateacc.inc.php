@@ -7,6 +7,7 @@ if(isset($_POST["update"])){
     $last_name = $_POST["last_name"];
     $email = $_POST["email"];
     $username = $_POST["username"];
+    $password = $_POST["ver_password"];
 
     require_once '../../Database/db.php';
     require_once 'updateaccfunctions.inc.php';
@@ -37,7 +38,7 @@ if(isset($_POST["update"])){
     }
     
 
-    updateAcc($conn, $first_name, $last_name, $email, $username, $id);
+    updateAcc($conn, $first_name, $last_name, $email, $username, $password, $id);
 
 }else{
     header("location: ../account.php");

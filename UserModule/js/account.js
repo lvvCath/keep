@@ -20,6 +20,22 @@ function modal_password_show_hide() {
   }
 }
 
+function ver_password_show_hide() {
+    var x = document.getElementById("ver_password");
+    var show_eye = document.getElementById("show_eye_v");
+    var hide_eye = document.getElementById("hide_eye_v");
+    hide_eye.classList.remove("d-none");
+    if (x.type === "password") {
+      x.type = "text";
+      show_eye.style.display = "none";
+      hide_eye.style.display = "block";
+    } else {
+      x.type = "password";
+      show_eye.style.display = "block";
+      hide_eye.style.display = "none";
+    }
+  }
+
 // Password Hide/Unhide #########################
 function password_show_hide() {
     var x = document.getElementById("last_password");

@@ -86,18 +86,52 @@ function emailExists($conn, $email, $id){
     mysqli_stmt_close($stmt);
 }
 
-function updateAcc($conn, $first_name, $last_name, $email, $username, $id){
-    $sql = "UPDATE users SET usersFirstName=?, usersLastName=?, usersEmail=?, usersUid=? WHERE usersId = ?;";
+function getUser($conn, $username, $email){
+    $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
-
-    if(!mysqli_stmt_prepare($stmt, $sql) ){
+    if(!mysqli_stmt_prepare($stmt, $sql)){
         header("location: ../account.php?error=stmtFailed");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ssssi", $first_name, $last_name, $email, $username, $id);
+    mysqli_stmt_bind_param($stmt, "ss", $username, $email);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if($row = mysqli_fetch_assoc($resultData)){
+        return $row;
+    }else{
+        $result = false;
+        return $result;
+    }
     
-    header("location: ../account.php?msg=accupdated");
+    mysqli_stmt_close($stmt);
+}
+
+function updateAcc($conn, $first_name, $last_name, $email, $username, $password, $id){
+    $getUser = getUser($conn, $username, $email);
+
+    if ($getUser === false) {
+        header('location: ../account.php?error=stmtFailed');
+        exit();
+    }
+
+    $pwdHashed = $getUser["usersPassword"];
+    $checkPassword = password_verify($password, $pwdHashed);
+    if($checkPassword === false){
+        header('location: ../account.php?error=passwordNotMatch');
+        exit();
+    }else if($checkPassword === true){
+        $sql = "UPDATE users SET usersFirstName=?, usersLastName=?, usersEmail=?, usersUid=? WHERE usersId = ?;";
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql) ){
+            header("location: ../account.php?error=stmtFailed");
+            exit();
+        }
+        mysqli_stmt_bind_param($stmt, "ssssi", $first_name, $last_name, $email, $username, $id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        header("location: ../account.php?msg=accupdated");
+    }
 }
