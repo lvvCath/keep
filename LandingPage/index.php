@@ -364,7 +364,7 @@
                </div>
                <div class="col-md-4">   
                   <h4 class="footer-logo-text">KEEP</h4>
-                  <p> KEEP &nbsp yourself &nbsp professional &nbsp online </p>
+                  <p style="color: white;">Keeper of Excellent and essential Profile </p>
                   <div class="social-icons">
                      <a href="#" style="color: white;"><i class="bx bxl-facebook"></i></a>
                      <a href="#" style="color: white;"><i class="bx bxl-twitter"></i></a>
