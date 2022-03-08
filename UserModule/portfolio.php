@@ -1,23 +1,73 @@
+<?php
+include('../Database/db.php'); 
+session_start();
+$token = $_GET["v"];
+$sql = "SELECT * FROM users_share WHERE token = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: portfolio_private.php");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $token);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if($row = mysqli_fetch_assoc($resultData)){
+        if($row['permission'] == 1){
+            $_SESSION['share-userid'] = $row['userid'];
+            $id = $row['userid'];
+        }else{
+            header("location: portfolio_private.php");
+            exit();
+        }
+        
+    }else{
+        header("location: portfolio_private.php");
+        exit();
+    }
+    
+    mysqli_stmt_close($stmt);
+
+    include('../UserModule/includes/fetch_acc_info.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" href="../assets/images/icon.png" type="image/x-icon">
-<!-- external css -->
-<link rel="stylesheet" href="css/main.css">
-<script src="js/main.js"></script>  
+    <title>KEEP</title>
+    <link rel="icon" href="../assets/images/icon.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- external css -->
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Bootstrap CSS -->
+    <link href="../bootstrap-5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Fontawesome -->
+    <link href="../assets/fontawesome-free-6.0.0-web/css/fontawesome.css" rel="stylesheet">
+    <link href="../assets/fontawesome-free-6.0.0-web/css/brands.css" rel="stylesheet">
+    <link href="../assets/fontawesome-free-6.0.0-web/css/solid.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+</head>
 
+<body>
 <div id="hero" class="container-fluid">
-    <div class="row"><?php include 'header.php';?></div>
     <div id="hero-content" class="row flex-lg-row-reverse d-flex align-items-center justify-content-center">
         <div class="col-md-6">
-            <img src="../assets/images/image-holder.svg" class="d-block mx-lg-auto img-fluid" width="500" height="500">
+            <img id="read_image1" src="../assets/images/image-holder.svg" class="d-block mx-lg-auto img-fluid" width="242" height="363" >
         </div>
         <div class="col-md-6 py-5 mx-auto">
-            <a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>
             <h1 class="display-5 fw-bold lh-1 mb-2"><?php echo "".$row['usersFirstName']. " " .$row['usersLastName']. " " ?></h1>
             <div class="hr"></div>
-            <p class="lead">
-                 <?php echo $rowResume['about_me']?>
+            <p id="read_lead" class="lead text-break">
+                Tell readers here who you are in the first line of your portfolio introduction. Keep it short and simple.</br>
+                <span class="edit_Help font-monospace">To edit this section, click the edit icon <i class="fa fa-edit"></i> found the top left</span>.
             </p>
             <div class="d-grid d-md-flex justify-content-md-center">
                 <a href="#about" class="btn-get-started scrollto"><i class="fa-solid fa-angles-down"></i></a>
@@ -25,40 +75,6 @@
         </div>
     </div>
 </div><!-- End Hero -->
-
-<!-- Modal Hero Edit -->
-<div class="modal fade" id="modalHeroEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalHeroEditLabel">Introduction</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form class="row g-4 " id="formHeroEdit" name="formHeroEdit" method="POST" action="#">
-            <div class="col-12">
-                <label class="text-muted" for="intro">Introduction</label>
-                <textarea class="form-control" id="intro" name="intro" rows="7" maxlength="300" required
-                oninput="introLimit(this)" value=""></textarea>
-                <div id="charCounter" class="form-text text-end"></div>
-            </div>
-            <div class="col-12">
-                <label class="text-muted" for="introImage">Image Introduction Link</label>
-                <input class="form-control" id="introImage" name="introImage" type="text" placeholder="Insert image link" required
-                         value="">
-            </div>
-            <!-- buttons -->
-            <div class="col-md-6 d-flex justify-content-center">
-                <button type="button" class="modal-cancel-Btn btn btn-primary" data-bs-dismiss="modal">Cancel</button>   
-            </div>
-            <div class="col-md-6 d-flex justify-content-center">
-                <button type="submit" name="introUpdateBtn" class="modal-confirm-Btn btn btn-primary">Update</button>      
-            </div> 
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ======= Header ======= -->
 <header id="header" class="sticky-top">
@@ -98,38 +114,39 @@
 <div class="container-fluid">
     <!-- About -->
     <div class="section-title">
-        <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalAboutEdit"><i class="fa fa-edit"></i></a> About</h2>
+        <h2>About</h2>
         <p>Learn more about me</p>
     </div>
 
     <div class="row">
     <div class="col-lg-4" data-aos="fade-right">
-        <img src="../assets/images/default-profile.jpg" class="img-fluid" alt="">
+        <img id="read_image2" src="../assets/images/default-profile.jpg" class="img-fluid" width="242" height="363">
     </div>
-    <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">     
-        <h3><?php echo $rowResume['profession']?></h3>
-        <p class="fst-italic">
-        <?php echo $rowResume['info_description']?>
+    <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+        <h3 id="read_profession">Your Profession</h3>
+        <p id="read_description2" class="text-break">
+        Tell the readers in this About me section more about you. You want to make sure visitors and readers 
+        of your online portfolio to understand your work, but you don’t want to go into too much detail and create 
+        a long essay about yourself in case they lose interest. </br>
+        <span class="edit_Help font-monospace">To edit this section, click the edit icon <i class="fa fa-edit"></i> found the top left.</span>
         </p>
         <div class="row">
         <div class="col-lg-6">
-             <ul>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Age:</strong> <span><?php echo $rowResume['age']?></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Phone:</strong> <span><?php echo $rowResume['phone']?></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>City:</strong> <span><?php echo $rowResume['city']?></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Degree:</strong> <span><?php echo $rowResume['degree']?></span></li>
+            <ul>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Age:</strong> <span id="read_age"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Phone:</strong> <span id="read_phone"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>City:</strong> <span id="read_city"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Degree:</strong> <span id="read_degree"></span></li>
             </ul>
         </div>
         <div class="col-lg-6">
             <ul>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Years of Experience:</strong> <span><?php echo $rowResume['experience']?></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Website:</strong> <span><?php echo $rowResume['website']?></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Email:</strong> <span><?php echo $row['usersEmail']?></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Freelance:</strong> <span><?php echo $rowResume['freelance']?></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Years of Experience:</strong> <span id="read_experience"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Website:</strong> <span id="read_website"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Work Email:</strong> <span id="read_email"></span></li>
+            <li><i class="fa-solid fa-diamond"></i> <strong>Freelance:</strong> <span id="read_freelance"></span></li>
             </ul>
         </div>
-  
-      
         </div>
     </div>
     </div>
@@ -137,105 +154,14 @@
 </div>
 </section><!-- End About Section -->
 
-<!-- Modal About Edit -->
-<div class="modal fade" id="modalAboutEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalAboutEditLabel">About Me</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formAboutEdit" name="formAboutEdit" method="POST" action="#">
-        <div class="row g-3">
-            <div class="divider col-lg-5">
-                <div class="row g-3">
-                <div class="col-12">
-                    <label class="text-muted" for="about-profession"></label>
-                    <input class="form-control" id="about-profession" name="about-profession" type="text" required
-                            value="">
-                </div>
-                <div class="col-12">
-                    <label class="text-muted" for="about-desc">About Description</label>
-                    <textarea class="form-control" id="about-desc" name="about-desc" rows="8"  required
-                            value=""></textarea>
-                </div>
-                </div>
-            </div>
-            <div class="col-lg-7">
-                <div class="row g-3">
-                <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-age">Age</label>
-                    <input class="form-control" id="about-age" name="about-age" type="number" required
-                            value="">
-                </div>
-                <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-experience">Years of Experience</label>
-                    <input class="form-control" id="about-experience" name="about-experience" type="number" required
-                            value="">
-                </div>
-                <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-phone">Phone</label>
-                    <input class="form-control" id="about-phone" name="about-phone" type="text" required
-                            value="">
-                </div>
-                <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-website">Website</label>
-                    <input class="form-control" id="about-website" name="about-website" type="text" required
-                            value="">
-                </div>
-                <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-city">City</label>
-                    <input class="form-control" id="about-city" name="about-city" type="text" required
-                            value="">
-                </div>
-                <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-email">Email</label>
-                    <input class="form-control" id="about-email" name="about-email" type="email" required
-                            value="">
-                </div>
-                <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-degree">Degree</label>
-                    <input class="form-control" id="about-degree" name="about-degree" type="text" required
-                            value="">
-                </div>
-                <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="about-freelance">Freelance</label>
-                    <input class="form-control" id="about-freelance" name="about-freelance" type="text" required
-                            value="">
-                </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="row mt-2 g-3">
-            <!-- buttons -->
-            <div class="col-md-6 d-flex justify-content-center">
-                <button type="button" class="modal-cancel-Btn btn btn-primary" data-bs-dismiss="modal">Cancel</button>   
-            </div>
-            <div class="col-md-6 d-flex justify-content-center">
-                <button type="submit" name="aboutUpdateBtn" class="modal-confirm-Btn btn btn-primary">Update</button>      
-            </div> 
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ======= Skills  ======= -->
 <section class="skills section-bg">
     <div class="section-title">
-    <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Skills</h2>
+    <h2>Skills</h2>
     </div>
-
-    <div class="row g-4 skills-content">
-        <div class="col-md-6">
-        <div class="progress">
-            <span class="skill"><?php echo $rowResume['skill']?></span>
-            <p><?php echo $rowResume['skill_description']?></p>
-        </div>
-        </div>
+    
+    <div id="SkillSection" class="row g-4 skills-content">
+    </div>
 </section><!-- End Skills -->
 
 <!-- ======= Resume Section ======= -->
@@ -243,53 +169,31 @@
 <div class="container-fluid">
 
     <div class="section-title">
-    <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Resume</h2>
+    <h2>Resume</h2>
     <p>Check My Resume</p>
     </div>
 
-    <div class="row">
-    <div class="col-lg-6">
-        <h3 class="resume-title">Education</h3>
-         <?php foreach ($rowResumes as $rowResume){?> 
-            <div class="resume-item">
-            <h4><?php echo $rowResume['degree']?></h4>
-            <h5><?php echo $rowResume['educ_year']?></h5>
-            <p><em><?php echo $rowResume['school']?></em></p>
-            <p><?php echo $rowResume['educ_description']?></p>
-            </div>
-          <?php } ?>
+    <h3 class="resume-title"> Education</h3>
+    <div id="EducationSection" class="row">
     </div>
-    <div class="col-lg-6">
-        <h3 class="resume-title">Professional Experience</h3>
-        <div class="resume-item">
-        <h4><?php echo $rowResume['job']?></h4>
-        <h5><?php echo $rowResume['exp_year']?></h5>
-        <p><em>E<?php echo $rowResume['job_location']?> </em></p>
-        <p><?php echo $rowResume['exp_description']?></p>
-    </div>
-    </div>
+
+    <h3 class="resume-title">Professional Experience</h3>
+    <div id="ExperienceSection" class="row"></div>
 
 </div>
 </section><!-- End Resume Section -->
- 
+
 <!-- ======= Services Section ======= -->
 <section id="services" class="services section-bg">
-<div class="container">
+<div class="container-fluid">
 
     <div class="section-title">
-        <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-edit"></i></a> Services</h2>
+        <h2>Services</h2>
         <p>My Services</p>
     </div>
 
-    <div class="row g-5 d-flex align-items-center justify-content-center">
-        <div class="col-md-4">
-        <div class="icon-box">
-            <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
-            <h4 class="title"><a href=""><?php echo $rowResume['service']?></a></h4>
-            <p class="description"><?php echo $rowResume['service_description']?></p>
-        </div>
-        </div>
-
+    <div id="ServiceSection"  class="row g-3 d-flex align-items-center justify-content-center">
+        <!-- insert service/s -->
     </div>
 
 </div>
@@ -297,41 +201,15 @@
 
 <!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio section-bg">
-<div class="container">
+<div class="container-fluid">
 
     <div class="section-title">
-    <h2><a class="main-add-ico" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-circle-plus"></i></a> Portfolio</h2>
+    <h2>Portfolio</h2>
     <p>My Works</p>
     </div>
 
-    <!-- <div class="row">
-    <div class="col-lg-12 d-flex justify-content-center">
-        <ul id="portfolio-flters">
-        <li data-filter="*" class="filter-active">All</li>
-        <li data-filter=".filter-app">App</li>
-        <li data-filter=".filter-card">Card</li>
-        <li data-filter=".filter-web">Web</li>
-        </ul>
-    </div>
-    </div> -->
-
-    <div class="row portfolio-container ">
-
-    <div class="col-lg-4 col-md-6 portfolio-item filter-category">
-        <div class="portfolio-wrap">
-        <img src="../assets/images/image-holder.svg" class="img-fluid" alt="">
-        <div class="portfolio-info">
-            <h4>Card 2</h4>
-            <p>Card</p>
-            <div class="portfolio-links">
-            <a class="btn" title="Portfolio Details" data-bs-toggle="modal" data-bs-target="#portfolio-modal">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-            </div>
-        </div>
-        </div>
-    </div>
-
+    <div id="WorkSection" class="row g-2 g-5 d-flex align-items-center justify-content-center">
+    <!-- insert work/s -->
     </div>
 
 </div>
@@ -342,7 +220,7 @@
 <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="portfolioModalLabel">Project Name</h5>
+        <h5 class="modal-title" id="portfolioModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
@@ -350,20 +228,18 @@
         <div class="container">
             <div class="row g-3">
             <div class="col-lg-7">
-                <img src="../assets/images/image-holder.svg" alt="" class="d-block mx-lg-auto img-fluid" width="500" height="500">
+                <img id="view_image" src="../assets/images/image-holder.svg" alt="" class="d-block mx-lg-auto img-fluid" width="500" height="500">
             </div>
 
             <div class="col-lg-5 portfolio-info">
                 <h3>Project information</h3>
                 <ul class="portfolio-info-list">
-                <li><strong>Category</strong>: <?php echo $rowResume['category']?></li>
-                <li><strong>Client</strong>: <?php echo $rowResume['client']?></li>
-                <li><strong>Project date</strong>: <?php echo $rowResume['project_date']?></li>
-                <li><strong>Project URL</strong>: <a href="#"><?php echo $rowResume['project_url']?></a></li>
+                <li><strong>Category</strong>: <span id="view_category"></span></li>
+                <li><strong>Client</strong>: <span id="view_client"></span></li>
+                <li><strong>Project date</strong>: <span id="view_date"></span></li>
+                <li><strong>Project URL</strong>: <span id ='view_url' href="#"></span></li>
                 </ul>
-                <p>
-                <?php echo $rowResume['project_description']?>
-                </p>
+                <p id ='view_description'></p>
             </div>
 
             </div>
@@ -388,27 +264,17 @@
 
             <div class="info-box">
                 <h3><i class="fa-solid fa-map"></i> &nbsp;My Address</h3>
-                <p class="info-p" >A108 Adam Street, New York, NY 535022</p>
-            </div>
-
-            <div class="info-box">
-                <h3><i class="fa-solid fa-share-alt"></i> &nbsp;Social Profiles</h3>
-                <div class="social-links">
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                </div>
+                <p id="contact_city" class="info-p" ></p>
             </div>
 
             <div class="info-box">
                 <h3><i class="fa-solid fa-envelope"></i> &nbsp;Email Me</h3>
-                <p class="info-p">contact@example.com</p>
+                <p id="contact_email" class="info-p"></p>
             </div>
 
             <div class="info-box">
                 <h3><i class="fa-solid fa-phone"></i> &nbsp;Call Me</h3>
-                <p class="info-p">+1 5589 55488 55</p>
+                <p id="contact_phone" class="info-p"></p>
             </div>
             
         </div>
@@ -432,7 +298,7 @@
                     <div class="col-12 form-group">
                         <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                     </div>
-                    <div class="text-center"><button class="contact-submit" type="submit">Send Message</button></div>
+                    <div class="text-center"><button class="contact-submit" type="submit" disabled>Send Message</button></div>
                 </div>
             </form>
         </div>
@@ -442,9 +308,5 @@
 </Section> 
 <!-- /CONTACT US -->
 
-
+<script src="PortfolioCRUD\portfolio_public.ajax.js"></script>
 <?php include 'footer.php';?>
-
-
-
-
