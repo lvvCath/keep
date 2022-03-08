@@ -48,27 +48,25 @@ try {
         $check_email = "SELECT * FROM users WHERE usersEmail='$email'";
         $run_sql = mysqli_query($conn, $check_email);
         if(mysqli_num_rows($run_sql) > 0){
-            $code = rand(999999, 11111111);
-            $insert_code = "UPDATE users SET usersOtp = $code WHERE usersEmail = '$email'";
+            $code = rand(999999, 11111111);         
+            date_default_timezone_set("Asia/Manila");
+            $currenDate = date("Y-m-d");
+            $insert_code = "UPDATE users SET usersOtp = $code, OtpDate = $currenDate WHERE usersEmail = '$email'";
             $run_query =  mysqli_query($conn, $insert_code);
             if($run_query && sendMail($email,$code)){
-                echo "<script> alert('Password Reset Link has been sent to your E-mail')
-                window.location.href = '../otp-verification.php';
-            </script>
-            ";
+                 header("location: ../otp-verification.php?msg=OtpSent");
+                exit();
          }else{
-            echo "<script> alert('Email address not found')
-                window.location.href = '../forgot-password.php';
-            </script>
-            ";
-         }
+             header("location: ../forgot-password.php?error=FailedOtp");
+                exit();
+            }
     }else{
-            echo "<script> alert('Email address not found')
-                window.location.href = '../forgot-password.php';
-            </script>
-            ";
-         }
+            header("location: ../forgot-password.php?error=EmailnotFound");
+                exit();
 }
+    
+}
+
 
 
 

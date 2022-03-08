@@ -51,6 +51,15 @@ if(isset($_GET["error"])){
     else if($_GET["error"] == "stmtFailed"){
         echo '<p>Something went wrong, please try again.</p>';
     }
+    else if($_GET["error"] == "FailedOtp"){
+        echo '<p>Failed to send OTP, please try again.</p>';
+    }
+    else if($_GET["error"] == "EmailnotFound"){
+        echo '<p>Email address not found, please try again.</p>';
+    }
+    else if($_GET["error"] == "IncOTP"){
+        echo '<p>Invalid Verification code, please try again.</p>';
+    }
 
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }
@@ -70,6 +79,12 @@ if(isset($_GET["msg"])){
     }
     else if($_GET["msg"] == "accdeleted"){
         echo '<p>You have successfully Deleted your Account <br>We are sad to see you go <i class="fa-solid fa-face-frown"></i></p>';
+    }
+    else if($_GET["msg"] == "OtpSent"){
+        echo '<p>Successfully sent, please check your email</p>';
+    }
+     else if($_GET["msg"] == "CorrectOtp"){
+        echo '<p>Valid Code, please create a new password</p>';
     }
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }

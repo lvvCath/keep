@@ -14,13 +14,11 @@ require_once '../../Database/db.php';
             $code = 0;
             $update_otp = "UPDATE users SET usersOtp = $code WHERE usersEmail = '$email'";
             $run_query = mysqli_query($conn, $update_otp);
-          echo "<script> alert('Correct OTP.Please create a new password')
-                window.location.href = '../newpassword.php';
-            </script>";
+                header("location: ../newpassword.php?msg=CorrectOtp");
+                exit();
         }else{
-           echo "<script> alert('Incorrect OTP')
-                window.location.href = '../otp-verification.php';
-            </script>";
+               header("location: ../otp-verification.php?error=IncOTP");
+                exit();
         }
     }
     //if user click change password button
@@ -28,24 +26,20 @@ require_once '../../Database/db.php';
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
         if($password !== $cpassword){
-             echo "<script> alert('Confirm password not matched!')
-                window.location.href = '../newpassword.php';
-            </script>";
+            header("location: ../newpassword.php?error=passwordNotMatch");
+                exit();
         }else{
             $code = 0;
             $email = $_SESSION['usersEmail']; //getting this email using session
             $encpass = password_hash($password, PASSWORD_BCRYPT);
             $update_pass = "UPDATE users SET usersOtp = $code, usersPassword = '$encpass' WHERE usersEmail = '$email'";
             $run_query = mysqli_query($conn, $update_pass);
-            if($run_query){
-                 echo "<script> alert('Your password changed. Now you can login with your new password.!')
-                window.location.href = '../logIn.php';
-            </script>";
+            if($run_query){     
+                  header("location: ../logIn.php?msg=changePwdSuccess");
+                exit();
             }else{
-                  echo "<script> alert('Failed to change your password!')
-                window.location.href = '../newpassword.php';
-            </script>";
-
+                  header("location: ../newpassword.php?error=stmtFailed");
+                exit();
             }
         }
     }
