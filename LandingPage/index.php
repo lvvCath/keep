@@ -1,5 +1,7 @@
-<!doctype html>
-<html lang="en">
+<?php include 'sendemail.php'; ?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
    <title>KEEP</title>
    <link rel="icon" href="../assets/images/icon.png" type="image/x-icon">
@@ -13,7 +15,6 @@
     <link rel="stylesheet" href="css/boxicons.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body data-bs-spy="scroll" data-bs-target=".navbar">
    
    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
@@ -54,6 +55,11 @@
       </div>
     </nav>
 
+    
+   <!--alert messages start-->
+   <?php echo $alert; ?>
+   <!--alert messages end-->
+
    <section id="home">
       <div class="container text-center">
          <div class="row justify-content-center">
@@ -61,7 +67,7 @@
                <h1 class="text-white display-2">BUILD YOUR OWN <br>E-PORTFOLIO </h1>
                <h1 class="text-white display-4">WITH KEEP</h1>
                <br><br>
-              <button class="btn btn-brand"  style="font-size:1.5vw; padding:1% 1% 1% 1%; "  onclick="location.href='../LoginModule/LogIn.php '" >CONTACT</button>
+              <button class="btn btn-brand"  style="font-size:1.5vw; padding:1% 1% 1% 1%; "  onclick="location.href='../LoginModule/LogIn.php '" >GET Started</button>
                
             </div>
          </div>
@@ -94,8 +100,17 @@
                <img src="img/1.png" alt="">
                <div class="portfolio-overlay">
                   <div>
-                     <h3>Programmer</h3>
-                     
+                     <h3>About</h3>
+                  </div>
+               </div>
+         </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+         <div class="portfolio-item">
+               <img src="img/2.png" alt="">
+               <div class="portfolio-overlay">
+                  <div>
+                     <h3>Skills</h3>  
                   </div>
                </div>
          </div>
@@ -105,19 +120,7 @@
                <img src="img/3.png" alt="">
                <div class="portfolio-overlay">
                   <div>
-                     <h3>UI/UX designer</h3>
-                     
-                  </div>
-               </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-         <div class="portfolio-item">
-               <img src="img/2.jpg" alt="">
-               <div class="portfolio-overlay">
-                  <div>
-                     <h3>Programmer</h3>
-                    
+                     <h3>Resume</h3> 
                   </div>
                </div>
          </div>
@@ -127,19 +130,17 @@
                <img src="img/4.png" alt="">
                <div class="portfolio-overlay">
                   <div>
-                     <h3>Personal Portfolio</h3>
-                    
+                     <h3>My services</h3>
                   </div>
                </div>
          </div>
       </div>
       <div class="col-lg-4 col-sm-6">
          <div class="portfolio-item">
-               <img src="img/5.jpg" alt="">
+               <img src="img/5.png" alt="">
                <div class="portfolio-overlay">
                   <div>
-                     <h3>Photography</h3>
-                    
+                     <h3>My Works</h3>
                   </div>
                </div>
          </div>
@@ -149,8 +150,7 @@
                <img src="img/6.png" alt="">
                <div class="portfolio-overlay">
                   <div>
-                     <h3>Marketing</h3>
-                    
+                     <h3>Contact Us</h3> 
                   </div>
                </div>
          </div>
@@ -333,7 +333,7 @@
             </div>
 
             <div class="contact-info-form"> <span class="circle one"></span> <span class="circle two"></span>
-               <form action="#" onclick="" autocomplete="off">
+               <form class="contact" action="" method="post" autocomplete="off">
                      <h3 class="title">Contact us</h3>
                      <div class="social-input-containers"> 
                         <input type="text" name="name" class="input" placeholder="Name" required/> 
@@ -342,12 +342,12 @@
                         <input type="email" name="email" class="input" placeholder="Email" required/> 
                      </div>
                      <div class="social-input-containers"> 
-                        <input type="tel" name="phone" class="input" placeholder="Phone" required/> 
+                        <input type="telephone" name="phone" class="input" placeholder="Phone"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/> 
                      </div>
                      <div class="social-input-containers textarea"> 
                         <textarea name="message" class="input" placeholder="Message" required></textarea> 
                      </div> 
-                     <input type="submit" value="Send" class="btn" />
+                     <input type="submit" name="submit" value="Send" class="btn" />
                </form>
             </div>
          </div>
@@ -408,6 +408,15 @@
 
     <!-- Optional JavaScript; choose one of the two! -->
     <script src="js/bootstrap.bundle.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript">
+      if(window.history.replaceState){
+         window.history.replaceState(null, null, window.location.href);
+      }
+    </script>
+
   </body>
-</html>
+
+
+
