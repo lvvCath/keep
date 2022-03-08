@@ -231,13 +231,15 @@ include('../UserModule/includes/fetch_acc_info.php');
                 <div class="row g-3">
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="update_age">Age</label>
-                    <input class="form-control" id="update_age" name="update_age" type="number" required
-                            value="">
+                    <input class="form-control" id="update_age" name="update_age" type="number" min="0" max="100"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                    required value="">
                 </div>
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="update_experience">Years of Experience</label>
-                    <input class="form-control" id="update_experience" name="update_experience" type="number" required
-                            value="">
+                    <input class="form-control" id="update_experience" name="update_experience" type="number"  min="0" max="100" 
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                    required value="">
                 </div>
                 <div class="col-6 col-sm-6">
                     <label class="text-muted" for="update_phone">Phone</label>
@@ -325,7 +327,9 @@ include('../UserModule/includes/fetch_acc_info.php');
             </div>
             <div class="col-12">
                 <label class="text-muted" for="input_percentage">Skill Level %</label>
-                <input class="form-control" id="input_percentage" name="input_percentage" type="number" required>
+                <input class="form-control" id="input_percentage" name="input_percentage" type="number" min="0" max="100" 
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                    required value="">
             </div>
             <!-- buttons -->
             <div class="col-md-6 d-flex justify-content-center">
