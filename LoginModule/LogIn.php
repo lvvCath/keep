@@ -44,15 +44,14 @@ if (isset($_SESSION["locked"])){
     <div class="blueBg">
         <div class="box signin">
             <h1>Join now!</h1>
-            <p> Join now and be part of our community! <br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <p> Join now and be part of our growing community! <br>
             </p>
             <p class="question">Registered Already?</p>
             <button class="btn ghost signinBtn" id="signIn">SIGN IN</button>
         </div>
         <div class="box signup">
             <h1>Welcome Back!</h1>
-            <p>Let's continue our jouney!</p>
+            <p>Let's continue our journey!</p>
             <p class="question">Not yet Registered? Join us now!</p>
             <button class="btn ghost signupBtn" id="signUp">SIGN UP</button>
         </div>
@@ -98,12 +97,12 @@ if (isset($_SESSION["locked"])){
         <div class="form signupForm">
             <form action="SignUp.php" method="POST"> <br> <br>
                 <h1>Be part of our Community!!</h1> <br>
-                <p>	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <p>Create your online portfolio now and showcase your Stunning Works Online!
                 </p><br>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
                     <label class="form-check-label" for="flexCheckDefault">
-                        Agree to the <a href="" class="terms">Terms and Conditions</a> and <a href="" class="terms">Privacy Policy</a> 
+                        Agree to the <a href="terms.php" class="terms">Terms and Conditions</a> and <a href="terms.php" class="terms">Privacy Policy</a> 
                     </label>
                 </div>
                 <input name="SignupBtn"  id="SignupBtn" href="SignUp.php" type="submit" class="btn signBtn" value="Get Started">
