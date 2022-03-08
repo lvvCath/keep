@@ -24,21 +24,42 @@
 
 <div class="container-fluid">
     <div id="hero-content" class="m-5 row d-flex align-items-center justify-content-center">
-        <div class="col-md-3">
-            <img src="../assets/images/icon.png" class="d-block mx-lg-auto img-fluid" width="242" height="363" >
+        <div class="col-lg-4 align-self-start">
+            <img src="../assets/images/icon.png" class="d-block mx-lg-auto img-fluid" width="400" height="400" >
         </div>
-        <div class="col-md-9 py-5 mx-auto">
+        <div class="col-lg-8 py-5 mx-auto">
             <h1 class="display-5 fw-bold lh-1 mb-2"><a class="webname" href="https://keepcs.000webhostapp.com/">K E E P</a></h1>
             <div class="hr"></div>
-            <h2>You need access.</h2>
-            <h5>
-                The Online Portfolio you requested is currently restricted.</br>
-                Ask the owner for an access.
-            </h5>
+            <?php
+            session_start();
+            if($_SESSION['page-found'] == 1){
+            ?>
+                <h2>You need access.</h2>
+                <h5>
+                    The Online Portfolio you requested is currently restricted.</br>
+                    Ask the owner for an access.
+                </h5>
+            <?php
+            }else{
+            ?>
+                <h1>4 0 4</h1>
+                <h5>
+                    The Page you are looking for does not exist.</br>
+                </h5><br>
+                <h6>Here are the possible reasons why:</h6>
+                <ul class="list-group">
+                    <li class="">The owner of the Online Portfolio that you are trying to view changed the link. Try asking the owner for a new Link to their Online portfolio.</li>
+                    <li class="">There might be a typographical error on the link. Ask the owner again for their Online portfolio link.</li>
+                </ul>
+            <?php
+            }
+            ?>
+            
+
             <button type="button" id="home" class="btn btn-primary" onClick="location.href='https://keepcs.000webhostapp.com/'">Go to our website</button>
         </div>
     </div>
-</div><
+</div>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 shareLoad();
-
+$("#copiedmsg").hide();
 // READ About =================
 function shareLoad(){
     $.ajax({
@@ -7,7 +7,10 @@ function shareLoad(){
         type: "GET",
         success: function(response){
             // $('#share_link').val("https://keepcs.000webhostapp.com/UserModule/portfolio.php?v=" + response["token"]);
-            $('#share_link').val("http://localhost/TIP/Project/CS005Project/UserModule/portfolio.php?v=" + response["token"]);
+            // if($.trim(response["token"]).replace(/\s+/g, ' ') != 0)
+            // {$('#share_link').val("https://keepcs.000webhostapp.com/UserModule/portfolio.php?v=" + response["token"]);}
+            if($.trim(response["token"]).replace(/\s+/g, ' ') != 0)
+            {$('#share_link').val("http://localhost/TIP/Project/CS005Project/UserModule/portfolio.php?v=" + response["token"]);}
             // 1 true = public, 0 false = private
             if(response["permission"] == 0){
                 $("#fa-public-i").attr("hidden",true);
@@ -90,6 +93,9 @@ $(document).ready(function(){
         $.post(ajaxurl, data, function (response) {
             console.log(response);
             if(response.code=='201'){
+                var clipboardText = "";
+                clipboardText = $( '#share_link' ).val();
+                copyToClipboard( clipboardText );
                 console.log('Link Generated Successfully');
                 shareLoad();
             }
@@ -102,3 +108,26 @@ $(document).ready(function(){
     });
 
 });
+
+function copyBtn(){
+    var clipboardText = "";
+    clipboardText = $( '#share_link' ).val();
+    copyToClipboard( clipboardText );
+}
+
+function copyToClipboard(text) {
+    var textArea = document.createElement( "textarea" );
+    textArea.value = text;
+    document.body.appendChild( textArea );
+ 
+    textArea.select();
+    try {
+       var successful = document.execCommand( 'copy' );
+       var msg = successful ? 'successful' : 'unsuccessful';
+       $("#copiedmsg").show().delay(3000).fadeOut();
+       console.log('Copying text command was ' + msg);
+    } catch (err) {
+       console.log('Oops, unable to copy');
+    }
+    document.body.removeChild( textArea );
+ }

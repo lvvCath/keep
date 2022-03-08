@@ -44,6 +44,20 @@ body{
     padding: 10px;
 }
 
+.restriction{
+    position: relative;
+}
+#copiedmsg{
+    background-color: #464646;
+    color: #fff;
+    padding: 15px 15px 0px 15px;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+}
 
 #createBtn, #clearBtn, #edit, #genLinkBtn {
     background-color: #045de9;

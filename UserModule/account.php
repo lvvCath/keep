@@ -39,14 +39,20 @@ include('../UserModule/includes/fetch_acc_info.php');
 <div class="container d-flex justify-content-center flex-column mt-5">
     <div class="row g-5 p-3 mx-2">
 
-    <div class="col-12 shadow p-3 mb-5 bg-body rounded">
+    <div class="col-12 restriction shadow p-3 mb-5 bg-body rounded">
         <h4 class="title"><i class="fa-solid fa-share-nodes"></i> Online Portfolio Share Settings</h4>
         <div class="hr"></div>
         <form class="row g-3">
         <div class="col-12">
             <label class="text-muted" for="share_link"><h5>Get Link</h5></label>
-            <input class="form-control" id="share_link" name="share_link" type="text" value="" readonly>
+            <div class="input-group mb-3">
+              <input class="form-control" id="share_link" name="share_link" type="text" value="" readonly>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" onclick="copyBtn()" type="button">Copy</button>
+            </div>
+          </div>
         </div>
+        
         
         <div class="col-12">
             <h5>Set Restriction</h5>
@@ -77,10 +83,13 @@ include('../UserModule/includes/fetch_acc_info.php');
                 </li>
               </ul>
             </div>
-
             <div class="col-12 d-flex mt-4 justify-content-end">
               <button id="genLinkBtn" class="btn btn-primary" type="button"><i class="fa fa-link"></i>&nbspGenerate link</button>
             </div>
+            <div id="copiedmsg">
+              <p>Link copied to clipboard!</p>
+            </div>
+            
         </div>
 
         </form>

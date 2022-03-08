@@ -19,11 +19,13 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
             $_SESSION['share-userid'] = $row['userid'];
             $id = $row['userid'];
         }else{
+            $_SESSION['page-found'] = 1;
             header("location: portfolio_private.php");
             exit();
         }
         
     }else{
+        $_SESSION['page-found'] = 0;
         header("location: portfolio_private.php");
         exit();
     }
