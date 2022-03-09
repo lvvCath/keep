@@ -6,11 +6,11 @@ function shareLoad(){
         url: "PortfolioCRUD/Share/share_list.php",
         type: "GET",
         success: function(response){
-            if($.trim(response["token"]).replace(/\s+/g, ' ') != 0)
-            {$('#share_link').val("https://keepcs.000webhostapp.com/UserModule/portfolio.php?v=" + response["token"]);}
-
             // if($.trim(response["token"]).replace(/\s+/g, ' ') != 0)
-            // {$('#share_link').val("http://localhost/TIP/Project/CS005Project/UserModule/portfolio.php?v=" + response["token"]);}
+            // {$('#share_link').val("https://keepcs.000webhostapp.com/UserModule/portfolio.php?v=" + response["token"]);}
+
+            if($.trim(response["token"]).replace(/\s+/g, ' ') != 0)
+            {$('#share_link').val("http://localhost/TIP/Project/CS005Project/UserModule/portfolio.php?v=" + response["token"]);}
 
             // 1 true = public, 0 false = private
             if(response["permission"] == 0){
