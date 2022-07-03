@@ -1,9 +1,9 @@
 <?php
 // 
 // SignUp Functions
-function emptyInputSignup($first_name, $last_name, $email, $username, $password, $con_password){
+function emptyInputSignup($first_name, $middle_name, $last_name, $email, $username, $password, $con_password){
     $result;
-    if(empty($first_name) || empty($last_name) || empty($email) || empty($username) || empty($password) || empty($con_password)){
+    if(empty($first_name) || empty($middle_name) || empty($last_name) || empty($email) || empty($username) || empty($password) || empty($con_password)){
         $result = true;
     }else{
         $result = false;
@@ -11,9 +11,9 @@ function emptyInputSignup($first_name, $last_name, $email, $username, $password,
     return $result;
 }
 
-function invalidName($first_name, $last_name){
+function invalidName($first_name, $middle_name, $last_name, $suffix_name){
     $result;
-    if(!preg_match("/^[a-zA-Z\s]*$/", $first_name) || !preg_match("/^[a-zA-Z\s]*$/", $last_name)){
+    if(!preg_match("/^[a-zA-Z\s]*$/", $first_name) || !preg_match("/^[a-zA-Z\s]*$/", $middle_name) || !preg_match("/^[a-zA-Z\s]*$/", $last_name) || !preg_match("/^[a-zA-Z\s]*$/", $suffix_name)){
         $result = true;
     }else{
         $result = false;
@@ -143,8 +143,8 @@ function invDictPwd($password){
     return $result;
 }
 
-function createUser($conn, $first_name, $last_name, $email, $username, $password){
-    $sql = "INSERT INTO users (usersFirstName, usersLastName, usersEmail, usersUid, usersPassword, usersPwdDate) VALUES (?, ?, ?, ?, ?, ?);";
+function createUser($conn, $first_name, $middle_name, $last_name, $suffix_name, $email, $username, $password){
+    $sql = "INSERT INTO users (usersFirstName, usersMiddleName, usersLastName, usersSuffix, usersEmail, usersUid, usersPassword, usersPwdDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql) ){
@@ -155,7 +155,7 @@ function createUser($conn, $first_name, $last_name, $email, $username, $password
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
     $pwdDate = date("Y-m-d");
 
-    mysqli_stmt_bind_param($stmt, "ssssss", $first_name, $last_name, $email, $username, $hashedPwd, $pwdDate);
+    mysqli_stmt_bind_param($stmt, "ssssssss", $first_name, $middle_name, $last_name, $suffix_name, $email, $username, $hashedPwd, $pwdDate);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     

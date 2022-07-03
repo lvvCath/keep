@@ -3,7 +3,9 @@
 if(isset($_POST["submit"])){
     // echo "worked!";
     $first_name = $_POST["first_name"];
+    $middle_name = $_POST["middle_name"];
     $last_name = $_POST["last_name"];
+    $suffix_name = $_POST["suffix_name"];
     $email = $_POST["email"];
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -14,11 +16,11 @@ if(isset($_POST["submit"])){
 
     $validation = true;
 
-    if(emptyInputSignup($first_name, $last_name, $email, $username, $password, $con_password) !== false){
+    if(emptyInputSignup($first_name, $middle_name, $last_name, $email, $username, $password, $con_password) !== false){
         header("location: ../SignUp.php?error=emptyinput");
         exit();
     }
-    if(invalidName($first_name, $last_name) !== false){
+    if(invalidName($first_name, $middle_name, $last_name, $suffix_name) !== false){
         header("location: ../SignUp.php?error=invalidName");
         exit();
     }
@@ -56,7 +58,7 @@ if(isset($_POST["submit"])){
     }
     
 
-    createUser($conn, $first_name, $last_name, $email, $username, $password);
+    createUser($conn, $first_name, $middle_name, $last_name, $suffix_name, $email, $username, $password);
 
 }else{
     header("location: ../SignUp.php");

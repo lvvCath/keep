@@ -17,7 +17,7 @@ body {
 }
 
 .form {
-    max-width: 100vh !important;
+    max-width: 120vh !important;
     justify-content: center;
     background-color: #fff;
     border-bottom: 10px solid #485461;
@@ -56,7 +56,7 @@ body {
     float: right;
     color: #59636d;
     font-size: 15px;
-    padding-right: 4px;
+    padding: 4px;
 }
 
 
@@ -104,3 +104,12 @@ body {
     padding-right: 10px;
   }
 
+
+  .divider{
+    border-right: 2px dashed #cdcdcd !important;
+    }
+    @media (max-width: 768px) {
+      .divider{
+      border-right: none !important;
+      }
+    }

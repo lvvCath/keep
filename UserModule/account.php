@@ -99,15 +99,25 @@ include('../UserModule/includes/fetch_acc_info.php');
         <h4 class="title"><i class="fa-solid fa-gear"></i> General Account Settings</h4>
         <div class="hr"></div>
         <form class="row g-3 ">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <label class="text-muted" for="first_name">First Name</label>
             <input class="form-control" name="first_name" type="text"  
                     readonly value="<?php echo $row['usersFirstName']?>">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
+            <label class="text-muted" for="last_name">Middle Name</label>
+            <input class="form-control" name="last_name" type="text" 
+                    readonly value="<?php echo $row['usersMiddleName']?>"> 
+        </div>
+        <div class="col-md-5">
             <label class="text-muted" for="last_name">Last Name</label>
             <input class="form-control" name="last_name" type="text" 
                     readonly value="<?php echo $row['usersLastName']?>"> 
+        </div>
+        <div class="col-md-2">
+            <label class="text-muted" for="suffix_name">Suffix</label>
+            <input class="form-control" name="suffix_name" type="text" 
+                    readonly value="<?php echo $row['usersSuffix']?>"> 
         </div>
         <div class="col-12">
             <label class="text-muted" for="email">Email</label>
@@ -136,11 +146,15 @@ include('../UserModule/includes/fetch_acc_info.php');
         <form class="row g-3 " id="form" name="createForm" method="POST" action="includes/updatepwd.inc.php">
         <div class="col-12">
             <label class="text-muted" for="last_password">Current Password</label>
-            <span class="pwd-eye" onclick="password_show_hide();">
-                <i class="fa fa-eye" id="show_eye"></i>
-                <i class="fa fa-eye-slash d-none" id="hide_eye"></i>
-            </span>
-            <input class="form-control" id="last_password" name="last_password" type="password" required> 
+            <div class="input-group">
+                <input class="form-control" id="last_password" name="last_password" type="password" required> 
+                <div class="input-group-append">
+                    <div class="input-group-text" onclick="password_show_hide();"> 
+                        <i class="pwd-eye fa fa-eye" id="show_eye"></i>
+                        <i class="pwd-eye fa fa-eye-slash d-none" id="hide_eye"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
             <label class="text-muted" for="new_password">New Password</label>
@@ -196,19 +210,33 @@ include('../UserModule/includes/fetch_acc_info.php');
       </div>
       <div class="modal-body">
         <form class="row g-3 " id="createForm" name="createForm" method="POST" action="includes/updateacc.inc.php">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label class="text-muted" for="first_name">First Name</label>
                 <input class="form-control" id="first_name" name="first_name" type="text" required 
                       pattern="^[a-zA-Z\s]*$"
                       title="Name should only contain letters and whitespace."
                       value="<?php echo $row['usersFirstName']?>">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
+                <label class="text-muted" for="middle_name">Middle Name</label>
+                <input class="form-control" id="middle_name" name="middle_name" type="text" required 
+                      pattern="^[a-zA-Z\s]*$"
+                      title="Name should only contain letters and whitespace."
+                      value="<?php echo $row['usersMiddleName']?>">
+            </div>
+            <div class="col-md-5">
                 <label class="text-muted" for="last_name">Last Name</label>
                 <input class="form-control" id="last_name" name="last_name" type="text" required
                       pattern="^[a-zA-Z\s]*$"
                       title="Name should only contain letters and whitespace."
                       value="<?php echo $row['usersLastName']?>"> 
+            </div>
+            <div class="col-md-2">
+                <label class="text-muted" for="suffix_name">Suffix</label>
+                <input class="form-control" id="suffix_name" name="suffix_name" type="text"
+                      pattern="^[a-zA-Z\s]*$"
+                      title="Name should only contain letters and whitespace."
+                      value="<?php echo $row['usersSuffix']?>"> 
             </div>
             <div class="col-12">
                 <label class="text-muted" for="email">Email</label>
@@ -234,14 +262,18 @@ include('../UserModule/includes/fetch_acc_info.php');
                 </small>
             </div>
             <div class="hr"></div>
-            <h5>Enter your password to confirm changes</h5>
             <div class="col-12">
+            <h5>Enter your password to confirm changes</h5>
                 <label class="text-muted" for="ver_password">Password</label>
-                <span class="pwd-eye" onclick="ver_password_show_hide();">
-                    <i class="fa fa-eye" id="show_eye_v"></i>
-                    <i class="fa fa-eye-slash d-none" id="hide_eye_v"></i>
-                </span>
-                <input class="form-control" id="ver_password" name="ver_password" type="password" required> 
+                <div class="input-group">
+                    <input class="form-control" id="ver_password" name="ver_password" type="password" required> 
+                    <div class="input-group-append">
+                        <div class="input-group-text" onclick="ver_password_show_hide();"> 
+                            <i class="pwd-eye fa fa-eye" id="show_eye_v"></i>
+                            <i class="pwd-eye fa fa-eye-slash d-none" id="hide_eye_v"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- buttons -->
             <div class="col-md-6 d-flex justify-content-center">
@@ -275,11 +307,15 @@ include('../UserModule/includes/fetch_acc_info.php');
             </div>
             <div class="col-12">
                 <label class="text-muted" for="password">Password</label>
-                <span class="pwd-eye" onclick="modal_password_show_hide();">
-                    <i class="fa fa-eye" id="show_eye_m"></i>
-                    <i class="fa fa-eye-slash d-none" id="hide_eye_m"></i>
-                </span>
-                <input class="form-control" id="password" name="password" type="password" required> 
+                <div class="input-group">
+                    <input class="form-control" id="password" name="password" type="password" required> 
+                    <div class="input-group-append">
+                        <div class="input-group-text" onclick="modal_password_show_hide();"> 
+                            <i class="pwd-eye fa fa-eye" id="show_eye_m"></i>
+                            <i class="pwd-eye fa fa-eye-slash d-none" id="hide_eye_m"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-12">
                 <label class="text-muted" for="deleteverify">To verify, type <strong><i>delete my account</i></strong> below:</label>

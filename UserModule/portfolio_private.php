@@ -48,6 +48,7 @@
                 </h5><br>
                 <h6>Here are the possible reasons why:</h6>
                 <ul class="list-group">
+                    <li class="">The Online Portfolio you requested is currently restricted.</br>Ask the owner for an access.</li>
                     <li class="">The owner of the Online Portfolio that you are trying to view changed the link. Try asking the owner for a new Link to their Online portfolio.</li>
                     <li class="">There might be a typographical error on the link. Ask the owner again for their Online portfolio link.</li>
                 </ul>

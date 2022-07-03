@@ -126,7 +126,7 @@ body{
     float: right;
     color: #59636d;
     font-size: 15px;
-    padding-right: 4px;
+    padding: 4px;
 }
 
 /* Password & Username validation */
