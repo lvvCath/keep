@@ -270,7 +270,7 @@ function educationLoad(){
             response.forEach(function (data, index) {
                 if(data.year == 0){
                     var year = 'Year'
-                }else{year = data.year}
+                }else{year = 'Year ' + data.year}
                 $('#EducationSection').append(
                     '<div class="resume-item col-md-6">'+
                     '<h4> <a class="educationEdit_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalEducation" ' +
