@@ -271,9 +271,14 @@ include('../UserModule/includes/fetch_acc_info.php');
                             value="">
                 </div>
                 <div class="col-6 col-sm-6">
-                    <label class="text-muted" for="update_freelance">Freelance</label>
-                    <input class="form-control" id="update_freelance" name="update_freelance" type="text" required
-                            value="">
+                    <label class="text-muted" for="update_freelance">Freelance</label> <br>
+                    <!-- <input class="form-control" id="update_freelance" name="update_freelance" type="text" required
+                            value=""> -->
+                    <select class="form-select orm-select-lg mb-3" id="update_freelance" name="update_freelance" aria-label=".form-select-sm">
+                        <option selected>Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select> 
                 </div>
                 </div>
             </div>
