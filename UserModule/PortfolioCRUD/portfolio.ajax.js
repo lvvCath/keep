@@ -424,7 +424,7 @@ function experienceLoad(){
                     'data-description="'+data.description+'"' +
                     '><i class="fa fa-edit"></i></a>'
                     +data.job+'</h4>'+
-                    '<h5>'+data.startDate+' - '+data.endDate+'</h5>'+
+                    '<h5>'+data.startDate+' <i>to</i> '+data.endDate+'</h5>'+
                     '<p><em>'+data.location+'</em></p>'+
                     '<p>'+data.description+'</p>'+
                     '</div>'
