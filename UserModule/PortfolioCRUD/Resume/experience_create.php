@@ -11,11 +11,12 @@ function validate_input($data){
 session_start();
 $userid = validate_input($_SESSION['userid']);
 $job = validate_input($_POST['job']);
-$year = validate_input($_POST['year']);
+$startDate = validate_input($_POST['startDate']);
+$endDate = validate_input($_POST['endDate']);
 $location = validate_input($_POST['location']);
 $description = validate_input($_POST['description']);
 
-$sql = "INSERT INTO users_experience (userid, job, year, location, description) VALUES (?, ?, ?, ?, ?)";
+$sql = "INSERT INTO users_experience (userid, job, startDate, endDate, location, description) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_stmt_init($conn);
 
 if(!mysqli_stmt_prepare($stmt, $sql) ){
@@ -24,7 +25,7 @@ if(!mysqli_stmt_prepare($stmt, $sql) ){
     ]);
 }
 
-mysqli_stmt_bind_param($stmt, "issss", $userid, $job, $year, $location, $description);
+mysqli_stmt_bind_param($stmt, "isssss", $userid, $job, $startDate, $endDate, $location, $description);
 $result = mysqli_stmt_execute($stmt);
 
 if($result){

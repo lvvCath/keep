@@ -268,17 +268,20 @@ function educationLoad(){
         type: "GET",
         success: function(response){
             response.forEach(function (data, index) {
+                if(data.year == 0){
+                    var year = 'Year'
+                }else{year = data.year}
                 $('#EducationSection').append(
                     '<div class="resume-item col-md-6">'+
                     '<h4> <a class="educationEdit_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalEducation" ' +
                     'data-id="'+data.id+'"' +
                     'data-degree="'+data.degree+'"' +
-                    'data-year="'+data.year+'"' +
+                    'data-year="'+year+'"' +
                     'data-location="'+data.location+'"' +
                     'data-description="'+data.description+'"' +
                     '><i class="fa fa-edit"></i></a>'
                     +data.degree+'</h4>'+
-                    '<h5>'+data.year+'</h5>'+
+                    '<h5>'+year+'</h5>'+
                     '<p><em>'+data.location+'</em></p>'+
                     '<p>'+data.description+'</p>'+
                     '</div>'
@@ -415,12 +418,13 @@ function experienceLoad(){
                     '<h4> <a class="experienceEdit_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalExperience" ' +
                     'data-id="'+data.id+'"' +
                     'data-job="'+data.job+'"' +
-                    'data-year="'+data.year+'"' +
+                    'data-startDate="'+data.startDate+'"' +
+                    'data-endDate="'+data.endDate+'"' +
                     'data-location="'+data.location+'"' +
                     'data-description="'+data.description+'"' +
                     '><i class="fa fa-edit"></i></a>'
                     +data.job+'</h4>'+
-                    '<h5>'+data.year+'</h5>'+
+                    '<h5>'+data.startDate+' - '+data.endDate+'</h5>'+
                     '<p><em>'+data.location+'</em></p>'+
                     '<p>'+data.description+'</p>'+
                     '</div>'
@@ -448,12 +452,14 @@ function experienceUpdate(){
         $(".experienceUpdateBtn").show();
         var id=$(this).attr("data-id");
         var job=$(this).attr("data-job");
-        var year=$(this).attr("data-year");
+        var startDate=$(this).attr("data-startDate");
+        var endDate=$(this).attr("data-endDate");
         var location=$(this).attr("data-location");
         var description=$(this).attr("data-description");
 
         $('#job_exp').val(job);
-        $('#year_exp').val(year);
+        $('#startDate_exp').val(startDate);
+        $('#endDate_exp').val(endDate);
         $('#location_exp').val(location);
         $('#description_exp').val(description);
 
@@ -470,7 +476,8 @@ function experienceUpdate(){
             data: {
                 "id": id,
                 "job": $('#job_exp').val(), 
-                "year": $('#year_exp').val(),
+                "startDate": $('#startDate_exp').val(),
+                "endDate": $('#endDate_exp').val(),
                 "location": $('#location_exp').val(),
                 "description": $('#description_exp').val()
             },
@@ -521,7 +528,8 @@ $(document).on('click','.experienceCreateBtn',function(e) {
         type: "POST",
         data: {
             "job": $('#job_exp').val(), 
-            "year": $('#year_exp').val(),
+            "startDate": $('#startDate_exp').val(),
+            "endDate": $('#endDate_exp').val(),
             "location": $('#location_exp').val(),
             "description": $('#description_exp').val()
         },

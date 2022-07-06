@@ -10,9 +10,9 @@ background-size: cover;
 color: #5a656e;
 }
 
-.modal-body form{
-padding: 20px 0px !important;
-}
+/* .modal-body form{
+padding: 0px 0px !important;
+} */
 .divider{
 border-right: 2px dotted #5a656e !important;
 }
@@ -567,3 +567,14 @@ transform: scale(1.1);
 background-color: #fff;
 color: #045de9;
 }
+
+/* Date Input Field */
+.date_input{
+    position: relative;
+}
+    .date_input .fa-calendar-days{
+        position: absolute;
+        top: 12px;
+        left: 415px;
+        color: #575757;
+    }

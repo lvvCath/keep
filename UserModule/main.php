@@ -23,6 +23,8 @@ include('../UserModule/includes/fetch_acc_info.php');
     <link rel="stylesheet" href="css/main.css">
     <!-- Bootstrap CSS -->
     <link href="../bootstrap-5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <!-- Fontawesome -->
     <link href="../assets/fontawesome-free-6.0.0-web/css/fontawesome.css" rel="stylesheet">
     <link href="../assets/fontawesome-free-6.0.0-web/css/brands.css" rel="stylesheet">
@@ -31,6 +33,8 @@ include('../UserModule/includes/fetch_acc_info.php');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
     <script src="js/main.js"></script>
 </head>
 
@@ -387,7 +391,13 @@ include('../UserModule/includes/fetch_acc_info.php');
             </div>
             <div class="col-12">
                 <label class="text-muted" for="year_edu">Graduation Year (or anticipated graduation date)</label>
-                <input class="form-control" id="year_edu" name="year_edu" type="text" required>
+                <div class="date_input">
+                    <input class="form-control" id="year_edu" name="year_edu" type="text" aria-describedby="year_help" required>
+                    <i class="fa fa-calendar-days"></i>
+                </div>
+                <div id="year_help" class="form-text">
+                    <i>Format: YYYY (eg. 2022)</i>
+                </div>
             </div>
             <div class="col-12">
                 <label class="text-muted" for="location_edu">Institution Name and Location</label>
@@ -428,9 +438,17 @@ include('../UserModule/includes/fetch_acc_info.php');
                 <label class="text-muted" for="job_exp">Job Title and Position</label>
                 <input class="form-control" id="job_exp" name="job_exp" type="text" required>
             </div>
-            <div class="col-12">
-                <label class="text-muted" for="year_exp">Dates Employed</label>
-                <input class="form-control" id="year_exp" name="year_exp" type="text" required>
+            <div class="col-6">
+                <label class="text-muted" for="startDate_exp">Start Date Employed</label>
+                <!-- <input class="form-control" id="startDate_exp" name="startDate_exp" type="text" required> -->
+                <input id="startDate_exp" class="form-control" type="date" />
+                <span id="startDate_exp_Selected"></span>
+            </div>
+            <div class="col-6">
+                <label class="text-muted" for="endDate_exp">End Date Employed</label>
+                <!-- <input class="form-control" id="endDate_exp" name="endDate_exp" type="text" required> -->
+                <input id="endDate_exp" class="form-control" type="date" />
+                <span id="endDate_exp_Selected"></span>
             </div>
             <div class="col-12">
                 <label class="text-muted" for="location_exp">Company Name & Location</label>
@@ -617,7 +635,9 @@ include('../UserModule/includes/fetch_acc_info.php');
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="work_date">Project Date</label>
-                    <input class="form-control" id="work_date" name="work_date" type="text" required>
+                    <!-- <input class="form-control" id="work_date" name="work_date" type="text" required> -->
+                    <input id="work_date" class="form-control" type="date" />
+                    <span id="work_date_Selected"></span>
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="work_url">Project URL</label>

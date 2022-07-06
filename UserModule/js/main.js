@@ -104,3 +104,26 @@ $(function () {
         }
     });
 });
+
+// Date Picker (Year)
+$(document).ready(function(){
+    $("#year_edu").datepicker({
+       format: "yyyy",
+       viewMode: "years", 
+       minViewMode: "years",
+       autoclose:true
+    });   
+  })
+
+//   let startDate_exp = document.getElementById('startDate_exp')
+//   let endDate_exp = document.getElementById('endDate')
+  
+//   startDate_exp.addEventListener('change',(e)=>{
+//     let startDate_exp_Val = e.target.value
+//     document.getElementById('startDate_exp_Selected').innerText = startDate_exp_Val
+//   })
+  
+//   endDate_exp.addEventListener('change',(e)=>{
+//     let endDate_exp_Val = e.target.value
+//     document.getElementById('endDate_exp_Selected').innerText = endDate_exp_Val
+//   })  
