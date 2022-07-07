@@ -44,6 +44,7 @@ include('../UserModule/includes/fetch_acc_info.php');
     <div id="hero-content" class="row flex-lg-row-reverse d-flex align-items-center justify-content-center">
         <div class="col-md-6">
             <img id="read_image1" src="../assets/images/image-holder.svg" class="d-block mx-lg-auto img-fluid" width="242" height="363" >
+            <!-- <img id="read_image1-up" src="../assets/images/image-holder.svg" class="d-block mx-lg-auto img-fluid" width="242" height="363" > -->
         </div>
         <div class="col-md-6 py-5 mx-auto">
             <a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>
@@ -78,8 +79,9 @@ include('../UserModule/includes/fetch_acc_info.php');
             </div>
             <div class="col-12">
                 <label class="text-muted" for="update_image1">Image Introduction Link</label>
-                <input class="form-control" id="update_image1" name="update_image1" type="text" placeholder="Insert image link" required
-                         value="">
+                <!-- <input class="form-control" id="update_image1" name="update_image1" type="text" placeholder="Insert image link" required
+                         value=""> -->
+                <input class="form-control" type="file" id="formFile">
             </div>
             <!-- buttons -->
             <div class="col-md-6 d-flex justify-content-center">
@@ -220,8 +222,9 @@ include('../UserModule/includes/fetch_acc_info.php');
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="update_image2">Image Link</label>
-                    <input class="form-control" id="update_image2" name="update_image2" type="text" required
-                            value="">
+                    <!-- <input class="form-control" id="update_image2" name="update_image2" type="text" required
+                            value=""> -->
+                    <input class="form-control" type="file" id="formFile">
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="update_description2">About Description</label>
@@ -632,7 +635,8 @@ include('../UserModule/includes/fetch_acc_info.php');
                 <div class="row g-3">
                 <div class="col-12">
                     <label class="text-muted" for="work_image">Project Image Link</label>
-                    <input class="form-control" id="work_image" name="work_image" type="text" required>
+                    <!-- <input class="form-control" id="work_image" name="work_image" type="text" required> -->
+                    <input class="form-control" type="file" id="formFile">
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="work_client">Project Client</label>
