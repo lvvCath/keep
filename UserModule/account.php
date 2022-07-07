@@ -247,19 +247,19 @@ include('../UserModule/includes/fetch_acc_info.php');
             </div>
             <div class="col-12">
                 <label class="text-muted" for="username">Username</label>
-                <input class="form-control" id="username" name="username" type="text" required
+                <input class="form-control" id="username" name="username" type="text" required readonly
                       value="<?php echo $row['usersUid']?>"
                       onfocus="uidValidation()"
                       pattern="[a-zA-Z][0-9a-zA-Z_]{4,19}[0-9a-zA-Z]" 
                       title="Please conform to the Username requirements."
                       required>
-                <small id="usernameHelpBlock"  class="form-text text-muted">
+                <!-- <small id="usernameHelpBlock"  class="form-text text-muted">
                   <p>	Must be at least (6-20) char long, which can consist of letters (a-z A-Z), numbers (0-9), and underscore (_)</p>
                   <p id="uid_firstChar" class="font-awesome-icons invalid">first character should be a <b>letter</b></p>
                   <p id="uid_lastChar" class="font-awesome-icons invalid">Last letter can be a <b>letter/number</b></p>
                   <p id="uid_space" class="font-awesome-icons invalid">No <b>Whitespace</b></p>
                   <p id="uid_length" class="font-awesome-icons invalid">username length <b>6-20 characters</b></p>
-                </small>
+                </small> -->
             </div>
             <div class="hr"></div>
             <div class="col-12">
