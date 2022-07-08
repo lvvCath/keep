@@ -79,8 +79,8 @@ include('../UserModule/includes/fetch_acc_info.php');
             </div>
             <div class="col-12">
                 <label class="text-muted" for="update_image1">Image Introduction Link</label>
-                <!-- <input class="form-control" id="update_image1" name="update_image1" type="text" placeholder="Insert image link" required
-                         value=""> -->
+                <input class="form-control" id="update_image1" name="update_image1" type="text" placeholder="Insert image link" required
+                         value="" hidden>
                 <input class="form-control" type="file" id="formFile">
             </div>
             <!-- buttons -->
@@ -222,8 +222,8 @@ include('../UserModule/includes/fetch_acc_info.php');
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="update_image2">Image Link</label>
-                    <!-- <input class="form-control" id="update_image2" name="update_image2" type="text" required
-                            value=""> -->
+                    <input class="form-control" id="update_image2" name="update_image2" type="text" required
+                            value="" hidden>
                     <input class="form-control" type="file" id="formFile">
                 </div>
                 <div class="col-12">
@@ -635,7 +635,7 @@ include('../UserModule/includes/fetch_acc_info.php');
                 <div class="row g-3">
                 <div class="col-12">
                     <label class="text-muted" for="work_image">Project Image Link</label>
-                    <!-- <input class="form-control" id="work_image" name="work_image" type="text" required> -->
+                    <input class="form-control" id="work_image" name="work_image" type="text" required hidden>
                     <input class="form-control" type="file" id="formFile">
                 </div>
                 <div class="col-12">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 05:44 PM
+-- Generation Time: Jul 08, 2022 at 02:16 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -48,7 +48,8 @@ INSERT INTO `users` (`usersId`, `usersFirstName`, `usersMiddleName`, `usersLastN
 (67, 'Rosalyn', '', 'Quenca', '', 'rose@gmail.com', 'Rosal_08', '$2y$10$sYtmTDyTKLvHmFKPrAMEiu5veLfb.WpfxVLMWBWkbqNXTCXYARYNm', '2022-03-06'),
 (69, 'Bobby', '', 'Reyes', '', 'bobby.reyes00@gmail.com', 'bobby001', '$2y$10$BeSBgSfFELliqCabvx2fzONYwHV5ovMCKqKd8R9n.fVzMiTnPG5BO', '2022-03-07'),
 (70, 'Caroline', '', 'Dizon', '', 'caroli.dizon003@gmail.com', 'caroline_67', '$2y$10$J9eU6DVjww58Rk.ibl5p7OWIRa8IPetDtkOqp9U9WBhAvLh/0SUEu', '2022-03-08'),
-(76, 'Nathaniel', 'Doe', 'Doyle', 'Sr', 'nathanieldoyle@gmail.com', 'nathaniel_08', '$2y$10$AjCUZKhEivSTSO0JDDpGUuZdvls1CoYoe1y/U5pASvGGLvhliTfZC', '2022-07-06');
+(76, 'Nathaniel', 'Doe', 'Doyle', 'Sr', 'nathanieldoyle@gmail.com', 'nathaniel_08', '$2y$10$AjCUZKhEivSTSO0JDDpGUuZdvls1CoYoe1y/U5pASvGGLvhliTfZC', '2022-07-06'),
+(84, 'test', 'test', 'test', 'test', 'test@gmail.com', 'test_08', '$2y$10$uznusDso7CmBiQmcJbnS8eGBCcAn6CBVm2xHDQYnJ9M1yFD.mYN8C', '2022-07-08');
 
 --
 -- Triggers `users`
@@ -66,8 +67,8 @@ FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `trigger_new_child_experience` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_experience(userid, job, location, year, description) 
-SELECT usersId, 'Job Title and Position', 'Company Name & Location', 'Dates Employed', 'Description & Additional Details'
+CREATE TRIGGER `trigger_new_child_experience` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_experience(userid, job, location, startDate, endDate, description) 
+SELECT usersId, 'Job Title and Position', 'Company Name & Location', 0000-00-00, 0000-00-00, 'Description & Additional Details'
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
@@ -135,7 +136,9 @@ INSERT INTO `users_education` (`id`, `userid`, `degree`, `description`, `year`, 
 (28, 70, 'Degree Name/Major', 'Description & Additional Details', 0000, 'Institution Name and Location'),
 (38, 76, 'Degree Name/Major', 'Description &amp; Additional Details', 2000, 'Institution Name and Location'),
 (50, 76, '', '', 2021, ''),
-(51, 76, '', '', 2014, '');
+(51, 76, '', '', 2014, ''),
+(53, 76, '', '', 0000, ''),
+(54, 84, 'Degree Name/Major', 'Description & Additional Details', 0000, 'Institution Name and Location');
 
 -- --------------------------------------------------------
 
@@ -164,7 +167,9 @@ INSERT INTO `users_experience` (`id`, `userid`, `job`, `startDate`, `endDate`, `
 (24, 70, 'Job Title and Position', '0000-00-00', '0000-00-00', 'Description & Additional Details', 'Company Name & Location'),
 (25, 61, 'SOFTWARE ENGINEER', '0000-00-00', '0000-00-00', 'This is a &lt;strong&gt;example&lt;/strong&gt; if inserting html content in a form. 丸ケ舵井キトメラ第教今 丸ケ舵井キトメラ第教今 丸ケ舵井キトメラ第教今 丸ケ舵井キトメラ第教今.', ''),
 (33, 76, 'Job Title and Position', '0000-00-00', '0000-00-00', 'Description & Additional Details', 'Company Name & Location'),
-(38, 76, '', '2022-07-01', '2022-07-31', '', '');
+(38, 76, '', '2022-07-01', '2022-07-31', '', ''),
+(42, 76, '', '0000-00-00', '0000-00-00', '', ''),
+(43, 84, 'Job Title and Position', '0000-00-00', '0000-00-00', 'Description & Additional Details', 'Company Name & Location');
 
 -- --------------------------------------------------------
 
@@ -195,11 +200,12 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`id`, `userid`, `age`, `phone`, `city`, `degree`, `experience`, `website`, `email`, `freelance`, `profession`, `description1`, `description2`, `image1`, `image2`) VALUES
-(10, 61, 0, '', '', '', 0, '', '', '', '', '', '', 'https://design4users.com/wp-content/uploads/2020/02/spring-art-design.png', ''),
+(10, 61, 0, '', '', '', 0, '', '', '', '', '', '', '', ''),
 (16, 67, 0, '', '', '', 0, '', '', '', '', '', '', '', ''),
 (18, 69, 0, '', '', '', 0, '', '', '', '', '', '', '', ''),
 (19, 70, 0, '', '', '', 0, '', '', '', '', '', '', '', ''),
-(25, 76, 0, '', '', '', 0, '', '', '', '', '', '', '', '');
+(25, 76, 27, '', '', '', 0, '', '', 'No', '', 'hello tests new new', '', '', ''),
+(33, 84, 0, '', '', '', 0, '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -225,7 +231,8 @@ INSERT INTO `users_message` (`id`, `userid`, `subject`, `msgr_name`, `msgr_email
 (14, 67, '', '', '', ''),
 (16, 69, '', '', '', ''),
 (17, 70, '', '', '', ''),
-(23, 76, '', '', '', '');
+(23, 76, '', '', '', ''),
+(31, 84, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -250,7 +257,8 @@ INSERT INTO `users_service` (`id`, `userid`, `service`, `description`, `service_
 (22, 67, 'Service', 'short description about your service', ''),
 (24, 69, 'Service', 'short description about your service', ''),
 (25, 70, 'Service', 'short description about your service', ''),
-(31, 76, 'Service', 'short description about your service', '');
+(31, 76, 'Service', 'short description about your service', ''),
+(39, 84, 'Service', 'short description about your service', '');
 
 -- --------------------------------------------------------
 
@@ -275,7 +283,8 @@ INSERT INTO `users_share` (`id`, `userid`, `token`, `permission`) VALUES
 (4, 67, '', 0),
 (5, 69, '13cb185747402cea18349899cd2a012e98453f79', 1),
 (6, 70, 'bfc065ff6c1d5c3601b8c03606b16cd02a416d0e', 0),
-(12, 76, '', 0);
+(12, 76, '', 0),
+(20, 84, '', 0);
 
 -- --------------------------------------------------------
 
@@ -299,7 +308,9 @@ INSERT INTO `users_skill` (`id`, `userid`, `skill`, `percentage`) VALUES
 (44, 67, 'Skill', 100),
 (46, 69, 'Skill', 100),
 (47, 70, 'Skill', 100),
-(56, 76, 'Skill', 100);
+(56, 76, 'Skill', 100),
+(57, 76, 'InDesign', 26),
+(65, 84, 'Skill', 100);
 
 -- --------------------------------------------------------
 
@@ -329,7 +340,8 @@ INSERT INTO `users_work` (`id`, `userid`, `project`, `image`, `category`, `clien
 (22, 69, 'Sample Title', 'https://cdn.dribbble.com/uploads/599/original/86d75f5ebf6abc13a630dda33b292727.png?1544829141', 'Website', 'ABCD Company', '0000-00-00', 'www.thisisasample.com', 'Lorem ipsum dolor sit amet, id esse singulis eos. No ferri appellantur mel, delenit omnesque vix ad. Magna etiam aeque at vel, eligendi facilisis eam eu, nemore veritus tractatos sea te. Pro vivendo appetere in. Mutat persius voluptua te per. In eum appetere vulputate, vel at unum viris.'),
 (23, 69, 'Project New', 'https://www.boredart.com/wp-content/uploads/2016/02/illustration-art-3.jpg', 'Mobile App', 'XYZ Company', '0000-00-00', 'www.website.com', 'Lorem ipsum dolor sit amet, id esse singulis eos. No ferri appellantur mel, delenit omnesque vix ad. Magna etiam aeque at vel, eligendi facilisis eam eu, nemore veritus tractatos sea te. Pro vivendo appetere in. Mutat persius voluptua te per. In eum appetere vulputate, vel at unum viris. Lorem ipsum dolor sit amet, id esse singulis eos. No ferri appellantur mel, delenit omnesque vix ad. Magna etiam aeque at vel, eligendi facilisis eam eu, nemore veritus tractatos sea te. Pro vivendo appetere in.'),
 (24, 70, '', '', '', '', '0000-00-00', '', ''),
-(30, 76, '', '', '', '', '2022-07-05', '', '');
+(30, 76, '', '', '', '', '2022-07-05', '', 'this is a project description'),
+(39, 84, '', '', '', '', '0000-00-00', '', '');
 
 -- --------------------------------------------------------
 
@@ -353,7 +365,8 @@ INSERT INTO `user_history` (`pwdId`, `pwdUserId`, `pwdPassword`, `pwdUpdateDt`) 
 (80, 67, '$2y$10$sYtmTDyTKLvHmFKPrAMEiu5veLfb.WpfxVLMWBWkbqNXTCXYARYNm', '2022-03-06'),
 (82, 69, '$2y$10$BeSBgSfFELliqCabvx2fzONYwHV5ovMCKqKd8R9n.fVzMiTnPG5BO', '2022-03-07'),
 (83, 70, '$2y$10$J9eU6DVjww58Rk.ibl5p7OWIRa8IPetDtkOqp9U9WBhAvLh/0SUEu', '2022-03-08'),
-(90, 76, '$2y$10$AjCUZKhEivSTSO0JDDpGUuZdvls1CoYoe1y/U5pASvGGLvhliTfZC', '2022-07-06');
+(90, 76, '$2y$10$AjCUZKhEivSTSO0JDDpGUuZdvls1CoYoe1y/U5pASvGGLvhliTfZC', '2022-07-06'),
+(98, 84, '$2y$10$uznusDso7CmBiQmcJbnS8eGBCcAn6CBVm2xHDQYnJ9M1yFD.mYN8C', '2022-07-08');
 
 --
 -- Indexes for dumped tables
@@ -438,61 +451,61 @@ ALTER TABLE `user_history`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `users_education`
 --
 ALTER TABLE `users_education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `users_experience`
 --
 ALTER TABLE `users_experience`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `users_info`
 --
 ALTER TABLE `users_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users_message`
 --
 ALTER TABLE `users_message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users_service`
 --
 ALTER TABLE `users_service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `users_share`
 --
 ALTER TABLE `users_share`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users_skill`
 --
 ALTER TABLE `users_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `users_work`
 --
 ALTER TABLE `users_work`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `user_history`
 --
 ALTER TABLE `user_history`
-  MODIFY `pwdId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `pwdId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- Constraints for dumped tables
