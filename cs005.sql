@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2022 at 08:58 AM
+-- Generation Time: Jul 10, 2022 at 11:48 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `cs005`
 --
+CREATE DATABASE IF NOT EXISTS `cs005` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cs005`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_images`
 --
 
+DROP TABLE IF EXISTS `tbl_images`;
 CREATE TABLE `tbl_images` (
   `id` int(11) NOT NULL,
   `name` longblob NOT NULL
@@ -47,6 +50,7 @@ INSERT INTO `tbl_images` (`id`, `name`) VALUES
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `usersId` int(11) NOT NULL,
   `usersFirstName` varchar(128) NOT NULL,
@@ -76,54 +80,63 @@ INSERT INTO `users` (`usersId`, `usersFirstName`, `usersMiddleName`, `usersLastN
 --
 -- Triggers `users`
 --
+DROP TRIGGER IF EXISTS `trigger_new_child`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO user_history (pwdUserId, pwdPassword, pwdUpdateDt) 
 SELECT usersId, usersPassword, usersPwdDate 
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trigger_new_child_education`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child_education` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_education(userid, degree, year, location, description) 
 SELECT usersId, 'Degree Name/Major', 0000, 'Institution Name and Location', 'Description & Additional Details'
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trigger_new_child_experience`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child_experience` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_experience(userid, job, location, startDate, endDate, description) 
 SELECT usersId, 'Job Title and Position', 'Company Name & Location', 0000-00-00, 0000-00-00, 'Description & Additional Details'
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trigger_new_child_info`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child_info` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_info(userid) 
 SELECT usersId
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trigger_new_child_message`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child_message` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_message(userid) 
 SELECT usersId
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trigger_new_child_service`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child_service` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_service(userid, service, description) 
 SELECT usersId, 'Service', 'short description about your service'
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trigger_new_child_share`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child_share` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_share(userid, permission) 
 SELECT usersId, 0
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trigger_new_child_skill`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child_skill` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_skill(userid, skill, percentage) 
 SELECT usersId, 'Skill', '100'
 FROM users WHERE usersId = (SELECT MAX(usersId) FROM users)
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trigger_new_child_work`;
 DELIMITER $$
 CREATE TRIGGER `trigger_new_child_work` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO users_work(userid) 
 SELECT usersId
@@ -137,6 +150,7 @@ DELIMITER ;
 -- Table structure for table `users_education`
 --
 
+DROP TABLE IF EXISTS `users_education`;
 CREATE TABLE `users_education` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -166,6 +180,7 @@ INSERT INTO `users_education` (`id`, `userid`, `degree`, `description`, `year`, 
 -- Table structure for table `users_experience`
 --
 
+DROP TABLE IF EXISTS `users_experience`;
 CREATE TABLE `users_experience` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -199,6 +214,7 @@ INSERT INTO `users_experience` (`id`, `userid`, `job`, `startDate`, `endDate`, `
 -- Table structure for table `users_info`
 --
 
+DROP TABLE IF EXISTS `users_info`;
 CREATE TABLE `users_info` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -237,6 +253,7 @@ INSERT INTO `users_info` (`id`, `userid`, `age`, `phone`, `city`, `degree`, `exp
 -- Table structure for table `users_message`
 --
 
+DROP TABLE IF EXISTS `users_message`;
 CREATE TABLE `users_message` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -265,6 +282,7 @@ INSERT INTO `users_message` (`id`, `userid`, `subject`, `msgr_name`, `msgr_email
 -- Table structure for table `users_service`
 --
 
+DROP TABLE IF EXISTS `users_service`;
 CREATE TABLE `users_service` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -292,6 +310,7 @@ INSERT INTO `users_service` (`id`, `userid`, `service`, `description`, `service_
 -- Table structure for table `users_share`
 --
 
+DROP TABLE IF EXISTS `users_share`;
 CREATE TABLE `users_share` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -319,6 +338,7 @@ INSERT INTO `users_share` (`id`, `userid`, `token`, `permission`) VALUES
 -- Table structure for table `users_skill`
 --
 
+DROP TABLE IF EXISTS `users_skill`;
 CREATE TABLE `users_skill` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -351,6 +371,7 @@ INSERT INTO `users_skill` (`id`, `userid`, `skill`, `percentage`) VALUES
 -- Table structure for table `users_work`
 --
 
+DROP TABLE IF EXISTS `users_work`;
 CREATE TABLE `users_work` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -385,6 +406,7 @@ INSERT INTO `users_work` (`id`, `userid`, `project`, `image`, `category`, `clien
 -- Table structure for table `user_history`
 --
 
+DROP TABLE IF EXISTS `user_history`;
 CREATE TABLE `user_history` (
   `pwdId` int(11) NOT NULL,
   `pwdUserId` int(11) NOT NULL,
