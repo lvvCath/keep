@@ -7,32 +7,12 @@ function aboutLoad(){
         type: "GET",
         success: function(response){
             userid = response["userid"];
-            // Home
+            // Home Modal
             if($.trim(response["description1"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_lead').text(response["description1"]);}
-            if($.trim(response["image1"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_image1').attr('src', response["image1"]);}
-            $('#update_description1').val(response["description1"]);
-            $('#update_image1').val(response["image1"]);
-
-            // About
-            if($.trim(response["profession"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_profession').text(response["profession"]);}
-            if($.trim(response["description2"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_description2').text(response["description2"]);}
-            if($.trim(response["image2"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_image2').attr('src', response["image2"]);}
-            $('#read_age').text(response["age"]);
-            $('#read_phone').text(response["phone"]);
-            $('#read_city').text(response["city"]);
-            $('#read_degree').text(response["degree"]);
-            $('#read_experience').text(response["experience"]);
-            $('#read_website').text(response["website"]);
-            $('#read_email').text(response["email"]);
-            $('#read_freelance').text(response["freelance"]);
+            {$('#update_description1').text(response["description1"]);}
+            // About Modal
             $('#update_profession').val(response["profession"]);
             $('#update_description2').val(response["description2"]);
-            $('#update_image2').val(response["image2"]);
             $('#update_age').val(response["age"]);
             $('#update_phone').val(response["phone"]);
             $('#update_city').val(response["city"]);
@@ -53,69 +33,115 @@ function aboutLoad(){
     });
     
 }
-// UPDATE Home Modal =================
-$(document).ready(function(){
-    $("#introUpdateBtn").click(function(){
+
+// Portfolio Home - View and Update =================
+$(document).ready(function () {
+    fetch_data();
+    function fetch_data() {
+        var action = "fetch";
         $.ajax({
             url: "PortfolioCRUD/About/about_update_home.php",
-            type: "POST",
-            data: {
-                "userid": userid,
-                "description1":  $('#update_description1').val(), 
-                "image1": $('#update_image1').val()
+            method: "POST",
+            data: { 
+                action: action,
             },
-            success: function(response){
-                console.log(response);
-                if(response.code=='201'){
-                    $('#modalHeroEdit').modal('hide');
-                    console.log('Updated Successfully');
-                    aboutLoad();
-                }
-                if(response.code=='400'){
-                    console.log('Error');
-                    alert("Error: Update not Successful. Please try again.");
-                }
-            }
+            success: function (data) {
+                $("#hero-content").html(data);
+            },
         });
-        return false; 
+    }
+    $("#formHeroEdit").submit(function (event) {
+        event.preventDefault();
+        var image_name = $("#update_img_home").val();
+        var extension = $("#update_img_home").val().split(".").pop().toLowerCase();
+        if(jQuery.inArray(extension, ["gif", "png", "jpg", "jpeg"]) == -1 && !image_name==""){
+            alert("Invalid Image File");
+            $("#update_img_home").val("");
+            return false;
+        } else {
+            $.ajax({
+                url: "PortfolioCRUD/About/about_update_home.php",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data.code=='201'){
+                        $('#modalHeroEdit').modal('hide');
+                        console.log('Updated Successfully');
+                        fetch_data();
+                        aboutLoad();
+                    }
+                    if(data.code=='400'){
+                        console.log('Error');
+                        alert("Error: Update not Successful. Please try again.");
+                    }
+                },
+            });
+        }
     });
+    $(document).on("click", ".main-edit-ico", function () {
+        $("#action").val("update");
+        $("#modalHeroEdit").modal("show");
+    });
+
 });
 
-// UPDATE Home Modal =================
-$(document).ready(function(){
-    $("#aboutUpdateBtn").click(function(){
+// Portfolio About - View and Update =================
+$(document).ready(function () {
+    fetch_data();
+    function fetch_data() {
+        var action_about = "fetch";
         $.ajax({
             url: "PortfolioCRUD/About/about_update.php",
-            type: "POST",
-            data: {
-                "userid": userid,
-                "profession":  $('#update_profession').val(), 
-                "description2":  $('#update_description2').val(), 
-                "image2": $('#update_image2').val(),
-                "age": $('#update_age').val(),
-                "phone": $('#update_phone').val(),
-                "city": $('#update_city').val(),
-                "degree": $('#update_degree').val(),
-                "experience": $('#update_experience').val(),
-                "website": $('#update_website').val(),
-                "email": $('#update_email').val(),
-                "freelance": $('#update_freelance').val()
+            method: "POST",
+            data: { 
+                action_about: action_about,
             },
-            success: function(response){
-                console.log(response);
-                if(response.code=='201'){
-                    $('#modalAboutEdit').modal('hide');
-                    console.log('Updated Successfully');
-                    aboutLoad();
-                }
-                if(response.code=='400'){
-                    console.log('Error');
-                    alert("Error: Update not Successful. Please try again.");
-                }
-            }
+            success: function (data) {
+                $("#about_content").html(data);
+            },
         });
-        return false;
+    }
+    $("#formAboutEdit").submit(function (event) {
+        event.preventDefault();
+        var image_name = $("#update_img_about").val();
+        var extension = $("#update_img_about").val().split(".").pop().toLowerCase();
+        if(jQuery.inArray(extension, ["gif", "png", "jpg", "jpeg"]) == -1 && !image_name==""){
+            alert("Invalid Image File");
+            $("#update_img_about").val("");
+            return false;
+        } else {
+            $.ajax({
+                url: "PortfolioCRUD/About/about_update.php",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data.code=='201'){
+                        $('#modalAboutEdit').modal('hide');
+                        console.log('Updated Successfully');
+                        fetch_data();
+                        aboutLoad();
+                    }
+                    if(data.code=='400'){
+                        console.log('Error');
+                        alert("Error: Update not Successful. Please try again.");
+                    }
+                },
+            });
+        }
     });
+    $(document).on("click", ".about-edit-ico", function () {
+        $("#action_about").val("update");
+        $("#modalAboutEdit").modal("show");
+    });
+
 });
 
 

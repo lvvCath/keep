@@ -7,7 +7,9 @@ include("../../../Database/db.php");
 session_start();
 $id = $_SESSION['userid'];
 
-$sql = "SELECT * FROM users_info WHERE userid = ?";
+$sql = "SELECT 
+        userid, age, phone, city, degree, experience, website, email, freelance, profession, description1, description2
+        FROM users_info WHERE userid = ?";
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt, $sql)){
     header("location: main.php?error=stmtFailed");
