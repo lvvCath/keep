@@ -145,7 +145,7 @@ include('../UserModule/includes/fetch_acc_info.php');
 <div class="container-fluid">
     <!-- About -->
     <div class="section-title">
-        <h2><a class="about-edit-ico" >
+        <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalAboutEdit">
             <i class="fa fa-edit"></i></a> About</h2>
         <p>Learn more about me</p>
     </div>

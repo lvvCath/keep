@@ -84,7 +84,6 @@ $(document).ready(function () {
     });
     $(document).on("click", ".main-edit-ico", function () {
         $("#action").val("update");
-        $("#modalHeroEdit").modal("show");
     });
 
 });
@@ -137,9 +136,8 @@ $(document).ready(function () {
             });
         }
     });
-    $(document).on("click", ".about-edit-ico", function () {
+    $(document).on("click", ".main-edit-ico", function () {
         $("#action_about").val("update");
-        $("#modalAboutEdit").modal("show");
     });
 
 });
