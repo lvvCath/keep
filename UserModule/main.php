@@ -564,6 +564,8 @@ include('../UserModule/includes/fetch_acc_info.php');
       </div>
       <div class="modal-body">
         <form class="row g-4 " id="formWork" name="formWork" method="POST" action="#">
+        <input type="hidden" name="action_work" id="action_work" value="fetch" />
+        <input type="hidden" name="image_work_id" id="image_work_id" />
         <div class="row g-3">
             <div class="divider col-lg-7">
                 <div class="row g-3">
@@ -587,8 +589,7 @@ include('../UserModule/includes/fetch_acc_info.php');
                 <div class="row g-3">
                 <div class="col-12">
                     <label class="text-muted" for="work_image">Upload Project Image</label>
-                    <input class="form-control" id="work_image" name="work_image" type="text" required>
-                    <input class="form-control" type="file" id="formFile">
+                    <input class="form-control" id="work_image" name="work_image" type="file" id="formFile">
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="work_client">Project Client</label>
@@ -596,9 +597,8 @@ include('../UserModule/includes/fetch_acc_info.php');
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="work_date">Project Date</label>
-                    <!-- <input class="form-control" id="work_date" name="work_date" type="text" required> -->
-                    <input id="work_date" class="form-control" type="date" />
-                    <span id="work_date_Selected"></span>
+                    <input id="work_date" class="form-control" name="work_date" type="date" />
+                    <span id="work_date_Selected" name="work_date_Selected"></span>
                 </div>
                 <div class="col-12">
                     <label class="text-muted" for="work_url">Project URL</label>

@@ -9,32 +9,6 @@ function validate_input($data){
     return $data;
 }
 
-// $userid = validate_input($_POST['userid']);
-// $description1 = validate_input($_POST['description1']);
-// $image1 = validate_input($_POST['image1']);
-
-// $sql = "UPDATE users_info SET description1=?, image1=? WHERE userid = ?;";
-// $stmt = mysqli_stmt_init($conn);
-
-// if(!mysqli_stmt_prepare($stmt, $sql) ){
-//     echo json_encode([
-//         'code' => '400'
-//     ]);
-// }
-
-// mysqli_stmt_bind_param($stmt, "ssi", $description1, $image1, $userid);
-// mysqli_stmt_execute($stmt);
-// $result = mysqli_stmt_close($stmt);
-
-// if($result){
-//     echo json_encode([
-//         'code' => '201'
-//     ]);
-// }else{
-//     echo json_encode([
-//         'code' => '400'
-//     ]);
-// }
 session_start();
 if (isset($_POST["action"])) {
     $id = $_SESSION['userid'];
@@ -57,8 +31,11 @@ if (isset($_POST["action"])) {
 
         $output .= '" class="d-block mx-lg-auto img-fluid" width="242" height="363" >
         </div>
-        <div class="col-md-6 py-5 mx-auto">
-            <a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>
+        <div class="col-md-6 py-5 mx-auto">';
+        if($_POST["public"]=="false"){
+            $output .= '<a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>';
+        }
+        $output .= '
             <h1 class="display-5 fw-bold lh-1 mb-2">'.$row["usersFirstName"]. ' ' .$row["usersLastName"]. ' ' .$row["usersSuffix"]. '</h1>
             <div class="hr"></div>
             <p id="read_lead" class="lead text-break">';

@@ -55,26 +55,15 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <script src="js/main.js"></script>
 </head>
 
 <body>
 <div id="hero" class="container-fluid">
+    <div class="row"><?php include 'header.php';?></div>
     <div id="hero-content" class="row flex-lg-row-reverse d-flex align-items-center justify-content-center">
-        <div class="col-md-6">
-            <img id="read_image1" src="../assets/images/image-holder.svg" class="d-block mx-lg-auto img-fluid" width="242" height="363" >
-        </div>
-        <div class="col-md-6 py-5 mx-auto">
-            <h1 class="display-5 fw-bold lh-1 mb-2"><?php echo "".$row['usersFirstName']. " " .$row['usersLastName']. " " ?></h1>
-            <div class="hr"></div>
-            <p id="read_lead" class="lead text-break">
-                Tell readers here who you are in the first line of your portfolio introduction. Keep it short and simple.</br>
-                <span class="edit_Help font-monospace">To edit this section, click the edit icon <i class="fa fa-edit"></i> found the top left</span>.
-            </p>
-            <div class="d-grid d-md-flex justify-content-md-center">
-                <a href="#about" class="btn-get-started scrollto"><i class="fa-solid fa-angles-down"></i></a>
-            </div>
-        </div>
+        <!-- INSERT HERO-CONTENT HERE (about_update_home.php) -->
     </div>
 </div><!-- End Hero -->
 
@@ -120,37 +109,8 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
         <p>Learn more about me</p>
     </div>
 
-    <div class="row">
-    <div class="col-lg-4" data-aos="fade-right">
-        <img id="read_image2" src="../assets/images/default-profile.jpg" class="img-fluid" width="242" height="363">
-    </div>
-    <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-        <h3 id="read_profession">Your Profession</h3>
-        <p id="read_description2" class="text-break">
-        Tell the readers in this About me section more about you. You want to make sure visitors and readers 
-        of your online portfolio to understand your work, but you don’t want to go into too much detail and create 
-        a long essay about yourself in case they lose interest. </br>
-        <span class="edit_Help font-monospace">To edit this section, click the edit icon <i class="fa fa-edit"></i> found the top left.</span>
-        </p>
-        <div class="row">
-        <div class="col-lg-6">
-            <ul>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Age:</strong> <span id="read_age"></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Phone:</strong> <span id="read_phone"></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>City:</strong> <span id="read_city"></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Degree:</strong> <span id="read_degree"></span></li>
-            </ul>
-        </div>
-        <div class="col-lg-6">
-            <ul>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Years of Experience:</strong> <span id="read_experience"></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Website:</strong> <span id="read_website"></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Work Email:</strong> <span id="read_email"></span></li>
-            <li><i class="fa-solid fa-diamond"></i> <strong>Freelance:</strong> <span id="read_freelance"></span></li>
-            </ul>
-        </div>
-        </div>
-    </div>
+    <div id="about_content" class="row">
+        <!-- INSERT ABOUT CONTENT HERE (about_update.php) -->
     </div>
 
 </div>

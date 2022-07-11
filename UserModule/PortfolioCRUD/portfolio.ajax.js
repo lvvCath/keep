@@ -39,11 +39,13 @@ $(document).ready(function () {
     fetch_data();
     function fetch_data() {
         var action = "fetch";
+        var public = "false";
         $.ajax({
             url: "PortfolioCRUD/About/about_update_home.php",
             method: "POST",
             data: { 
                 action: action,
+                public: public
             },
             success: function (data) {
                 $("#hero-content").html(data);
@@ -718,60 +720,6 @@ $(document).on('click','.serviceCreateBtn',function(e) {
 //#################################################################################################
 //#################################################################################################
 //#################################################################################################
-
-workLoad();
-workUpdate();
-function workLoad(){
-    $('#WorkSection').empty();
-    $.ajax({
-        url: "PortfolioCRUD/Work/work_list.php",
-        type: "GET",
-        success: function(response){
-            response.forEach(function (data, index) {
-                let img = data.image;
-                if($.trim(data.image).replace(/\s+/g, ' ') == 0){
-                    img = "../assets/images/image-holder.svg";
-                }
-                $('#WorkSection').append(
-                '<div class="col-md-4">'+
-                '<div class="portfolio-wrap">'+
-                    '<img src="'+ img +'" class="img-fluid portfolio-img" alt="project-image">'+
-                    '<div class="portfolio-info">'+
-                        '<h4>'+ data.project +'</h4>'+
-                        '<p>'+ data.category +'</p>'+
-                        '<div class="portfolio-links">'+
-                        '<a class="btn workView_openModal" title="Portfolio Details" data-bs-toggle="modal" data-bs-target="#portfolio-modal"' +
-                            'data-id="'+data.id+'"' +
-                            'data-project="'+data.project+'"' +
-                            'data-image="'+data.image+'"' +
-                            'data-category="'+data.category+'"' +
-                            'data-client="'+data.client+'"' +
-                            'data-project_date="'+data.project_date+'"' +
-                            'data-project_url="'+data.project_url+'"' +
-                            'data-description="'+data.description+'"' +
-                        '><i class="fa-solid fa-arrow-up-right-from-square"></i>'+
-                        '</a>'+
-                        '<a class="workEdit_openModal btn main-edit-ico" title="Edit" data-bs-toggle="modal" data-bs-target="#modalWork" ' +
-                            'data-id="'+data.id+'"' +
-                            'data-project="'+data.project+'"' +
-                            'data-image="'+data.image+'"' +
-                            'data-category="'+data.category+'"' +
-                            'data-client="'+data.client+'"' +
-                            'data-project_date="'+data.project_date+'"' +
-                            'data-project_url="'+data.project_url+'"' +
-                            'data-description="'+data.description+'"' +
-                            '><i class="fa fa-edit"></i></a>'+
-                        '</div>'+
-                    '</div>'+
-                '</div>'+
-                '</div>'
-                );
-            });
-        }
-    });  
-    
-}
-
 $(document).on('click','.workAdd_openModal',function(e) {
     $('#formWork').trigger("reset");
     $(".workUpdateBtn").hide();
@@ -779,10 +727,7 @@ $(document).on('click','.workAdd_openModal',function(e) {
     $(".workCreateBtn").show();
 });
 
-// Update
-function workUpdate(){
-    $curr_id = 0;
-
+function workModal_fetch_data(){
     $(document).on('click','.workView_openModal',function(e) {
         var id=$(this).attr("data-id");
         var project=$(this).attr("data-project");
@@ -803,8 +748,6 @@ function workUpdate(){
         $('#view_client').html(client);
         $('#view_date').html(project_date);
         $('#view_url').html(project_url);
-
-        $curr_id = id;
     });
 
     $(document).on('click','.workEdit_openModal',function(e) {
@@ -827,44 +770,81 @@ function workUpdate(){
         $('#work_client').val(client);
         $('#work_date').val(project_date);
         $('#work_url').val(project_url);
-
-        $curr_id = id;
     });
+}
 
-    $(document).on('click', '.workUpdateBtn', function(e){
-        e.preventDefault();
-        let id = $curr_id;
+$(document).ready(function () {
+    fetch_data();
+    function fetch_data() {
+        var action_work = "fetch";
+        var public = "false";
         $.ajax({
-            url: "PortfolioCRUD/Work/work_update.php",
-            type: "POST",
-            data: {
-                "id": id,
-                "project": $('#work_project').val(), 
-                "category": $('#work_category').val(),
-                "description": $('#work_description').val(),
-                "image": $('#work_image').val(),
-                "client": $('#work_client').val(),
-                "project_date": $('#work_date').val(),
-                "project_url": $('#work_url').val()
+            url: "PortfolioCRUD/Work/work_read.php",
+            method: "POST",
+            data: { 
+                action_work: action_work,
+                public: public
             },
-            success: function(response){
-                if(response.code=='201'){
-                    $('#modalWork').modal('hide');
-                    console.log('Updated Successfully');
-                    workLoad();
-                }
-                if(response.code=='400'){
-                    console.log('Error');
-                    alert("Please Fill out all the Fields");
-                }
-            }
+            success: function (data) {
+                $("#WorkSection").html(data);
+                workModal_fetch_data();
+            },
         });
-        return false;
-    });
+    }
+    
+    $("#formWork").submit(function (event) {
+        event.preventDefault();
+        var image_name = $("#work_image").val();
+        var extension = $("#work_image").val().split(".").pop().toLowerCase();
+        if(jQuery.inArray(extension, ["gif", "png", "jpg", "jpeg"]) == -1 && !image_name==""){
+            alert("Invalid Image File");
+            $("#work_image").val("");
+            return false;
+        } else {
+            var url = "";
+            if($("#action_work").val() == "create"){
+                url = "PortfolioCRUD/Work/work_create.php";
+            }
+            if($("#action_work").val() == "update"){
+                url = "PortfolioCRUD/Work/work_update.php";
+            }
 
+            $.ajax({
+                url: url,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data.code=='201'){
+                        $('#modalWork').modal('hide');
+                        console.log('Updated Successfully');
+                        fetch_data();
+                        workModal_fetch_data();
+                    }
+                    if(data.code=='400'){
+                        console.log('Error');
+                        alert("Error: Update not Successful. Please try again.");
+                    }
+                },
+            });
+        }
+    });
+    // Create
+    $(document).on("click", ".main-add-ico", function() {
+        $('#formWork').trigger("reset");
+        $("#action_work").val("create");
+    });
+    // Update
+    $(document).on("click", ".main-edit-ico", function() {
+        $("#image_work_id").val($(this).attr("data-id"));
+        $("#action_work").val("update");
+    });
     // Delete
     $(document).on('click', '.workDeleteBtn', function(){
-        let id = $curr_id;
+        var id = $("#image_work_id").val();
         $.ajax({
             url: "PortfolioCRUD/Work/work_delete.php",
             type: "POST",
@@ -875,7 +855,7 @@ function workUpdate(){
                 if(response.code=='201'){
                     $('#modalWork').modal('hide');
                     console.log('Deleted Successfully');
-                    workLoad();
+                    fetch_data();
                 }
                 if(response.code=='400'){
                     console.log('Error');
@@ -883,41 +863,5 @@ function workUpdate(){
             }
         });
         return false;
-    });
-}
-
-// Create
-$(document).on('click', '.workCreateBtn',function(e) {
-    e.preventDefault();
-    console.log($('#work_project').val());
-    console.log($('#work_category').val());
-    console.log($('#work_description').val());
-    console.log($('#work_image').val());
-    console.log($('#work_client').val());
-    console.log($('#work_date').val());
-    console.log($('#work_url').val());
-    $.ajax({
-        url: "PortfolioCRUD/Work/work_create.php",
-        type: "POST",
-        data: {
-            "project": $('#work_project').val(), 
-            "category": $('#work_category').val(),
-            "description": $('#work_description').val(),
-            "image": $('#work_image').val(),
-            "client": $('#work_client').val(),
-            "project_date": $('#work_date').val(),
-            "project_url": $('#work_url').val()
-        },
-        success: function(response){
-            if(response.code=='201'){
-                console.log('Created Successfully');
-                $('#modalWork').modal('hide');
-                $('#formWork').trigger("reset");
-                workLoad();
-            }else{
-                console.log('Error');
-                alert("Please Fill out all the Fields");
-            }
-        }
     });
 });

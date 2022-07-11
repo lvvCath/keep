@@ -1,47 +1,10 @@
 aboutLoad();
-var userid;
 // READ About =================
 function aboutLoad(){
     $.ajax({
-        url: "PortfolioCRUD/Public/about_list.php",
+        url: "PortfolioCRUD/About/about_list.php",
         type: "GET",
         success: function(response){
-            userid = response["userid"];
-            // Home
-            if($.trim(response["description1"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_lead').text(response["description1"]);}
-            if($.trim(response["image1"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_image1').attr('src', response["image1"]);}
-            $('#update_description1').val(response["description1"]);
-            $('#update_image1').val(response["image1"]);
-
-            // About
-            if($.trim(response["profession"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_profession').text(response["profession"]);}
-            if($.trim(response["description2"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_description2').text(response["description2"]);}
-            if($.trim(response["image2"]).replace(/\s+/g, ' ') != 0)
-            {$('#read_image2').attr('src', response["image2"]);}
-            $('#read_age').text(response["age"]);
-            $('#read_phone').text(response["phone"]);
-            $('#read_city').text(response["city"]);
-            $('#read_degree').text(response["degree"]);
-            $('#read_experience').text(response["experience"]);
-            $('#read_website').text(response["website"]);
-            $('#read_email').text(response["email"]);
-            $('#read_freelance').text(response["freelance"]);
-            $('#update_profession').val(response["profession"]);
-            $('#update_description2').val(response["description2"]);
-            $('#update_image2').val(response["image2"]);
-            $('#update_age').val(response["age"]);
-            $('#update_phone').val(response["phone"]);
-            $('#update_city').val(response["city"]);
-            $('#update_degree').val(response["degree"]);
-            $('#update_experience').val(response["experience"]);
-            $('#update_website').val(response["website"]);
-            $('#update_email').val(response["email"]);
-            $('#update_freelance').val(response["freelance"]);
-
             // Contact
             $('#contact_city').text(response["city"]);
             $('#contact_email').text(response["email"]);
@@ -51,8 +14,44 @@ function aboutLoad(){
             alert("Status: " + textStatus); alert("Error: " + errorThrown); 
         } 
     });
+    
 }
 
+$(document).ready(function () {
+    fetch_data();
+    function fetch_data() {
+        var action = "fetch";
+        var public = "true";
+        $.ajax({
+            url: "PortfolioCRUD/About/about_update_home.php",
+            method: "POST",
+            data: { 
+                action: action,
+                public: public
+            },
+            success: function (data) {
+                $("#hero-content").html(data);
+            },
+        });
+    }
+});
+
+$(document).ready(function () {
+    fetch_data();
+    function fetch_data() {
+        var action_about = "fetch";
+        $.ajax({
+            url: "PortfolioCRUD/About/about_update.php",
+            method: "POST",
+            data: { 
+                action_about: action_about,
+            },
+            success: function (data) {
+                $("#about_content").html(data);
+            },
+        });
+    }
+});
 
 //#################################################################################################
 //#################################################################################################
@@ -169,65 +168,69 @@ function serviceLoad(){
 //#################################################################################################
 //#################################################################################################
 
-workLoad();
-function workLoad(){
-    $('#WorkSection').empty();
-    $.ajax({
-        url: "PortfolioCRUD/Public/work_list.php",
-        type: "GET",
-        success: function(response){
-            response.forEach(function (data, index) {
-                let img = data.image;
-                if($.trim(data.image).replace(/\s+/g, ' ') == 0){
-                    img = "../assets/images/image-holder.svg";
-                }
-                $('#WorkSection').append(
-                '<div class="col-md-4">'+
-                '<div class="portfolio-wrap">'+
-                    '<img src="'+ img +'" class="img-fluid portfolio-img" alt="project-image">'+
-                    '<div class="portfolio-info">'+
-                        '<h4>'+ data.project +'</h4>'+
-                        '<p>'+ data.category +'</p>'+
-                        '<div class="portfolio-links">'+
-                        '<a class="btn workView_openModal" title="Portfolio Details" data-bs-toggle="modal" data-bs-target="#portfolio-modal"' +
-                            'data-id="'+data.id+'"' +
-                            'data-project="'+data.project+'"' +
-                            'data-image="'+data.image+'"' +
-                            'data-category="'+data.category+'"' +
-                            'data-client="'+data.client+'"' +
-                            'data-project_date="'+data.project_date+'"' +
-                            'data-project_url="'+data.project_url+'"' +
-                            'data-description="'+data.description+'"' +
-                        '><i class="fa-solid fa-arrow-up-right-from-square"></i>'+
-                        '</a>'+
-                    '</div>'+
-                '</div>'+
-                '</div>'
-                );
-            });
+function workModal_fetch_data(){
+    $(document).on('click','.workView_openModal',function(e) {
+        var id=$(this).attr("data-id");
+        var project=$(this).attr("data-project");
+        var image=$(this).attr("data-image");
+        var category=$(this).attr("data-category");
+        var client=$(this).attr("data-client");
+        var project_date=$(this).attr("data-project_date");
+        var project_url=$(this).attr("data-project_url");
+        var description=$(this).attr("data-description");
+
+        if($.trim(image).replace(/\s+/g, ' ') == 0){
+            image = "../assets/images/image-holder.svg";
         }
-    });  
-    
+        $('#view_image').attr('src', image);
+        $('#portfolioModalLabel').html(project);
+        $('#view_category').html(category);
+        $('#view_description').html(description);
+        $('#view_client').html(client);
+        $('#view_date').html(project_date);
+        $('#view_url').html(project_url);
+    });
+
+    $(document).on('click','.workEdit_openModal',function(e) {
+        $(".workCreateBtn").hide();
+        $(".workDeleteBtn").show();
+        $(".workUpdateBtn").show();
+        var id=$(this).attr("data-id");
+        var project=$(this).attr("data-project");
+        var image=$(this).attr("data-image");
+        var category=$(this).attr("data-category");
+        var client=$(this).attr("data-client");
+        var project_date=$(this).attr("data-project_date");
+        var project_url=$(this).attr("data-project_url");
+        var description=$(this).attr("data-description");
+
+        $('#work_project').val(project);
+        $('#work_category').val(category);
+        $('#work_description').val(description);
+        $('#work_image').val(image);
+        $('#work_client').val(client);
+        $('#work_date').val(project_date);
+        $('#work_url').val(project_url);
+    });
 }
 
-$(document).on('click','.workView_openModal',function(e) {
-    var id=$(this).attr("data-id");
-    var project=$(this).attr("data-project");
-    var image=$(this).attr("data-image");
-    var category=$(this).attr("data-category");
-    var client=$(this).attr("data-client");
-    var project_date=$(this).attr("data-project_date");
-    var project_url=$(this).attr("data-project_url");
-    var description=$(this).attr("data-description");
-
-    if($.trim(image).replace(/\s+/g, ' ') == 0){
-        image = "../assets/images/image-holder.svg";
+$(document).ready(function () {
+    fetch_data();
+    function fetch_data() {
+        var action_work = "fetch";
+        var public = "true";
+        $.ajax({
+            url: "PortfolioCRUD/Work/work_read.php",
+            method: "POST",
+            data: { 
+                action_work: action_work,
+                public: public
+            },
+            success: function (data) {
+                $("#WorkSection").html(data);
+                workModal_fetch_data();
+            },
+        });
     }
-    $('#view_image').attr('src', image);
-    $('#portfolioModalLabel').html(project);
-    $('#view_category').html(category);
-    $('#view_description').html(description);
-    $('#view_client').html(client);
-    $('#view_date').html(project_date);
-    $('#view_url').html(project_url);
+    
 });

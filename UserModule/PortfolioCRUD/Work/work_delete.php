@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 include("../../../Database/db.php");
 
-$id = (int) $_POST['id'];
+$id = (int) $_POST["id"];
 
 $stmt = $db->prepare("DELETE FROM users_work WHERE id = ?");
 $result = $stmt->execute([$id]);
