@@ -99,7 +99,7 @@ $(document).ready(function () {
             url: "PortfolioCRUD/About/about_update.php",
             method: "POST",
             data: { 
-                action_about: action_about,
+                action_about: action_about
             },
             success: function (data) {
                 $("#about_content").html(data);

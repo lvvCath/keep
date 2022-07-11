@@ -61,7 +61,6 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
 
 <body>
 <div id="hero" class="container-fluid">
-    <div class="row"><?php include 'header.php';?></div>
     <div id="hero-content" class="row flex-lg-row-reverse d-flex align-items-center justify-content-center">
         <!-- INSERT HERO-CONTENT HERE (about_update_home.php) -->
     </div>

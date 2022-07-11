@@ -11,7 +11,7 @@ function validate_input($data){
 
 session_start();
 if (isset($_POST["action"])) {
-    $id = $_SESSION['userid'];
+    $id = $_SESSION['share-userid'];
 
     if ($_POST["action"] == "fetch") {
         $query = "SELECT users.usersFirstName, users.usersLastName, users.usersSuffix, users_info.* 
@@ -33,7 +33,6 @@ if (isset($_POST["action"])) {
         $output .= '" class="d-block mx-lg-auto img-fluid" width="242" height="363" >
         </div>
         <div class="col-md-6 py-5 mx-auto">
-            <a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalHeroEdit"><i class="fa fa-edit"></i></a>
             <h1 class="display-5 fw-bold lh-1 mb-2">'.$row["usersFirstName"]. ' ' .$row["usersLastName"]. ' ' .$row["usersSuffix"]. '</h1>
             <div class="hr"></div>
             <p id="read_lead" class="lead text-break">';
@@ -53,40 +52,6 @@ if (isset($_POST["action"])) {
         </div>
         ';
         echo $output;
-    }
-
-    if ($_POST["action"] == "update") {
-        $description1 = validate_input($_POST['update_description1']);
-        if($_FILES["update_img_home"]["tmp_name"] == ""){
-            $sql = "UPDATE users_info SET description1=? WHERE userid = ?;";
-            $stmt = mysqli_stmt_init($conn);
-            if(!mysqli_stmt_prepare($stmt, $sql) ){
-                echo json_encode(['code' => '400']);
-            }
-            mysqli_stmt_bind_param($stmt, "si", $description1, $id);
-
-        }else{
-            $file = file_get_contents($_FILES["update_img_home"]["tmp_name"]);
-            $sql = "UPDATE users_info SET description1=?, img_home=? WHERE userid = ?;";
-            $stmt = mysqli_stmt_init($conn);
-            if(!mysqli_stmt_prepare($stmt, $sql) ){
-                echo json_encode(['code' => '400']);
-            }
-            mysqli_stmt_bind_param($stmt, "ssi", $description1, $file, $id);
-        }
-
-        mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_close($stmt);
-            if($result){
-                echo json_encode([
-                    'code' => '201'
-                ]);
-            }else{
-                echo json_encode([
-                    'code' => '400'
-                ]);
-            }
-        
     }
 }
 ?>

@@ -2,7 +2,7 @@ aboutLoad();
 // READ About =================
 function aboutLoad(){
     $.ajax({
-        url: "PortfolioCRUD/About/about_list.php",
+        url: "PortfolioCRUD/Public/contact_list.php",
         type: "GET",
         success: function(response){
             // Contact
@@ -23,7 +23,7 @@ $(document).ready(function () {
         var action = "fetch";
         var public = "true";
         $.ajax({
-            url: "PortfolioCRUD/About/about_update_home.php",
+            url: "PortfolioCRUD/Public/home_list.php",
             method: "POST",
             data: { 
                 action: action,
@@ -41,7 +41,7 @@ $(document).ready(function () {
     function fetch_data() {
         var action_about = "fetch";
         $.ajax({
-            url: "PortfolioCRUD/About/about_update.php",
+            url: "PortfolioCRUD/Public/about_list.php",
             method: "POST",
             data: { 
                 action_about: action_about,
@@ -189,28 +189,6 @@ function workModal_fetch_data(){
         $('#view_client').html(client);
         $('#view_date').html(project_date);
         $('#view_url').html(project_url);
-    });
-
-    $(document).on('click','.workEdit_openModal',function(e) {
-        $(".workCreateBtn").hide();
-        $(".workDeleteBtn").show();
-        $(".workUpdateBtn").show();
-        var id=$(this).attr("data-id");
-        var project=$(this).attr("data-project");
-        var image=$(this).attr("data-image");
-        var category=$(this).attr("data-category");
-        var client=$(this).attr("data-client");
-        var project_date=$(this).attr("data-project_date");
-        var project_url=$(this).attr("data-project_url");
-        var description=$(this).attr("data-description");
-
-        $('#work_project').val(project);
-        $('#work_category').val(category);
-        $('#work_description').val(description);
-        $('#work_image').val(image);
-        $('#work_client').val(client);
-        $('#work_date').val(project_date);
-        $('#work_url').val(project_url);
     });
 }
 

@@ -5,7 +5,12 @@ include("../../../Database/db.php");
 session_start();
 
 if (isset($_POST["action_work"])) {
-    $id = $_SESSION['userid'];
+    if($_POST["public"]=="false"){
+        $id = $_SESSION['userid'];
+    }else{
+        $id = $_SESSION['share-userid'];
+    }
+    
     if ($_POST["action_work"] == "fetch") {
         $query = "SELECT * FROM users_work WHERE userid=".$id."";
         $result = mysqli_query($conn, $query);
