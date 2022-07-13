@@ -60,6 +60,9 @@ if(isset($_GET["error"])){
     else if($_GET["error"] == "IncOTP"){
         echo '<p>Invalid Verification code, please try again.</p>';
     }
+    else if($_GET["error"] == "invalidLastPwd"){
+        echo '<p>Incorrect Password, changes were not saved, please try again.</p>';
+    }
 
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }
