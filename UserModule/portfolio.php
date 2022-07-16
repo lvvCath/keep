@@ -56,6 +56,8 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js" integrity="sha512-/n/dTQBO8lHzqqgAQvy0ukBQ0qLmGzxKhn8xKrz4cn7XJkZzy+fAtzjnOQd5w55h4k1kUC+8oIe6WmrGUYwODA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="js/main.js"></script>
 </head>
 
@@ -153,7 +155,7 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
         <p>My Services</p>
     </div>
 
-    <div id="ServiceSection"  class="row g-3 d-flex align-items-center justify-content-center">
+    <div id="ServiceSection"  class="row g-3 d-flex justify-content-center">
         <!-- insert service/s -->
     </div>
 

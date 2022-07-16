@@ -125,10 +125,23 @@ function experienceLoad(){
         type: "GET",
         success: function(response){
             response.forEach(function (data, index) {
+                var startDate;
+                var endDate;
+                if(String(data.startDate) == '0000-00-00'){
+                    startDate ="Start Date";
+                }else{
+                    startDate = Date.parse(data.startDate).toString("MMMM yyyy");
+                }
+                if(String(data.endDate) == '0000-00-00'){
+                    endDate ="End Date";
+                }else{
+                    endDate = Date.parse(data.endDate).toString("MMMM yyyy");
+                }
+
                 $('#ExperienceSection').append(
                     '<div class="resume-item  col-md-6">'+
                     '<h4>'+data.job+'</h4>'+
-                    '<h5>'+data.year+'</h5>'+
+                    '<h5>'+startDate + ' to ' + endDate+'</h5>'+
                     '<p><em>'+data.location+'</em></p>'+
                     '<p>'+data.description+'</p>'+
                     '</div>'

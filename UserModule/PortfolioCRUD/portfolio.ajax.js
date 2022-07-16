@@ -441,6 +441,19 @@ function experienceLoad(){
         type: "GET",
         success: function(response){
             response.forEach(function (data, index) {
+                var startDate;
+                var endDate;
+                if(String(data.startDate) == '0000-00-00'){
+                    startDate ="Start Date";
+                }else{
+                    startDate = Date.parse(data.startDate).toString("MMMM yyyy");
+                }
+                if(String(data.endDate) == '0000-00-00'){
+                    endDate ="End Date";
+                }else{
+                    endDate = Date.parse(data.endDate).toString("MMMM yyyy");
+                }
+
                 $('#ExperienceSection').append(
                     '<div class="resume-item  col-md-6">'+
                     '<h4> <a class="experienceEdit_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalExperience" ' +
@@ -452,7 +465,7 @@ function experienceLoad(){
                     'data-description="'+data.description+'"' +
                     '><i class="fa fa-edit"></i></a>'
                     +data.job+'</h4>'+
-                    '<h5>'+data.startDate+' <i>to</i> '+data.endDate+'</h5>'+
+                    '<h5>'+startDate+' <i> - </i> '+endDate+'</h5>'+
                     '<p><em>'+data.location+'</em></p>'+
                     '<p>'+data.description+'</p>'+
                     '</div>'
@@ -497,15 +510,28 @@ function experienceUpdate(){
     $(document).on('click', '.experienceUpdateBtn', function(e){
         e.preventDefault();
         let id = $curr_id;
-        console.log(id);
+        var startDate;
+        var endDate;
+
+        if(!$('#startDate_exp').val()){
+            startDate = '0000-00-00';
+        }else{
+            startDate =  $('#startDate_exp').val();
+        }
+        if(!$('#endDate_exp').val()){
+            endDate = '0000-00-00';
+        }else{
+            endDate =  $('#endDate_exp').val();
+        }
+
         $.ajax({
             url: "PortfolioCRUD/Resume/experience_update.php",
             type: "POST",
             data: {
                 "id": id,
                 "job": $('#job_exp').val(), 
-                "startDate": $('#startDate_exp').val(),
-                "endDate": $('#endDate_exp').val(),
+                "startDate": startDate,
+                "endDate": endDate,
                 "location": $('#location_exp').val(),
                 "description": $('#description_exp').val()
             },
