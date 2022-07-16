@@ -91,10 +91,17 @@ function educationLoad(){
         type: "GET",
         success: function(response){
             response.forEach(function (data, index) {
+                var year = data.year;
+                if(data.year == 0){
+                    year = "Not Indicated";
+                }else{
+                    year = data.year;
+                }
+
                 $('#EducationSection').append(
                     '<div class="resume-item col-md-6">'+
                     '<h4>'+data.degree+'</h4>'+
-                    '<h5>'+data.year+'</h5>'+
+                    '<h5> Year '+year+'</h5>'+
                     '<p><em>'+data.location+'</em></p>'+
                     '<p>'+data.description+'</p>'+
                     '</div>'
