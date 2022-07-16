@@ -348,6 +348,8 @@ function educationUpdate(){
     });
 
     $(document).on('click', '.educationUpdateBtn', function(e){
+        var year = $('#year_edu').val().replace('Year ','');
+
         e.preventDefault();
         let id = $curr_id;
         console.log(id);
@@ -357,7 +359,7 @@ function educationUpdate(){
             data: {
                 "id": id,
                 "degree": $('#degree_edu').val(), 
-                "year": $('#year_edu').val(),
+                "year": year,
                 "location": $('#location_edu').val(),
                 "description": $('#description_edu').val()
             },
