@@ -1,3 +1,24 @@
+var m = $('#loader');
+var run = false; // global scope is necessary
+m.hide(); // if isn't hidden in css
+
+jQuery.ajaxSetup({
+    beforeSend: function() {
+        run = true; // up flag          
+        d = setTimeout(function(){
+            if(run) // is ajax executing now?
+                m.show();
+        },100); // is trigged only for NO fast response
+    },
+    complete: function(){
+        m.hide();
+        run = false; // down flag                
+    },
+    success: function() {            
+  //  do stuff
+    }
+});
+
 aboutLoad();
 var userid;
 // READ About =================

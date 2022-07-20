@@ -35,10 +35,20 @@ include('../UserModule/includes/fetch_acc_info.php');
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js" integrity="sha512-/n/dTQBO8lHzqqgAQvy0ukBQ0qLmGzxKhn8xKrz4cn7XJkZzy+fAtzjnOQd5w55h4k1kUC+8oIe6WmrGUYwODA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="js/main.js"></script>
 </head>
 
 <body>
+<div id="loader" >    
+<div class="loader d-flex justify-content-center align-items-center">
+
+    <div class="spinner-grow text-primary" role="status" style="width: 3rem; height: 3rem; z-index: 20;">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+</div>
+    
 <div id="hero" class="container-fluid">
     <div class="row"><?php include 'header.php';?></div>
     <div id="hero-content" class="row flex-lg-row-reverse d-flex align-items-center justify-content-center">
@@ -686,7 +696,3 @@ include('../UserModule/includes/fetch_acc_info.php');
 
 <script src="PortfolioCRUD\portfolio.ajax.js"></script>
 <?php include 'footer.php';?>
-
-
-
-
