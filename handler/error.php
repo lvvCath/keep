@@ -63,6 +63,11 @@ if(isset($_GET["error"])){
     else if($_GET["error"] == "invalidLastPwd"){
         echo '<p>Incorrect Password, changes were not saved, please try again.</p>';
     }
+    else if($_GET["error"] == "failed-01"){
+        echo '<p>Something went wrong with sending your message. <br>
+                Please resent your message or directly sent it to the <br>email address of the portfolio owner.
+            </p>';
+    }
 
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }
@@ -86,8 +91,11 @@ if(isset($_GET["msg"])){
     else if($_GET["msg"] == "OtpSent"){
         echo '<p>Successfully sent, please check your email</p>';
     }
-     else if($_GET["msg"] == "CorrectOtp"){
+    else if($_GET["msg"] == "CorrectOtp"){
         echo '<p>Valid Code, please create a new password</p>';
+    }
+    else if($_GET["msg"] == "success-01"){
+        echo '<p>Your message was successfully sent!</p>';
     }
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }

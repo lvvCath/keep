@@ -59,6 +59,7 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js" integrity="sha512-/n/dTQBO8lHzqqgAQvy0ukBQ0qLmGzxKhn8xKrz4cn7XJkZzy+fAtzjnOQd5w55h4k1kUC+8oIe6WmrGUYwODA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="js/main.js"></script>
+    <?php include '../handler/error.php';?>
 </head>
 
 <body>
@@ -247,7 +248,7 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
                 <h2></h2>
                 <p>Message Me</p>
             </div>
-            <form action="#" method="post" role="form" class="contact-form">
+            <form role="form" class="contact-form" method="POST" action="<?php echo htmlspecialchars("includes/contact_email.php");?>">
                 <div class="row g-3">
                     <div class="col-12 form-group">
                         <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -261,7 +262,7 @@ $sql = "SELECT * FROM users_share WHERE token = ?;";
                     <div class="col-12 form-group">
                         <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                     </div>
-                    <div class="text-center"><button class="contact-submit" type="submit" disabled>Send Message</button></div>
+                    <div class="text-center"><button class="contact-submit" type="submit">Send Message</button></div>
                 </div>
             </form>
         </div>
