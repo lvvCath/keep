@@ -531,3 +531,6 @@ footer .footer-links a:hover {
   border-left: 8px solid #FFA502;
   border-radius: 4px;
 }
+
+/*hide disclaimer 000webhost*/
+.disclaimer { display: none; }

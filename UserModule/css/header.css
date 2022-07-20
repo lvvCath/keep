@@ -70,3 +70,6 @@ background-color: rgb(255, 255, 255);    /* color of the scroll thumb */
 border-radius: 20px;       /* roundness of the scroll thumb */
 border: 3px solid rgb(70, 70, 70);  /* creates padding around scroll thumb */
 }
+
+/*hide disclaimer 000webhost*/
+.disclaimer { display: none; }

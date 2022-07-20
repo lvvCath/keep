@@ -113,3 +113,6 @@ body {
       border-right: none !important;
       }
     }
+
+/*hide disclaimer 000webhost*/
+.disclaimer { display: none; }

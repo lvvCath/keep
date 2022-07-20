@@ -85,3 +85,6 @@ body {
     border-radius: 20px;
     margin-left: 6%;
 }
+
+/*hide disclaimer 000webhost*/
+.disclaimer { display: none; }

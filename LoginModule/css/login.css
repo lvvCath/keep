@@ -237,3 +237,6 @@ input[type=submit]:focus, button:focus {
         top: 350px;
     }
 }
+
+/*hide disclaimer 000webhost*/
+.disclaimer { display: none; }
