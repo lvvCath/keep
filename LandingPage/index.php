@@ -1,5 +1,3 @@
-<?php include 'sendemail.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -14,6 +12,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/boxicons.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <?php include '../handler/error.php';?>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar">
    
@@ -333,7 +332,7 @@
             </div>
 
             <div class="contact-info-form"> <span class="circle one"></span> <span class="circle two"></span>
-               <form class="contact" action="" method="post" autocomplete="off">
+               <form class="contact" method="POST" action="<?php echo htmlspecialchars("sendemail.php");?>">
                      <h3 class="title">Contact us</h3>
                      <div class="social-input-containers"> 
                         <input type="text" name="name" class="input" placeholder="Name" required/> 
@@ -342,12 +341,12 @@
                         <input type="email" name="email" class="input" placeholder="Email" required/> 
                      </div>
                      <div class="social-input-containers"> 
-                        <input type="telephone" name="phone" class="input" placeholder="Phone"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/> 
+                        <input type="text" name="subject" class="input" placeholder="subject"  required/> 
                      </div>
                      <div class="social-input-containers textarea"> 
                         <textarea name="message" class="input" placeholder="Message" required></textarea> 
                      </div> 
-                     <input type="submit" name="submit" value="Send" class="btn" />
+                     <input type="submit" name="submit" value="Send" class="btn"/>
                </form>
             </div>
          </div>
@@ -417,6 +416,3 @@
     </script>
 
   </body>
-
-
-

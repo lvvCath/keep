@@ -68,6 +68,11 @@ if(isset($_GET["error"])){
                 Please resent your message or directly sent it to the <br>email address of the portfolio owner.
             </p>';
     }
+    else if($_GET["error"] == "failed-02"){
+        echo '<p>Something went wrong with sending your message. <br>
+                Please resent your message or directly sent it to keep.webpage@gmail.com.
+            </p>';
+    }
 
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }

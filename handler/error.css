@@ -1,9 +1,9 @@
 .alert{
-    position: absolute !important;
+    position: fixed !important;
     border-left: 5px solid red !important;
     left: 0px ;
-    top: 1%;
-    z-index: 2 !important;
+    top: 12%;
+    z-index: 10000 !important;
 }
 .alert-success{
     border-left: 5px solid green !important;
