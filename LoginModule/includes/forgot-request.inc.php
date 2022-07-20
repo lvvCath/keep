@@ -1,9 +1,10 @@
 <?php 
 session_start();
-require_once '../../Database/db.php';
+
 
     //if user click check reset otp button
     if(isset($_POST['check-reset-otp'])){
+        require_once '../../Database/db.php';
         $otp_code = mysqli_real_escape_string($conn, $_POST['otp']);
         $check_code = "SELECT * FROM users WHERE usersOtp = $otp_code";
         $code_res = mysqli_query($conn, $check_code);
@@ -23,6 +24,7 @@ require_once '../../Database/db.php';
     }
     //if user click change password button
     if(isset($_POST['change-password'])){
+        require_once '../../Database/db.php';
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
         if($password !== $cpassword){
@@ -35,7 +37,7 @@ require_once '../../Database/db.php';
             $update_pass = "UPDATE users SET usersOtp = $code, usersPassword = '$encpass' WHERE usersEmail = '$email'";
             $run_query = mysqli_query($conn, $update_pass);
             if($run_query){     
-                  header("location: ../logIn.php?msg=changePwdSuccess");
+                  header("location: ../LogIn.php?msg=changePwdSuccess");
                 exit();
             }else{
                   header("location: ../newpassword.php?error=stmtFailed");
