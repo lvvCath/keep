@@ -695,4 +695,4 @@ include('../UserModule/includes/fetch_acc_info.php');
 <!-- /CONTACT US -->
 
 <script src="PortfolioCRUD\portfolio.ajax.js"></script>
-<?php include 'footer.php';? >
+<?php include 'footer.php';?>
