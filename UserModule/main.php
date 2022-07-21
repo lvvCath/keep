@@ -51,7 +51,7 @@ include('../UserModule/includes/fetch_acc_info.php');
     
 <div id="hero" class="container-fluid">
     <div class="row"><?php include 'header.php';?></div>
-    <div id="hero-content" class="row flex-lg-row-reverse d-flex align-items-center justify-content-center">
+    <div id="hero-content" class="row flex-lg-row-reverse d-flex align-items-center justify-content-center" title="Upload Photo">
         <!-- INSERT HERO-CONTENT HERE (about_update_home.php) -->
     </div>
 </div><!-- End Hero -->
@@ -156,7 +156,7 @@ include('../UserModule/includes/fetch_acc_info.php');
     <!-- About -->
     <div class="section-title">
         <h2><a class="main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalAboutEdit">
-            <i class="fa fa-edit"></i></a> About</h2>
+            <i class="fa fa-edit" title="Edit About"     ></i></a> About</h2>
         <p>Learn more about me</p>
     </div>
 
@@ -267,7 +267,7 @@ include('../UserModule/includes/fetch_acc_info.php');
 <!-- ======= Skills  ======= -->
 <section class="skills section-bg">
     <div class="section-title">
-    <h2><a class="skillsAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalSkill"><i class="fa fa-circle-plus"></i></a> Skills</h2>
+    <h2><a class="skillsAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalSkill" title="Add Skills"><i class="fa fa-circle-plus"></i></a> Skills</h2>
     </div>
 
     <div class="tips container">
@@ -275,7 +275,7 @@ include('../UserModule/includes/fetch_acc_info.php');
         <p>The Skills Section of the online portfolio is where you can list most of your essential skills that is related to what you do. The more skills you have, usually the better—but only if you’ll actually use them in the kind of work you want. (Hot tip: do not overload your portfolio with irrelevant skills!)</p>
     </div>
     
-    <div id="SkillSection" class="row g-4 skills-content">
+    <div id="SkillSection" class="row g-4 skills-content" title="Edit Skill" >
         <!-- <table id="skillsTable" style="width:100%" cellpadding="0" cellspacing="0" BORDER="0">
             <thead></thead>
             <tbody>
@@ -329,16 +329,16 @@ include('../UserModule/includes/fetch_acc_info.php');
     </div>
 
     <h3 class="resume-title"> Education
-        <a class="educationAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalEducation"><i class="fa fa-circle-plus"></i></a> 
+        <a class="educationAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalEducation" title="Add Education"><i class="fa fa-circle-plus"></i></a> 
     </h3>
-    <div id="EducationSection" class="row">
+    <div id="EducationSection" class="row" title="Edit Degree Name/Major">
     <!-- Insert Education Background -->
     </div>
 
     <h3 class="resume-title">Professional Experience 
-        <a class="experienceAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalExperience"><i class="fa fa-circle-plus"></i></a> 
+        <a class="experienceAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalExperience" title="Add Professional Experience"><i class="fa fa-circle-plus"></i></a> 
     </h3>
-    <div id="ExperienceSection" class="row">
+    <div id="ExperienceSection" class="row" title="Edit Job title & Postion">
     <!-- Insert Professional Background -->
     </div>
 
@@ -451,7 +451,7 @@ include('../UserModule/includes/fetch_acc_info.php');
 
     <div class="section-title">
         <h2><a class="serviceAdd_openModal main-edit-ico" data-bs-toggle="modal" data-bs-target="#modalService">
-            <i class="fa fa-circle-plus"></i></a> Services</h2>
+            <i class="fa fa-circle-plus" title="Add Services"></i></a> Services</h2>
         <p>My Services</p>
     </div>
 
@@ -460,7 +460,7 @@ include('../UserModule/includes/fetch_acc_info.php');
         <p>The Services Section is wher you can tell the readers the services that you offer and your specialties. You can include a brief description of your service and a option to include a link that will redirect the reader to the service you offer.</p>
     </div>
 
-    <div id="ServiceSection"  class="row g-3 d-flex justify-content-center">
+    <div id="ServiceSection"  class="row g-3 d-flex justify-content-center" title="Edit Service">
         <!-- insert service/s -->
     </div>
 
@@ -510,7 +510,7 @@ include('../UserModule/includes/fetch_acc_info.php');
 <div class="container-fluid">
 
     <div class="section-title">
-    <h2><a class="workAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalWork"><i class="fa fa-circle-plus"></i></a> Portfolio</h2>
+    <h2><a class="workAdd_openModal main-add-ico" data-bs-toggle="modal" data-bs-target="#modalWork" title="Add Portfolio"><i class="fa fa-circle-plus"></i></a> Portfolio</h2>
     <p>My Works</p>
     </div>
 
