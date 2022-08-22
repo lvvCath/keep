@@ -1,7 +1,5 @@
 <?php
-
 if(isset($_POST["submit"])){
-    // echo "worked!";
     $first_name = $_POST["first_name"];
     $middle_name = $_POST["middle_name"];
     $last_name = $_POST["last_name"];
@@ -56,10 +54,8 @@ if(isset($_POST["submit"])){
         header("location: ../SignUp.php?error=invalidPasswordDict");
         exit();
     }
-    
 
     createUser($conn, $first_name, $middle_name, $last_name, $suffix_name, $email, $username, $password);
-
 }else{
     header("location: ../SignUp.php");
     exit();

@@ -1,12 +1,9 @@
 <?php 
-/*To Get All Items in the Table (list.php).*/
-
 header('Content-Type: application/json');
 include("../../../Database/db.php");
 
 session_start();
 $id = $_SESSION['userid'];
-
 $sql = "SELECT 
         userid, age, phone, city, degree, experience, website, email, freelance, profession, description1, description2
         FROM users_info WHERE userid = ?";
@@ -27,6 +24,5 @@ if($row = mysqli_fetch_assoc($resultData)){
     header("location: main.php?error=stmtFailed");
     exit();
 }
-
 mysqli_stmt_close($stmt);
 ?>
